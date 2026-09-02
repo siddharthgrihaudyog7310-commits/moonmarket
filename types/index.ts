@@ -1,4 +1,9 @@
-export type ProductCategory = "Dry Fruits" | "Spices" | "Dry Dates" | "Whole Spices";
+export type ProductCategory =
+  | "Dry Fruits"
+  | "Spices"
+  | "Dry Dates"
+  | "Whole Spices"
+  | "Flour (Atta)";
 
 export interface PackOption {
   weight: string;

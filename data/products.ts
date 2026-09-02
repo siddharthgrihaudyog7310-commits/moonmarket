@@ -118,4 +118,9 @@ export const categories: { name: Product["category"]; image: string; description
     image: "/products/cloves.svg",
     description: "Aromatic whole spices, hand-sorted for maximum freshness.",
   },
+  {
+    name: "Flour (Atta)",
+    image: "/products/atta.svg",
+    description: "Stone-ground wheat flour for soft, wholesome rotis.",
+  },
 ];
