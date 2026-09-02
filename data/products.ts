@@ -37,6 +37,22 @@ export const products: Product[] = [
     packs: [{ weight: "250g", price: 550 }],
   },
   {
+    slug: "raisins",
+    name: "Golden Raisins",
+    category: "Dry Fruits",
+    image: "/products/raisins.svg",
+    shortDescription: "Naturally sweet, plump golden raisins — a pantry staple.",
+    description:
+      "Our Golden Raisins are sun-dried and hand-cleaned to bring out their natural sweetness and soft, juicy bite. A versatile pantry staple, perfect for snacking, baking, or finishing off your favourite festive dishes.",
+    nutritionalHighlights: [
+      "Naturally sweet — no added sugar",
+      "Good source of iron & potassium",
+      "Hand-cleaned, plump kernels",
+      "100% natural, sun-dried",
+    ],
+    packs: [{ weight: "250g", price: 350 }],
+  },
+  {
     slug: "moon-dry-dates",
     name: "Moon Dry Fruits Dry Dates",
     category: "Dry Dates",
@@ -55,7 +71,7 @@ export const products: Product[] = [
   {
     slug: "cloves",
     name: "Cloves (Laung)",
-    category: "Spices",
+    category: "Whole Spices",
     image: "/products/cloves.svg",
     shortDescription: "Aromatic, whole cloves for authentic flavour in every dish.",
     description:
@@ -88,7 +104,7 @@ export const categories: { name: Product["category"]; image: string; description
     description: "Premium almonds, cashews & more — hand-picked for quality.",
   },
   {
-    name: "Spices",
+    name: "Whole Spices",
     image: "/products/cloves.svg",
     description: "Aromatic whole spices sourced for authentic flavour.",
   },

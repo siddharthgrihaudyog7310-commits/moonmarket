@@ -8,10 +8,11 @@ export const siteConfig = {
     "Moon Spices & Groceries brings you premium, naturally sourced dry fruits, dry dates, and whole spices — hand-picked for quality and freshness.",
   foundedYear: 2018, // TODO: replace with the actual founding year
   url: "https://moonmarket.in",
-  phone: "+91 98765 43210", // TODO: replace with real business phone
-  whatsapp: "919876543210", // TODO: replace with real WhatsApp number (no + or spaces)
-  email: "hello@moonmarket.in", // TODO: replace with real business email
-  address: "Moon Spices & Groceries, India", // TODO: replace with full store address
+  phone: "+91 70545 78781",
+  whatsapp: "917054578781",
+  email: "siddharthgrihaudyog7310@gmail.com",
+  address:
+    "312/290 (312/195-A) Quarter No. 12/11, Lajpat Nagar Chowk, Lucknow - 226003 (U.P.), India",
   social: {
     instagram: "https://instagram.com/moonspicesgroceries",
     facebook: "https://facebook.com/moonspicesgroceries",

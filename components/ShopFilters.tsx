@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductCategory } from "@/types";
 
-const categoryOptions: ProductCategory[] = ["Dry Fruits", "Spices", "Dry Dates"];
+const categoryOptions: ProductCategory[] = ["Dry Fruits", "Whole Spices", "Dry Dates"];
 const sortOptions = [
   { value: "featured", label: "Featured" },
   { value: "price-asc", label: "Price: Low to High" },
