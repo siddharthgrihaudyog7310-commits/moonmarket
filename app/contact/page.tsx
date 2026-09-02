@@ -48,6 +48,32 @@ export default function ContactPage() {
                 <dt className="font-semibold text-ink/60">Hours</dt>
                 <dd className="text-ink">Mon – Sat, 9:00 AM – 7:00 PM IST</dd>
               </div>
+              <div>
+                <dt className="font-semibold text-ink/60">WhatsApp</dt>
+                <dd>
+                  <a
+                    href={`https://wa.me/${siteConfig.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold-600 hover:underline"
+                  >
+                    {siteConfig.phone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink/60">Instagram</dt>
+                <dd>
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold-600 hover:underline"
+                  >
+                    @moon_spices_groceries
+                  </a>
+                </dd>
+              </div>
             </dl>
           </div>
 

@@ -14,7 +14,6 @@ export const siteConfig = {
   address:
     "312/290 (312/195-A) Quarter No. 12/11, Lajpat Nagar Chowk, Lucknow - 226003 (U.P.), India",
   social: {
-    instagram: "https://instagram.com/moonspicesgroceries",
-    facebook: "https://facebook.com/moonspicesgroceries",
+    instagram: "https://www.instagram.com/moon_spices_groceries",
   },
 };
