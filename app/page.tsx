@@ -21,7 +21,7 @@ export default function HomePage() {
           <h2 className="section-heading">Shop by Category</h2>
           <p className="mt-2 text-ink/70">Explore our range, sourced for purity and freshness.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((c) => (
             <CategoryTile key={c.name} {...c} />
           ))}

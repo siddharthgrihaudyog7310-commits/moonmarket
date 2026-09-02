@@ -71,7 +71,7 @@ export const products: Product[] = [
   {
     slug: "cloves",
     name: "Cloves (Laung)",
-    category: "Whole Spices",
+    category: "Spices",
     image: "/products/cloves.svg",
     shortDescription: "Aromatic, whole cloves for authentic flavour in every dish.",
     description:
@@ -104,13 +104,18 @@ export const categories: { name: Product["category"]; image: string; description
     description: "Premium almonds, cashews & more — hand-picked for quality.",
   },
   {
-    name: "Whole Spices",
+    name: "Spices",
     image: "/products/cloves.svg",
-    description: "Aromatic whole spices sourced for authentic flavour.",
+    description: "Everyday ground & blended spices for authentic flavour.",
   },
   {
     name: "Dry Dates",
     image: "/products/dry-dates.svg",
     description: "Naturally sweet, sun-dried dates for a wholesome treat.",
+  },
+  {
+    name: "Whole Spices",
+    image: "/products/cloves.svg",
+    description: "Aromatic whole spices, hand-sorted for maximum freshness.",
   },
 ];
