@@ -1,10 +1,8 @@
-import { siteConfig } from "@/lib/site-config";
-
 const badges = [
   { icon: "🌿", label: "100% Natural" },
   { icon: "⭐", label: "Premium Quality" },
   { icon: "🚚", label: "Pan-India Delivery" },
-  { icon: "☾", label: `Since ${siteConfig.foundedYear}` },
+  { icon: "☾", label: "Since 30 Years" },
 ];
 
 export default function TrustBadges() {

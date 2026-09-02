@@ -40,10 +40,10 @@ export default function AboutPage() {
             Crafted for Today
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-ink/70">
-            Since {siteConfig.foundedYear}, {siteConfig.name} has been bringing
-            India&rsquo;s finest dry fruits, dry dates, and whole spices from
-            trusted farms straight to your home — with the same care our
-            families have practiced for generations.
+            For over 30 years, {siteConfig.name} has been bringing India&rsquo;s
+            finest dry fruits, dry dates, and whole spices from trusted farms
+            straight to your home — with the same care our families have
+            practiced for generations.
           </p>
         </div>
       </section>

@@ -15,7 +15,7 @@ export default function Footer() {
             {siteConfig.description}
           </p>
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-gold-600">
-            Since {siteConfig.foundedYear}
+            Since 30 Years
           </p>
         </div>
 

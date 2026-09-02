@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: "Premium Indian Dry Fruits & Spices",
   description:
     "Moon Spices & Groceries brings you premium, naturally sourced dry fruits, dry dates, and whole spices — hand-picked for quality and freshness.",
-  foundedYear: 2018, // TODO: replace with the actual founding year
+  foundedYear: 1996, // 30 years of business
   url: "https://moonmarket.in",
   phone: "+91 70545 78781",
   whatsapp: "917054578781",
