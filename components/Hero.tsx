@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { LinkButton } from "./Button";
+import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
@@ -7,6 +9,14 @@ export default function Hero() {
       <div className="absolute right-10 top-10 text-6xl text-white/30" aria-hidden="true">☾</div>
 
       <div className="section relative py-20 sm:py-28 flex flex-col items-start gap-6 max-w-3xl">
+        <Image
+          src="/logo-full.png"
+          alt={siteConfig.name}
+          width={900}
+          height={491}
+          priority
+          className="h-20 sm:h-28 w-auto drop-shadow-md"
+        />
         <span className="inline-flex items-center rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
           Premium Indian Dry Fruits &amp; Spices
         </span>
