@@ -51,7 +51,7 @@ export default function AboutPage() {
       <section className="section py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl2 bg-gold-50 shadow-card">
           {/* Placeholder — replace with real brand/sourcing photography */}
-          <Image src="/products/almonds.svg" alt="Sourcing almonds for Moon Spices & Groceries" fill className="object-cover" />
+          <Image src="/products/almonds.jpg" alt="Sourcing almonds for Moon Spices & Groceries" fill className="object-cover" />
         </div>
         <div>
           <h2 className="section-heading">Our Quality &amp; Sourcing Promise</h2>

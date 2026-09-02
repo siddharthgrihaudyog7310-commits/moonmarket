@@ -8,7 +8,7 @@ export const products: Product[] = [
     slug: "almonds",
     name: "Premium Almonds",
     category: "Dry Fruits",
-    image: "/products/almonds.svg",
+    image: "/products/almonds.jpg",
     shortDescription: "Hand-picked, sun-ripened almonds with a rich, buttery crunch.",
     description:
       "Our Premium Almonds are sourced from the finest orchards and hand-sorted for size and quality. Naturally rich in protein, fibre, and healthy fats, they make a wholesome everyday snack or a thoughtful gift for the ones you love.",
@@ -24,7 +24,7 @@ export const products: Product[] = [
     slug: "cashews",
     name: "Whole Cashews",
     category: "Dry Fruits",
-    image: "/products/cashews.svg",
+    image: "/products/cashews.jpg",
     shortDescription: "Creamy, whole cashew kernels roasted to golden perfection.",
     description:
       "Our Whole Cashews (W240 grade) are prized for their smooth, creamy texture and delicate sweetness. Carefully cleaned and graded, each kernel is packed to lock in freshness — perfect for snacking, gifting, or your festive kitchen.",
@@ -40,7 +40,7 @@ export const products: Product[] = [
     slug: "raisins",
     name: "Golden Raisins",
     category: "Dry Fruits",
-    image: "/products/raisins.svg",
+    image: "/products/raisins.jpg",
     shortDescription: "Naturally sweet, plump golden raisins — a pantry staple.",
     description:
       "Our Golden Raisins are sun-dried and hand-cleaned to bring out their natural sweetness and soft, juicy bite. A versatile pantry staple, perfect for snacking, baking, or finishing off your favourite festive dishes.",
@@ -100,7 +100,7 @@ export function getRelatedProducts(product: Product, limit = 3): Product[] {
 export const categories: { name: Product["category"]; image: string; description: string }[] = [
   {
     name: "Dry Fruits",
-    image: "/products/almonds.svg",
+    image: "/products/almonds.jpg",
     description: "Premium almonds, cashews & more — hand-picked for quality.",
   },
   {
