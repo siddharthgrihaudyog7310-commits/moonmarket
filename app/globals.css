@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-poppins;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-poppins font-bold;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-gold-500;
+  }
+}
+
+@layer components {
+  .section {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl font-extrabold tracking-tight text-ink;
+  }
+
+  .divider-moon {
+    @apply relative flex items-center justify-center py-4;
+  }
+
+  .divider-moon::before,
+  .divider-moon::after {
+    content: "";
+    @apply h-px flex-1 bg-gold-300;
+  }
+
+  .card {
+    @apply rounded-xl2 bg-white shadow-card border border-gold-100;
+  }
+}

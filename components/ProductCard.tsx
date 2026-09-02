@@ -1,0 +1,45 @@
+import Link from "next/link";
+import Image from "next/image";
+import { Product } from "@/types";
+import { formatPrice } from "@/lib/utils";
+import EnquireButton from "./EnquireButton";
+
+export default function ProductCard({ product }: { product: Product }) {
+  const startingPack = product.packs[0];
+
+  return (
+    <div className="card group flex flex-col overflow-hidden">
+      <Link href={`/shop/${product.slug}`} className="relative block h-56 w-full bg-gold-50 overflow-hidden">
+        <Image
+          src={product.image}
+          alt={`${product.name} — ${startingPack.weight} pack`}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <span className="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gold-700 shadow-sm">
+          {product.category}
+        </span>
+      </Link>
+
+      <div className="flex flex-1 flex-col p-5">
+        <Link href={`/shop/${product.slug}`}>
+          <h3 className="font-poppins font-bold text-lg text-ink hover:text-gold-600">
+            {product.name}
+          </h3>
+        </Link>
+        <p className="mt-1 text-sm text-ink/70 flex-1">{product.shortDescription}</p>
+
+        <div className="mt-4 flex items-center justify-between">
+          <div>
+            <p className="text-xs text-ink/50">{startingPack.weight} pack</p>
+            <p className="font-poppins font-bold text-xl text-gold-600">
+              {formatPrice(startingPack.price)}
+            </p>
+          </div>
+        </div>
+
+        <EnquireButton productName={product.name} className="mt-4 w-full" />
+      </div>
+    </div>
+  );
+}

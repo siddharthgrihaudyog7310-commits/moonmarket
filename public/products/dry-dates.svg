@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBF6E9"/>
+      <stop offset="100%" stop-color="#F5E9C6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="185" r="120" fill="#EBD48F" opacity="0.5"/>
+  <g fill="#87601C">
+    <ellipse cx="160" cy="195" rx="28" ry="55" transform="rotate(-10 160 195)"/>
+    <ellipse cx="215" cy="185" rx="28" ry="58" transform="rotate(5 215 185)"/>
+    <ellipse cx="255" cy="210" rx="26" ry="50" transform="rotate(20 255 210)"/>
+  </g>
+  <text x="200" y="345" font-family="Poppins, Arial, sans-serif" font-size="24" font-weight="700" fill="#1A1A1A" text-anchor="middle">Dry Dates</text>
+  <text x="200" y="372" font-family="Poppins, Arial, sans-serif" font-size="14" fill="#87601C" text-anchor="middle">Moon Spices &amp; Groceries — placeholder image</text>
+</svg>

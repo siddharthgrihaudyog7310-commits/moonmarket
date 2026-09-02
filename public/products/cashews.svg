@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBF6E9"/>
+      <stop offset="100%" stop-color="#F5E9C6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="185" r="120" fill="#EBD48F" opacity="0.5"/>
+  <g fill="#D4AF37" stroke="#A97923" stroke-width="2">
+    <path d="M150 150 C120 150 110 190 130 215 C145 235 175 235 185 210 C195 235 225 235 240 215 C260 190 250 150 220 150 C205 150 195 165 190 175 C185 165 165 150 150 150 Z" transform="translate(-10,10) rotate(-8 200 190)"/>
+    <path d="M150 150 C120 150 110 190 130 215 C145 235 175 235 185 210 C195 235 225 235 240 215 C260 190 250 150 220 150 C205 150 195 165 190 175 C185 165 165 150 150 150 Z" transform="translate(30,50) rotate(20 200 190) scale(0.8)"/>
+    <path d="M150 150 C120 150 110 190 130 215 C145 235 175 235 185 210 C195 235 225 235 240 215 C260 190 250 150 220 150 C205 150 195 165 190 175 C185 165 165 150 150 150 Z" transform="translate(-60,60) rotate(-25 200 190) scale(0.75)"/>
+  </g>
+  <text x="200" y="345" font-family="Poppins, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="middle">Cashews</text>
+  <text x="200" y="372" font-family="Poppins, Arial, sans-serif" font-size="14" fill="#87601C" text-anchor="middle">Moon Spices &amp; Groceries — placeholder image</text>
+</svg>
