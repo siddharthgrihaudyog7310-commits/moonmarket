@@ -3,7 +3,8 @@ export type ProductCategory =
   | "Spices"
   | "Dry Dates"
   | "Whole Spices"
-  | "Flour (Atta)";
+  | "Flour (Atta)"
+  | "Seeds";
 
 export interface PackOption {
   weight: string;

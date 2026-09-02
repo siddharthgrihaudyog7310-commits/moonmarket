@@ -155,4 +155,9 @@ export const categories: { name: Product["category"]; image: string; description
     image: "/products/kuttu-atta.jpg",
     description: "Kuttu, singhara & more — stone-ground for soft, wholesome rotis.",
   },
+  {
+    name: "Seeds",
+    image: "/products/seeds.svg",
+    description: "Nutrient-rich seeds, hand-cleaned for everyday wellness.",
+  },
 ];

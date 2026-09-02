@@ -9,6 +9,7 @@ const categoryOptions: ProductCategory[] = [
   "Dry Dates",
   "Whole Spices",
   "Flour (Atta)",
+  "Seeds",
 ];
 const sortOptions = [
   { value: "featured", label: "Featured" },
