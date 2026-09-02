@@ -84,6 +84,38 @@ export const products: Product[] = [
     ],
     packs: [{ weight: "100g", price: 150 }],
   },
+  {
+    slug: "kuttu-atta",
+    name: "Kuttu Atta",
+    category: "Flour (Atta)",
+    image: "/products/kuttu-atta.jpg",
+    shortDescription: "Buckwheat flour, stone-ground for soft, fasting-friendly rotis.",
+    description:
+      "Our Kuttu Atta (buckwheat flour) is milled from premium buckwheat for a fine, soft texture — perfect for vrat/fasting recipes like puris and parathas, or as a gluten-free flour for everyday cooking.",
+    nutritionalHighlights: [
+      "Naturally gluten-free",
+      "Good source of protein & fibre",
+      "Ideal for vrat/fasting recipes",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "500g", price: 180 }],
+  },
+  {
+    slug: "singhara-atta",
+    name: "Singhara Atta",
+    category: "Flour (Atta)",
+    image: "/products/singhara-atta.jpg",
+    shortDescription: "Water chestnut flour, finely milled for light, crisp puris.",
+    description:
+      "Our Singhara Atta (water chestnut flour) is ground fresh for a light, delicate texture — a traditional favourite for vrat/fasting meals, giving puris and pakoras their signature crisp bite.",
+    nutritionalHighlights: [
+      "Naturally gluten-free",
+      "Good source of potassium",
+      "Ideal for vrat/fasting recipes",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "500g", price: 200 }],
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
@@ -120,7 +152,7 @@ export const categories: { name: Product["category"]; image: string; description
   },
   {
     name: "Flour (Atta)",
-    image: "/products/atta.svg",
-    description: "Stone-ground wheat flour for soft, wholesome rotis.",
+    image: "/products/kuttu-atta.jpg",
+    description: "Kuttu, singhara & more — stone-ground for soft, wholesome rotis.",
   },
 ];
