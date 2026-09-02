@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             alt={product.name}
             fill
             priority
-            className="object-cover"
+            className="object-contain p-6"
           />
         </div>
 

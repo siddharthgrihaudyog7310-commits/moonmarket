@@ -19,7 +19,7 @@ export default function CategoryTile({ name, image, description }: CategoryTileP
           src={image}
           alt=""
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <div className="p-5">
