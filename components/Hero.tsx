@@ -8,15 +8,17 @@ export default function Hero() {
       <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/20 blur-2xl" aria-hidden="true" />
       <div className="absolute right-10 top-10 text-6xl text-white/30" aria-hidden="true">☾</div>
 
-      <div className="section relative py-20 sm:py-28 flex flex-col items-start gap-6 max-w-3xl">
-        <Image
-          src="/logo-full.png"
-          alt={siteConfig.name}
-          width={900}
-          height={491}
-          priority
-          className="h-20 sm:h-28 w-auto drop-shadow-md"
-        />
+      <div className="section relative py-16 sm:py-24 flex flex-col items-start gap-7 max-w-3xl">
+        <div className="rounded-2xl bg-cream/90 px-6 py-4 shadow-soft backdrop-blur-sm">
+          <Image
+            src="/logo-full.png"
+            alt={siteConfig.name}
+            width={900}
+            height={491}
+            priority
+            className="h-16 sm:h-24 w-auto"
+          />
+        </div>
         <span className="inline-flex items-center rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
           Premium Indian Dry Fruits &amp; Spices
         </span>
