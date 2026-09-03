@@ -3,7 +3,7 @@ export type ProductCategory =
   | "Spices"
   | "Dry Dates"
   | "Whole Spices"
-  | "Flour (Atta)"
+  | "Speciality Flours"
   | "Seeds";
 
 export interface PackOption {

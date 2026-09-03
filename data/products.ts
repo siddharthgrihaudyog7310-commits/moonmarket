@@ -40,7 +40,7 @@ export const products: Product[] = [
     slug: "raisins",
     name: "Golden Raisins",
     category: "Dry Fruits",
-    image: "/products/raisins.jpg",
+    image: "/products/raisins.svg",
     shortDescription: "Naturally sweet, plump golden raisins — a pantry staple.",
     description:
       "Our Golden Raisins are sun-dried and hand-cleaned to bring out their natural sweetness and soft, juicy bite. A versatile pantry staple, perfect for snacking, baking, or finishing off your favourite festive dishes.",
@@ -87,7 +87,7 @@ export const products: Product[] = [
   {
     slug: "kuttu-atta",
     name: "Kuttu Atta",
-    category: "Flour (Atta)",
+    category: "Speciality Flours",
     image: "/products/kuttu-atta.jpg",
     shortDescription: "Buckwheat flour, stone-ground for soft, fasting-friendly rotis.",
     description:
@@ -103,7 +103,7 @@ export const products: Product[] = [
   {
     slug: "singhara-atta",
     name: "Singhara Atta",
-    category: "Flour (Atta)",
+    category: "Speciality Flours",
     image: "/products/singhara-atta.jpg",
     shortDescription: "Water chestnut flour, finely milled for light, crisp puris.",
     description:
@@ -151,7 +151,7 @@ export const categories: { name: Product["category"]; image: string; description
     description: "Aromatic whole spices, hand-sorted for maximum freshness.",
   },
   {
-    name: "Flour (Atta)",
+    name: "Speciality Flours",
     image: "/products/kuttu-atta.jpg",
     description: "Kuttu, singhara & more — stone-ground for soft, wholesome rotis.",
   },

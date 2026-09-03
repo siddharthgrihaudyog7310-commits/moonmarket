@@ -8,7 +8,7 @@ const categoryOptions: ProductCategory[] = [
   "Spices",
   "Dry Dates",
   "Whole Spices",
-  "Flour (Atta)",
+  "Speciality Flours",
   "Seeds",
 ];
 const sortOptions = [
