@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <div>
             <p className="text-xs text-ink/50">{startingPack.weight} pack</p>
             <p className="font-poppins font-bold text-xl text-gold-600">
-              {formatPrice(startingPack.price)}
+              {startingPack.price != null ? formatPrice(startingPack.price) : "Price on Enquiry"}
             </p>
             {unitPrice && <p className="text-xs text-ink/40">{unitPrice}</p>}
           </div>

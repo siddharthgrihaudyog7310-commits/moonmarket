@@ -14,13 +14,22 @@ interface ShopPageProps {
   searchParams: Promise<{ category?: string; sort?: string }>;
 }
 
+function comparePrices(a: Product, b: Product, direction: 1 | -1) {
+  const pa = a.packs[0].price;
+  const pb = b.packs[0].price;
+  if (pa == null && pb == null) return 0;
+  if (pa == null) return 1; // products without a price sort to the end either way
+  if (pb == null) return -1;
+  return (pa - pb) * direction;
+}
+
 function sortProducts(list: Product[], sort?: string) {
   const sorted = [...list];
   switch (sort) {
     case "price-asc":
-      return sorted.sort((a, b) => a.packs[0].price - b.packs[0].price);
+      return sorted.sort((a, b) => comparePrices(a, b, 1));
     case "price-desc":
-      return sorted.sort((a, b) => b.packs[0].price - a.packs[0].price);
+      return sorted.sort((a, b) => comparePrices(a, b, -1));
     case "name-asc":
       return sorted.sort((a, b) => a.name.localeCompare(b.name));
     default:

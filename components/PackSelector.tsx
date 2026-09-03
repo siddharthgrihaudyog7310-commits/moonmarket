@@ -19,10 +19,21 @@ export default function PackSelector({
   return (
     <div>
       <p className="font-poppins font-extrabold text-3xl text-gold-600">
-        {formatPrice(activePack.price)}
-        <span className="ml-2 text-base font-medium text-ink/50">
-          / {activePack.weight}
-        </span>
+        {activePack.price != null ? (
+          <>
+            {formatPrice(activePack.price)}
+            <span className="ml-2 text-base font-medium text-ink/50">
+              / {activePack.weight}
+            </span>
+          </>
+        ) : (
+          <>
+            Price on Enquiry
+            <span className="ml-2 text-base font-medium text-ink/50">
+              ({activePack.weight})
+            </span>
+          </>
+        )}
       </p>
       {unitPrice && <p className="mt-1 text-sm text-ink/50">{unitPrice}</p>}
 

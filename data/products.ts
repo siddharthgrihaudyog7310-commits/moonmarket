@@ -243,9 +243,9 @@ export const products: Product[] = [
       "100% natural, no additives",
     ],
     packs: [
-      { weight: "50g", price: 40 },
-      { weight: "100g", price: 70 },
-      { weight: "250g", price: 150 },
+      { weight: "50g" },
+      { weight: "100g" },
+      { weight: "250g" },
     ],
   },
   {

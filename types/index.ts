@@ -8,7 +8,8 @@ export type ProductCategory =
 
 export interface PackOption {
   weight: string;
-  price: number;
+  /** Omit when the price hasn't been confirmed yet — the UI shows "Price on Enquiry". */
+  price?: number;
 }
 
 export interface Product {
