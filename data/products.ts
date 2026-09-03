@@ -69,6 +69,70 @@ export const products: Product[] = [
     packs: [{ weight: "250g", price: 280 }],
   },
   {
+    slug: "turmeric-powder",
+    name: "Turmeric Powder",
+    category: "Spices",
+    image: "/products/haldi.jpg",
+    shortDescription: "Vibrant, aromatic turmeric powder ground fresh for everyday cooking.",
+    description:
+      "Our Turmeric Powder is ground from premium turmeric roots for a deep golden colour and warm, earthy aroma. An everyday kitchen essential, it adds colour, flavour, and goodness to curries, dals, and more.",
+    nutritionalHighlights: [
+      "Rich in curcumin & antioxidants",
+      "Naturally vibrant colour",
+      "Cleaned & finely ground",
+      "No fillers or artificial colour",
+    ],
+    packs: [{ weight: "100g", price: 90 }],
+  },
+  {
+    slug: "red-chilli-powder",
+    name: "Red Chilli Powder",
+    category: "Spices",
+    image: "/products/mircha.jpg",
+    shortDescription: "Bold, vibrant red chilli powder for authentic heat and colour.",
+    description:
+      "Our Red Chilli Powder is ground from handpicked red chillies for a rich colour and bold heat. A staple in every Indian kitchen, it brings authentic spice and depth to curries, marinades, and snacks.",
+    nutritionalHighlights: [
+      "Rich, natural red colour",
+      "Bold, authentic heat",
+      "Cleaned & finely ground",
+      "No fillers or artificial colour",
+    ],
+    packs: [{ weight: "100g", price: 150 }],
+  },
+  {
+    slug: "coriander-powder",
+    name: "Coriander Powder",
+    category: "Spices",
+    image: "/products/daniya.jpg",
+    shortDescription: "Freshly ground coriander powder with a warm, citrusy aroma.",
+    description:
+      "Our Coriander Powder is ground from quality coriander seeds for a warm, citrusy aroma and mellow flavour. A base spice in Indian cooking, it rounds out curries, gravies, and masalas beautifully.",
+    nutritionalHighlights: [
+      "Warm, citrusy aroma",
+      "Good source of dietary fibre",
+      "Cleaned & finely ground",
+      "No fillers or additives",
+    ],
+    packs: [{ weight: "100g", price: 80 }],
+  },
+  {
+    slug: "amchur-powder",
+    name: "Amchur Powder",
+    category: "Spices",
+    image: "/products/khatai.jpg",
+    shortDescription: "Tangy dry mango powder for that classic sour kick.",
+    description:
+      "Our Amchur Powder (dry mango powder) is ground from sun-dried raw mangoes for a tangy, fruity sourness. A pantry favourite for finishing chaats, curries, and snacks with a burst of natural tang.",
+    nutritionalHighlights: [
+      "Bold, tangy flavour",
+      "Cleaned & finely ground",
+      "No fillers or artificial additives",
+      "100% natural",
+    ],
+    packs: [{ weight: "100g", price: 100 }],
+  },
+  {
     slug: "kuttu-atta",
     name: "Kuttu Atta",
     category: "Speciality Flours",
