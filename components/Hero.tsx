@@ -1,5 +1,11 @@
-import Image from "next/image";
 import { LinkButton } from "./Button";
+
+const badges = [
+  { icon: "🌿", label: "100% Natural", position: "left-0 top-2 sm:top-0" },
+  { icon: "⭐", label: "Premium Quality", position: "right-0 top-2 sm:top-0" },
+  { icon: "🚚", label: "Pan-India Delivery", position: "left-0 bottom-2 sm:bottom-0" },
+  { icon: "🤲", label: "Hand-Picked", position: "right-0 bottom-2 sm:bottom-0" },
+];
 
 export default function Hero() {
   return (
@@ -7,7 +13,7 @@ export default function Hero() {
       <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/20 blur-3xl" aria-hidden="true" />
       <div className="absolute right-10 top-10 text-6xl text-white/30" aria-hidden="true">☾</div>
 
-      <div className="section relative py-16 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-6">
+      <div className="section relative py-16 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-6">
         <div className="flex flex-col items-start gap-6 max-w-xl">
           <span className="inline-flex items-center rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
             Premium Indian Dry Fruits &amp; Spices
@@ -30,30 +36,35 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto h-72 w-full max-w-sm sm:h-96 lg:mx-0 lg:h-[440px] lg:max-w-none">
+        <div className="relative mx-auto flex h-80 w-80 items-center justify-center sm:h-96 sm:w-96 lg:mx-0 lg:h-[420px] lg:w-[420px]">
           <div
-            className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/25 blur-2xl sm:h-80 sm:w-80 lg:h-96 lg:w-96"
+            className="absolute inset-0 rounded-full border-2 border-dashed border-white/50 animate-[spin_30s_linear_infinite]"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-6 rounded-full border border-white/30"
             aria-hidden="true"
           />
 
-          <div className="absolute left-1/2 top-1/2 h-44 w-36 -translate-x-[115%] -translate-y-1/2 rotate-[-10deg] drop-shadow-2xl transition-transform duration-500 hover:-translate-y-[55%] sm:h-56 sm:w-44 lg:h-64 lg:w-52">
-            <Image src="/products/cashews.jpg" alt="Moon Cashews pack" fill sizes="220px" className="rounded-2xl object-cover" />
-          </div>
-
-          <div className="absolute left-1/2 top-1/2 h-52 w-44 -translate-x-1/2 -translate-y-[58%] rotate-[3deg] drop-shadow-2xl transition-transform duration-500 hover:-translate-y-[68%] sm:h-64 sm:w-52 lg:h-72 lg:w-60">
-            <Image src="/products/almonds.jpg" alt="Moon Almonds pack" fill sizes="260px" priority className="rounded-2xl object-cover" />
-          </div>
-
-          <div className="absolute left-1/2 top-1/2 h-44 w-36 translate-x-[15%] -translate-y-1/2 rotate-[10deg] drop-shadow-2xl transition-transform duration-500 hover:-translate-y-[55%] sm:h-56 sm:w-44 lg:h-64 lg:w-52">
-            <Image src="/products/dry-dates.jpg" alt="Moon Dry Dates pack" fill sizes="220px" className="rounded-2xl object-cover" />
-          </div>
-
-          <div className="absolute -bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 shadow-premium sm:bottom-2">
-            <span className="text-lg">☾</span>
-            <span className="font-poppins text-xs font-bold text-ink whitespace-nowrap">
-              30 Years of Trust
+          <div className="relative flex h-44 w-44 flex-col items-center justify-center gap-1 rounded-full bg-cream shadow-premium sm:h-52 sm:w-52">
+            <span className="text-4xl text-gold-600" aria-hidden="true">☾</span>
+            <span className="font-poppins text-xs font-semibold uppercase tracking-widest text-ink/60">
+              Est. 1996
+            </span>
+            <span className="font-poppins text-lg font-extrabold text-ink text-center leading-tight">
+              30 Years <br /> of Trust
             </span>
           </div>
+
+          {badges.map((b) => (
+            <div
+              key={b.label}
+              className={`absolute ${b.position} flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-soft`}
+            >
+              <span className="text-lg" aria-hidden="true">{b.icon}</span>
+              <span className="font-poppins text-xs font-bold text-ink whitespace-nowrap">{b.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
