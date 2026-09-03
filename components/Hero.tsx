@@ -1,12 +1,5 @@
 import { LinkButton } from "./Button";
 
-const stats = [
-  { icon: "☾", label: "30+ Years of Trust" },
-  { icon: "🌿", label: "100% Natural" },
-  { icon: "🚚", label: "Pan-India Delivery" },
-  { icon: "💬", label: "Order via WhatsApp" },
-];
-
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-white">
@@ -44,17 +37,6 @@ export default function Hero() {
               Our Story
             </LinkButton>
           </div>
-        </div>
-
-        <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-y-6 border-t border-gold-100 pt-8 sm:grid-cols-4 sm:divide-x sm:divide-gold-100">
-          {stats.map((s) => (
-            <div key={s.label} className="flex flex-col items-center gap-2 text-center sm:px-4">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-50 text-xl text-gold-600">
-                {s.icon}
-              </span>
-              <span className="font-poppins text-sm font-semibold text-ink/80">{s.label}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>
