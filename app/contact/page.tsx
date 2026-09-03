@@ -77,12 +77,17 @@ export default function ContactPage() {
             </dl>
           </div>
 
-          <div
-            className="card flex h-64 w-full items-center justify-center bg-gold-50 text-center text-sm text-ink/50"
-            role="img"
-            aria-label="Map showing store location — placeholder"
-          >
-            Map placeholder — embed Google Maps here with your store location
+          <div className="card overflow-hidden p-0">
+            <iframe
+              title={`${siteConfig.name} store location`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address)}&output=embed`}
+              width="100%"
+              height="256"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-64 w-full"
+            />
           </div>
         </div>
       </div>
