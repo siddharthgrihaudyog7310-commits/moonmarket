@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import SectionDivider from "@/components/SectionDivider";
-import ProductCard from "@/components/ProductCard";
 import { LinkButton } from "@/components/Button";
 import { siteConfig } from "@/lib/site-config";
-import { products } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -80,26 +78,6 @@ export default function AboutPage() {
               <p className="mt-2 text-sm text-ink/70">{v.description}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="bg-gold-gradient-soft py-16 sm:py-20">
-        <div className="section">
-          <div className="text-center mb-12">
-            <span className="section-eyebrow justify-center">Our Range</span>
-            <h2 className="section-heading mt-2">A Taste of What We Offer</h2>
-            <p className="mt-3 text-ink/70">Hand-picked and naturally sourced, from our family to yours.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.slice(0, 4).map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
-          </div>
-          <div className="mt-12 flex justify-center">
-            <LinkButton href="/shop" variant="outline">
-              View All Products
-            </LinkButton>
-          </div>
         </div>
       </section>
 
