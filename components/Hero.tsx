@@ -2,41 +2,29 @@ import { LinkButton } from "./Button";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      <div
-        className="absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage: "radial-gradient(rgba(212,168,83,0.5) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-        aria-hidden="true"
-      />
-      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-200/50 blur-3xl" aria-hidden="true" />
-      <div className="absolute right-8 bottom-8 text-7xl text-gold-500/10" aria-hidden="true">☾</div>
+    <section className="relative overflow-hidden bg-gold-gradient">
+      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/20 blur-3xl" aria-hidden="true" />
+      <div className="absolute right-10 top-10 text-6xl text-white/30" aria-hidden="true">☾</div>
 
-      <div className="section relative py-20 sm:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-gold-300 bg-gold-50 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
-            Premium Indian Dry Fruits &amp; Spices
-          </span>
-          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-ink">
-            Nature&rsquo;s{" "}
-            <span className="bg-gold-gradient bg-clip-text text-transparent">Finest</span>,{" "}
-            <br className="hidden sm:block" />
-            Delivered with Love
-          </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-ink/70">
-            Hand-picked almonds, cashews, dry dates and whole spices — sourced
-            for purity and packed to preserve every bit of natural goodness.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <LinkButton href="/shop" variant="primary">
-              Shop Now
-            </LinkButton>
-            <LinkButton href="/about" variant="outline">
-              Our Story
-            </LinkButton>
-          </div>
+      <div className="section relative py-20 sm:py-28 flex flex-col items-start gap-6 max-w-3xl">
+        <span className="inline-flex items-center rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
+          Premium Indian Dry Fruits &amp; Spices
+        </span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-ink">
+          Nature&rsquo;s Finest, <br className="hidden sm:block" />
+          Delivered with Love
+        </h1>
+        <p className="text-lg text-ink/80 max-w-xl">
+          Hand-picked almonds, cashews, dry dates and whole spices — sourced
+          for purity and packed to preserve every bit of natural goodness.
+        </p>
+        <div className="flex flex-wrap gap-4 pt-2">
+          <LinkButton href="/shop" variant="primary">
+            Shop Now
+          </LinkButton>
+          <LinkButton href="/about" variant="outline" className="bg-white/60">
+            Our Story
+          </LinkButton>
         </div>
       </div>
     </section>
