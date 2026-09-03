@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import TrustBadges from "@/components/TrustBadges";
 import CategoryTile from "@/components/CategoryTile";
 import ProductCard from "@/components/ProductCard";
 import ShopByPurpose from "@/components/ShopByPurpose";
@@ -13,7 +12,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBadges />
 
       <section className="bg-gold-gradient-soft py-16 sm:py-20">
         <div className="section">
