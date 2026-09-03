@@ -129,35 +129,46 @@ export function getRelatedProducts(product: Product, limit = 3): Product[] {
     .slice(0, limit);
 }
 
-export const categories: { name: Product["category"]; image: string; description: string }[] = [
+export const categories: {
+  name: Product["category"];
+  image: string;
+  description: string;
+  accent: string;
+}[] = [
   {
     name: "Dry Fruits",
     image: "/products/almonds.jpg",
     description: "Premium almonds, cashews & more — hand-picked for quality.",
+    accent: "#B5651D",
   },
   {
     name: "Spices",
     image: "/products/cloves.svg",
     description: "Everyday ground & blended spices for authentic flavour.",
+    accent: "#8B2C3B",
   },
   {
     name: "Dry Dates",
     image: "/products/dry-dates.svg",
     description: "Naturally sweet, sun-dried dates for a wholesome treat.",
+    accent: "#6B4226",
   },
   {
     name: "Whole Spices",
     image: "/products/cloves.svg",
     description: "Aromatic whole spices, hand-sorted for maximum freshness.",
+    accent: "#4A6741",
   },
   {
     name: "Speciality Flours",
     image: "/products/kuttu-atta.jpg",
     description: "Kuttu, singhara & more — stone-ground for soft, wholesome rotis.",
+    accent: "#B8860B",
   },
   {
     name: "Seeds",
     image: "/products/seeds.svg",
     description: "Nutrient-rich seeds, hand-cleaned for everyday wellness.",
+    accent: "#7A6C3F",
   },
 ];
