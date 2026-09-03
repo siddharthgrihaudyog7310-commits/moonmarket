@@ -9,30 +9,25 @@ interface CategoryTileProps {
   accent: string;
 }
 
-export default function CategoryTile({ name, image, description, accent }: CategoryTileProps) {
+export default function CategoryTile({ name, image, accent }: CategoryTileProps) {
   return (
     <Link
       href={`/shop?category=${encodeURIComponent(name)}`}
-      className="card group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      className="group relative flex h-40 w-36 shrink-0 flex-col justify-end overflow-hidden rounded-2xl shadow-soft transition-transform hover:-translate-y-1 snap-start sm:h-44 sm:w-40"
+      style={{ backgroundColor: accent }}
     >
-      <div className="h-1" style={{ backgroundColor: accent }} aria-hidden="true" />
-      <div className="relative h-44 w-full overflow-hidden" style={{ backgroundColor: `${accent}1A` }}>
-        <Image
-          src={image}
-          alt=""
-          fill
-          className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-        />
+      <div className="absolute inset-0 flex items-center justify-center p-4 pb-10">
+        <div className="relative h-full w-full">
+          <Image
+            src={image}
+            alt=""
+            fill
+            className="object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-110"
+          />
+        </div>
       </div>
-      <div className="p-5">
-        <h3 className="font-poppins font-bold text-lg text-ink">{name}</h3>
-        <p className="mt-1 text-sm text-ink/70">{description}</p>
-        <span
-          className="mt-3 inline-block text-sm font-semibold group-hover:underline"
-          style={{ color: accent }}
-        >
-          Explore &rarr;
-        </span>
+      <div className="relative bg-black/35 px-3 py-2.5 text-center backdrop-blur-[2px]">
+        <span className="font-poppins font-bold text-sm text-white">{name}</span>
       </div>
     </Link>
   );

@@ -22,7 +22,7 @@ export default function HomePage() {
             <h2 className="section-heading mt-2">Shop by Category</h2>
             <p className="mt-3 text-ink/70">Explore our range, sourced for purity and freshness.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 sm:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => (
               <CategoryTile key={c.name} {...c} />
             ))}

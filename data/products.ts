@@ -143,19 +143,19 @@ export const categories: {
   },
   {
     name: "Spices",
-    image: "/products/cloves.svg",
+    image: "/products/spices-icon.svg",
     description: "Everyday ground & blended spices for authentic flavour.",
     accent: "#8B2C3B",
   },
   {
     name: "Dry Dates",
-    image: "/products/dry-dates.svg",
+    image: "/products/dry-dates-icon.svg",
     description: "Naturally sweet, sun-dried dates for a wholesome treat.",
     accent: "#6B4226",
   },
   {
     name: "Whole Spices",
-    image: "/products/cloves.svg",
+    image: "/products/spices-icon.svg",
     description: "Aromatic whole spices, hand-sorted for maximum freshness.",
     accent: "#4A6741",
   },
@@ -167,7 +167,7 @@ export const categories: {
   },
   {
     name: "Seeds",
-    image: "/products/seeds.svg",
+    image: "/products/seeds-icon.svg",
     description: "Nutrient-rich seeds, hand-cleaned for everyday wellness.",
     accent: "#7A6C3F",
   },
