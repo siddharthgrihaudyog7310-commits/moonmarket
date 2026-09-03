@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import SectionDivider from "@/components/SectionDivider";
 import { LinkButton } from "@/components/Button";
 import { siteConfig } from "@/lib/site-config";
@@ -48,25 +47,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl2 bg-gold-50 shadow-card">
-          {/* Placeholder — replace with real brand/sourcing photography */}
-          <Image src="/products/almonds.jpg" alt="Sourcing almonds for Moon Spices & Groceries" fill className="object-cover" />
-        </div>
-        <div>
-          <h2 className="section-heading">Our Quality &amp; Sourcing Promise</h2>
-          <p className="mt-4 text-ink/70 leading-relaxed">
-            We believe premium food starts with premium sourcing. That&rsquo;s
-            why we partner directly with growers across India&rsquo;s finest
-            dry fruit and spice belts, inspecting every harvest for size,
-            texture, and aroma before it earns the Moon Spices name.
-          </p>
-          <p className="mt-4 text-ink/70 leading-relaxed">
-            From orchard to pack, our process is designed to preserve
-            nature&rsquo;s goodness — no shortcuts, no fillers, just honest,
-            wholesome food.
-          </p>
-        </div>
+      <section className="section py-16 max-w-2xl mx-auto text-center">
+        <h2 className="section-heading">Our Quality &amp; Sourcing Promise</h2>
+        <p className="mt-4 text-ink/70 leading-relaxed">
+          We believe premium food starts with premium sourcing. That&rsquo;s
+          why we partner directly with growers across India&rsquo;s finest
+          dry fruit and spice belts, inspecting every harvest for size,
+          texture, and aroma before it earns the Moon Spices name.
+        </p>
+        <p className="mt-4 text-ink/70 leading-relaxed">
+          From orchard to pack, our process is designed to preserve
+          nature&rsquo;s goodness — no shortcuts, no fillers, just honest,
+          wholesome food.
+        </p>
       </section>
 
       <SectionDivider />
