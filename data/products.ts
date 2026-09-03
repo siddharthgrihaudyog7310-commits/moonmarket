@@ -229,6 +229,26 @@ export const products: Product[] = [
     packs: [{ weight: "100g", price: 100 }],
   },
   {
+    slug: "cumin-seeds",
+    name: "Cumin Seeds (Jeera)",
+    category: "Whole Spices",
+    image: "/products/cumin-seeds.jpg",
+    shortDescription: "Aromatic whole cumin seeds for tempering and everyday cooking.",
+    description:
+      "Our Cumin Seeds (Jeera) are cleaned and hand-sorted for a rich, earthy aroma and bold flavour. A kitchen essential for tempering dals, curries, and rice, or grinding fresh for your own masalas.",
+    nutritionalHighlights: [
+      "Rich, earthy aroma",
+      "Hand-cleaned & sorted",
+      "Hygienically packed",
+      "100% natural, no additives",
+    ],
+    packs: [
+      { weight: "50g", price: 40 },
+      { weight: "100g", price: 70 },
+      { weight: "250g", price: 150 },
+    ],
+  },
+  {
     slug: "kuttu-atta",
     name: "Kuttu Atta",
     category: "Speciality Flours",
