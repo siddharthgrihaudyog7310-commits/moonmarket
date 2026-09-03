@@ -1,68 +1,56 @@
 import { LinkButton } from "./Button";
 
-const badges = [
-  { icon: "🌿", label: "100% Natural", position: "left-0 top-2 sm:top-0" },
-  { icon: "⭐", label: "Premium Quality", position: "right-0 top-2 sm:top-0" },
-  { icon: "🚚", label: "Pan-India Delivery", position: "left-0 bottom-2 sm:bottom-0" },
-  { icon: "🤲", label: "Hand-Picked", position: "right-0 bottom-2 sm:bottom-0" },
+const stats = [
+  { icon: "☾", label: "30+ Years of Trust" },
+  { icon: "🌿", label: "100% Natural" },
+  { icon: "🚚", label: "Pan-India Delivery" },
+  { icon: "💬", label: "Order via WhatsApp" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gold-gradient">
-      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/20 blur-3xl" aria-hidden="true" />
-      <div className="absolute right-10 top-10 text-6xl text-white/30" aria-hidden="true">☾</div>
+    <section className="relative overflow-hidden bg-ink">
+      <div
+        className="absolute inset-0 opacity-[0.15]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(212,168,83,0.6) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-500/30 blur-3xl" aria-hidden="true" />
+      <div className="absolute right-8 bottom-8 text-7xl text-gold-500/10" aria-hidden="true">☾</div>
 
-      <div className="section relative py-16 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-6">
-        <div className="flex flex-col items-start gap-6 max-w-xl">
-          <span className="inline-flex items-center rounded-full bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
+      <div className="section relative py-20 sm:py-28">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center rounded-full border border-gold-400/40 bg-gold-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-300">
             Premium Indian Dry Fruits &amp; Spices
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-ink">
-            Nature&rsquo;s Finest, <br className="hidden sm:block" />
+          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-cream">
+            Nature&rsquo;s{" "}
+            <span className="bg-gold-gradient bg-clip-text text-transparent">Finest</span>,{" "}
+            <br className="hidden sm:block" />
             Delivered with Love
           </h1>
-          <p className="text-lg text-ink/80 max-w-xl">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-cream/70">
             Hand-picked almonds, cashews, dry dates and whole spices — sourced
             for purity and packed to preserve every bit of natural goodness.
           </p>
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <LinkButton href="/shop" variant="primary">
               Shop Now
             </LinkButton>
-            <LinkButton href="/about" variant="outline" className="bg-white/60">
+            <LinkButton href="/about" variant="outline" className="border-cream/30 bg-transparent text-cream hover:bg-cream/10">
               Our Story
             </LinkButton>
           </div>
         </div>
 
-        <div className="relative mx-auto flex h-80 w-80 items-center justify-center sm:h-96 sm:w-96 lg:mx-0 lg:h-[420px] lg:w-[420px]">
-          <div
-            className="absolute inset-0 rounded-full border-2 border-dashed border-white/50 animate-[spin_30s_linear_infinite]"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute inset-6 rounded-full border border-white/30"
-            aria-hidden="true"
-          />
-
-          <div className="relative flex h-44 w-44 flex-col items-center justify-center gap-1 rounded-full bg-cream shadow-premium sm:h-52 sm:w-52">
-            <span className="text-4xl text-gold-600" aria-hidden="true">☾</span>
-            <span className="font-poppins text-xs font-semibold uppercase tracking-widest text-ink/60">
-              Est. 1996
-            </span>
-            <span className="font-poppins text-lg font-extrabold text-ink text-center leading-tight">
-              30 Years <br /> of Trust
-            </span>
-          </div>
-
-          {badges.map((b) => (
-            <div
-              key={b.label}
-              className={`absolute ${b.position} flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-soft`}
-            >
-              <span className="text-lg" aria-hidden="true">{b.icon}</span>
-              <span className="font-poppins text-xs font-bold text-ink whitespace-nowrap">{b.label}</span>
+        <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-y-6 border-t border-cream/10 pt-8 sm:grid-cols-4 sm:divide-x sm:divide-cream/10">
+          {stats.map((s) => (
+            <div key={s.label} className="flex flex-col items-center gap-2 text-center sm:px-4">
+              <span className="text-2xl">{s.icon}</span>
+              <span className="font-poppins text-sm font-semibold text-cream/90">{s.label}</span>
             </div>
           ))}
         </div>
