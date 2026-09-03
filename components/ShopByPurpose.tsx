@@ -16,13 +16,6 @@ const purposes = [
     gradient: "from-gold-500 to-gold-700",
   },
   {
-    label: "Festive Treats",
-    icon: "✨",
-    description: "Premium picks for Diwali, Rakhi & more",
-    href: "/shop?category=Dry%20Dates",
-    gradient: "from-[#6B4226] to-[#8F5A34]",
-  },
-  {
     label: "Bulk & Wholesale",
     icon: "📦",
     description: "Enquire for bulk orders & best rates",
@@ -42,7 +35,7 @@ export default function ShopByPurpose() {
             We&rsquo;ve made it easy to find exactly what you need.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {purposes.map((p) => (
             <Link
               key={p.label}

@@ -40,7 +40,7 @@ export const products: Product[] = [
     slug: "raisins",
     name: "Golden Raisins",
     category: "Dry Fruits",
-    image: "/products/raisins.svg",
+    image: "/products/raisins.jpg",
     shortDescription: "Naturally sweet, plump golden raisins — a pantry staple.",
     description:
       "Our Golden Raisins are sun-dried and hand-cleaned to bring out their natural sweetness and soft, juicy bite. A versatile pantry staple, perfect for snacking, baking, or finishing off your favourite festive dishes.",
@@ -56,7 +56,7 @@ export const products: Product[] = [
     slug: "moon-dry-dates",
     name: "Moon Dry Fruits Dry Dates",
     category: "Dry Dates",
-    image: "/products/dry-dates.svg",
+    image: "/products/dry-dates.jpg",
     shortDescription: "Naturally sweet, soft dry dates — a wholesome everyday treat.",
     description:
       "Moon Dry Fruits Dry Dates are naturally sun-dried to preserve their deep caramel sweetness and soft, chewy texture. A traditional favourite, they're perfect for snacking, festive sweets, or adding to your daily diet as a natural energy boost.",
@@ -67,6 +67,102 @@ export const products: Product[] = [
       "100% natural, sun-dried",
     ],
     packs: [{ weight: "250g", price: 280 }],
+  },
+  {
+    slug: "chia-seeds",
+    name: "Chia Seeds",
+    category: "Seeds",
+    image: "/products/chia-seeds.jpg",
+    shortDescription: "Nutrient-dense chia seeds for smoothies, drinks & everyday wellness.",
+    description:
+      "Our Chia Seeds are naturally rich in fibre and omega-3s, with a mild, nutty flavour. Soak them in water or milk, or add to smoothies and salads for a wholesome nutritional boost.",
+    nutritionalHighlights: [
+      "Rich in omega-3 fatty acids",
+      "High in dietary fibre",
+      "Good source of plant protein",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 120 }],
+  },
+  {
+    slug: "musk-melon-seeds",
+    name: "Musk Melon Seeds",
+    category: "Seeds",
+    image: "/products/musk-melon-seeds.jpg",
+    shortDescription: "Light, crunchy musk melon seeds — a wholesome snacking seed.",
+    description:
+      "Our Musk Melon Seeds are cleaned and hand-sorted for a light, crunchy bite. A nutritious addition to salads, trail mixes, or enjoyed on their own as a healthy snack.",
+    nutritionalHighlights: [
+      "Good source of healthy fats",
+      "Rich in magnesium",
+      "Hand-cleaned & sorted",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 150 }],
+  },
+  {
+    slug: "melon-seeds",
+    name: "Melon Seeds",
+    category: "Seeds",
+    image: "/products/melon-seeds.jpg",
+    shortDescription: "Crunchy melon seeds, hand-cleaned for everyday wellness.",
+    description:
+      "Our Melon Seeds are naturally cleaned and sorted for a crisp, nutty bite. Perfect for snacking, garnishing, or adding to your favourite recipes for extra crunch and nutrition.",
+    nutritionalHighlights: [
+      "Good source of healthy fats & protein",
+      "Rich in magnesium & zinc",
+      "Hand-cleaned & sorted",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 130 }],
+  },
+  {
+    slug: "black-sesame-seeds",
+    name: "Black Sesame Seeds",
+    category: "Seeds",
+    image: "/products/til-kala.jpg",
+    shortDescription: "Aromatic black sesame seeds for cooking, baking & garnishing.",
+    description:
+      "Our Black Sesame Seeds are cleaned and hand-sorted for a rich, nutty aroma. A staple in Indian and Asian cooking, perfect for garnishing, baking, or making chikki and laddoos.",
+    nutritionalHighlights: [
+      "Rich in calcium & iron",
+      "Good source of healthy fats",
+      "Hand-cleaned & sorted",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 60 }],
+  },
+  {
+    slug: "pumpkin-seeds",
+    name: "Pumpkin Seeds",
+    category: "Seeds",
+    image: "/products/pumpkin-seeds.jpg",
+    shortDescription: "Wholesome pumpkin seeds, hand-cleaned for a nutritious crunch.",
+    description:
+      "Our Pumpkin Seeds are cleaned and hand-sorted for a satisfying crunch and nutty flavour. Enjoy them as a snack, or add to salads, granola, and baked goods for extra nutrition.",
+    nutritionalHighlights: [
+      "Rich in magnesium & zinc",
+      "Good source of plant protein",
+      "Hand-cleaned & sorted",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 140 }],
+  },
+  {
+    slug: "flax-seeds",
+    name: "Flax Seeds",
+    category: "Seeds",
+    image: "/products/flax-seeds.jpg",
+    shortDescription: "Nutrient-rich flax seeds for everyday wellness.",
+    description:
+      "Our Flax Seeds are cleaned and hand-sorted, naturally rich in fibre and omega-3s. Add them to rotis, smoothies, or your daily diet for an easy nutritional boost.",
+    nutritionalHighlights: [
+      "Rich in omega-3 fatty acids",
+      "High in dietary fibre",
+      "Hand-cleaned & sorted",
+      "100% natural, no additives",
+    ],
+    packs: [{ weight: "100g", price: 70 }],
   },
   {
     slug: "turmeric-powder",
