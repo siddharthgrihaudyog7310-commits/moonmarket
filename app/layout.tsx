@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import TopBar from "@/components/TopBar";
 import { siteConfig } from "@/lib/site-config";
 
 const poppins = Poppins({
@@ -51,6 +52,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <TopBar />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}

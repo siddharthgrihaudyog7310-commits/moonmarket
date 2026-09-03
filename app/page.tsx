@@ -2,7 +2,9 @@ import Hero from "@/components/Hero";
 import TrustBadges from "@/components/TrustBadges";
 import CategoryTile from "@/components/CategoryTile";
 import ProductCard from "@/components/ProductCard";
+import ShopByPurpose from "@/components/ShopByPurpose";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
 import { LinkButton } from "@/components/Button";
 import { products, categories } from "@/data/products";
@@ -48,6 +50,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ShopByPurpose />
+
       <section className="bg-gold-gradient-soft py-16 sm:py-20">
         <div className="section">
           <div className="text-center mb-12">
@@ -57,6 +61,8 @@ export default function HomePage() {
           <TestimonialCarousel />
         </div>
       </section>
+
+      <FAQ />
 
       <Newsletter />
     </>
