@@ -139,7 +139,7 @@ export const categories: {
     name: "Dry Fruits",
     image: "/products/almonds.jpg",
     description: "Premium almonds, cashews & more — hand-picked for quality.",
-    accent: "#B5651D",
+    accent: "#8F4A15",
   },
   {
     name: "Spices",
@@ -163,7 +163,7 @@ export const categories: {
     name: "Speciality Flours",
     image: "/products/kuttu-atta.jpg",
     description: "Kuttu, singhara & more — stone-ground for soft, wholesome rotis.",
-    accent: "#B8860B",
+    accent: "#8A6108",
   },
   {
     name: "Seeds",
