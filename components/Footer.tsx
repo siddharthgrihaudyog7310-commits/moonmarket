@@ -51,7 +51,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-poppins font-bold text-sm uppercase tracking-widest text-ink mb-4">
-            Get in Touch
+            Our Information
           </h3>
           <ul className="space-y-2 text-sm text-ink/80">
             <li>{siteConfig.address}</li>

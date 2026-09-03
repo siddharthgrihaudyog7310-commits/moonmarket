@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <div className="section py-12">
       <div className="text-center mb-10">
-        <h1 className="section-heading">Get in Touch</h1>
+        <h1 className="section-heading">Our Information</h1>
         <p className="mt-2 text-ink/70">
           Questions about a product, bulk orders, or gifting? We&rsquo;d love to hear from you.
         </p>
