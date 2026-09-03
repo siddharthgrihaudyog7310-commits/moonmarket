@@ -33,8 +33,9 @@ const config: Config = {
           "linear-gradient(135deg, #FBF6E9 0%, #F5E9C6 100%)",
       },
       boxShadow: {
-        soft: "0 10px 30px -10px rgba(201, 150, 44, 0.25)",
-        card: "0 4px 20px -4px rgba(26, 26, 26, 0.08)",
+        soft: "0 12px 32px -10px rgba(169, 121, 35, 0.35)",
+        card: "0 8px 28px -8px rgba(26, 26, 26, 0.12)",
+        premium: "0 24px 60px -20px rgba(67, 48, 14, 0.35)",
       },
       borderRadius: {
         xl2: "1.25rem",

@@ -18,7 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold-100 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/80">
+    <header className="sticky top-0 z-50 border-b border-gold-100 bg-cream/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-cream/80">
       <nav className="section flex h-20 items-center justify-between" aria-label="Main">
         <Logo />
 
@@ -29,8 +29,10 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`font-semibold text-sm tracking-wide transition-colors hover:text-gold-600 ${
-                    isActive ? "text-gold-600" : "text-ink"
+                  className={`relative font-semibold text-sm tracking-wide transition-colors hover:text-gold-600 after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-gold-500 after:transition-all after:duration-200 ${
+                    isActive
+                      ? "text-gold-600 after:w-full"
+                      : "text-ink after:w-0 hover:after:w-full"
                   }`}
                   aria-current={isActive ? "page" : undefined}
                 >

@@ -29,7 +29,11 @@
   }
 
   .section-heading {
-    @apply text-3xl sm:text-4xl font-extrabold tracking-tight text-ink;
+    @apply text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight text-ink;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold-600;
   }
 
   .divider-moon {
@@ -43,6 +47,6 @@
   }
 
   .card {
-    @apply rounded-xl2 bg-white shadow-card border border-gold-100;
+    @apply rounded-xl2 bg-white shadow-card border border-gold-100/70;
   }
 }
