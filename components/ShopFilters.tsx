@@ -43,10 +43,10 @@ export default function ShopFilters() {
         <button
           type="button"
           onClick={() => updateParam("category", null)}
-          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+          className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
             !activeCategory
-              ? "bg-gold-500 text-white"
-              : "bg-white text-ink border border-gold-200 hover:bg-gold-50"
+              ? "bg-gradient-to-b from-gold-400 to-gold-600 text-white shadow-soft"
+              : "bg-gold-50 text-ink border border-gold-200 hover:bg-gold-100"
           }`}
         >
           All
@@ -56,10 +56,10 @@ export default function ShopFilters() {
             key={cat}
             type="button"
             onClick={() => updateParam("category", cat)}
-            className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
               activeCategory === cat
-                ? "bg-gold-500 text-white"
-                : "bg-white text-ink border border-gold-200 hover:bg-gold-50"
+                ? "bg-gradient-to-b from-gold-400 to-gold-600 text-white shadow-soft"
+                : "bg-gold-50 text-ink border border-gold-200 hover:bg-gold-100"
             }`}
             aria-pressed={activeCategory === cat}
           >
@@ -76,7 +76,7 @@ export default function ShopFilters() {
           id="sort"
           value={activeSort}
           onChange={(e) => updateParam("sort", e.target.value === "featured" ? null : e.target.value)}
-          className="rounded-full border border-gold-200 bg-white px-4 py-2 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-gold-500"
+          className="rounded-full border border-gold-200 bg-gold-50 px-4 py-2 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-gold-500"
         >
           {sortOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>

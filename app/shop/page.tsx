@@ -37,29 +37,48 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const sorted = sortProducts(filtered, sort);
 
   return (
-    <div className="section py-12">
-      <div className="text-center mb-10">
-        <h1 className="section-heading">Shop Our Range</h1>
-        <p className="mt-2 text-ink/70">
-          Premium dry fruits, dry dates &amp; whole spices — naturally sourced.
-        </p>
-      </div>
-
-      <Suspense fallback={null}>
-        <ShopFilters />
-      </Suspense>
-
-      {sorted.length > 0 ? (
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sorted.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
+    <div>
+      <section className="relative overflow-hidden bg-gold-gradient">
+        <div className="absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-white/15 blur-3xl" aria-hidden="true" />
+        <div className="section relative py-14 sm:py-16 text-center">
+          <span className="section-eyebrow justify-center text-gold-800">Our Catalog</span>
+          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight text-ink">
+            Shop Our Range
+          </h1>
+          <p className="mt-3 text-ink/80 max-w-xl mx-auto">
+            Premium dry fruits, dry dates &amp; whole spices — naturally sourced,
+            hand-picked for quality.
+          </p>
         </div>
-      ) : (
-        <p className="mt-12 text-center text-ink/60">
-          No products found in this category yet — check back soon!
+      </section>
+
+      <div className="section py-10 sm:py-14">
+        <div className="card px-4 py-4 sm:px-6 sm:py-5">
+          <Suspense fallback={null}>
+            <ShopFilters />
+          </Suspense>
+        </div>
+
+        <p className="mt-6 text-sm font-medium text-ink/50">
+          Showing {sorted.length} {sorted.length === 1 ? "product" : "products"}
+          {category ? ` in ${category}` : ""}
         </p>
-      )}
+
+        {sorted.length > 0 ? (
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {sorted.map((p) => (
+              <ProductCard key={p.slug} product={p} />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-6 card flex flex-col items-center gap-3 py-16 text-center">
+            <span className="text-4xl" aria-hidden="true">☾</span>
+            <p className="text-ink/60">
+              No products found in this category yet — check back soon!
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
