@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const startingPack = product.packs[0];
 
   return (
-    <div className="card group flex flex-col overflow-hidden">
+    <div className="card group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <Link href={`/shop/${product.slug}`} className="relative block aspect-[4/5] w-full bg-gold-50 overflow-hidden">
         <Image
           src={product.image}
@@ -27,6 +27,12 @@ export default function ProductCard({ product }: { product: Product }) {
             {product.name}
           </h3>
         </Link>
+        <div className="mt-1 flex items-center gap-1 text-gold-500" aria-hidden="true">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span key={i} className="text-xs">★</span>
+          ))}
+          <span className="ml-1 text-xs font-medium text-ink/50">(4.8)</span>
+        </div>
         <p className="mt-1 text-sm text-ink/70 flex-1">{product.shortDescription}</p>
 
         <div className="mt-4 flex items-center justify-between">
