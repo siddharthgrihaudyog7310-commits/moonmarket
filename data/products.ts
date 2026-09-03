@@ -69,22 +69,6 @@ export const products: Product[] = [
     packs: [{ weight: "250g", price: 280 }],
   },
   {
-    slug: "cloves",
-    name: "Cloves (Laung)",
-    category: "Spices",
-    image: "/products/cloves.svg",
-    shortDescription: "Aromatic, whole cloves for authentic flavour in every dish.",
-    description:
-      "Our whole Cloves (Laung) are handpicked for their strong aroma and essential-oil-rich buds. A staple in Indian cooking, they bring warmth and depth to curries, biryanis, chai, and festive delicacies.",
-    nutritionalHighlights: [
-      "Rich in antioxidants",
-      "Naturally aromatic, high oil content",
-      "Cleaned & hand-sorted",
-      "No fillers or additives",
-    ],
-    packs: [{ weight: "100g", price: 150 }],
-  },
-  {
     slug: "kuttu-atta",
     name: "Kuttu Atta",
     category: "Speciality Flours",
