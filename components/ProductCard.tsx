@@ -1,11 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, pricePerHundredGrams } from "@/lib/utils";
 import EnquireButton from "./EnquireButton";
+
+const BESTSELLER_SLUGS = new Set(["almonds", "cashews", "moon-dry-dates"]);
 
 export default function ProductCard({ product }: { product: Product }) {
   const startingPack = product.packs[0];
+  const unitPrice = pricePerHundredGrams(startingPack.weight, startingPack.price);
+  const isBestseller = BESTSELLER_SLUGS.has(product.slug);
 
   return (
     <div className="card group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -19,6 +23,11 @@ export default function ProductCard({ product }: { product: Product }) {
         <span className="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gold-700 shadow-sm">
           {product.category}
         </span>
+        {isBestseller && (
+          <span className="absolute top-3 right-3 rounded-full bg-gradient-to-b from-gold-400 to-gold-600 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+            Bestseller
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
@@ -41,6 +50,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <p className="font-poppins font-bold text-xl text-gold-600">
               {formatPrice(startingPack.price)}
             </p>
+            {unitPrice && <p className="text-xs text-ink/40">{unitPrice}</p>}
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { PackOption } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, pricePerHundredGrams } from "@/lib/utils";
 import EnquireButton from "./EnquireButton";
 
 export default function PackSelector({
@@ -14,6 +14,7 @@ export default function PackSelector({
 }) {
   const [selected, setSelected] = useState(0);
   const activePack = packs[selected];
+  const unitPrice = pricePerHundredGrams(activePack.weight, activePack.price);
 
   return (
     <div>
@@ -23,6 +24,7 @@ export default function PackSelector({
           / {activePack.weight}
         </span>
       </p>
+      {unitPrice && <p className="mt-1 text-sm text-ink/50">{unitPrice}</p>}
 
       {packs.length > 1 && (
         <div className="mt-5">
