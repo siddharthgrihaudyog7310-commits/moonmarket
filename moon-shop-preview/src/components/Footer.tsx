@@ -20,9 +20,10 @@ export default function Footer() {
                 <div className="absolute inset-0 bg-brand-gold/20 blur-2xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-700" />
                 <div className="relative bg-brand-cream p-1.5 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-4 border-brand-gold/10 overflow-hidden w-28 h-28 flex items-center justify-center transition-all duration-500 group-hover:border-brand-gold/40">
                   <img
-                    src="/logo-full.png"
-                    alt="Moon Spices & Groceries Logo"
-                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                    src="https://i.postimg.cc/0QMHvBD8/Whats-App-Image-2026-05-04-at-7-48-32-PM.jpg"
+                    alt="Moon Dry Fruits Logo"
+                    className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>

@@ -33,9 +33,10 @@ export default function Header({ cartCount, wishlistCount, onOpenCart }: { cartC
           <Link to="/" className="flex items-center group">
             <div className="relative mix-blend-multiply transition-all duration-500 group-hover:scale-105">
               <img
-                src="/logo-full.png"
-                alt="Moon Spices & Groceries Logo"
+                src="https://i.postimg.cc/0QMHvBD8/Whats-App-Image-2026-05-04-at-7-48-32-PM.jpg"
+                alt="Moon Dry Fruits Logo"
                 className="h-14 md:h-16 w-auto object-contain"
+                referrerPolicy="no-referrer"
               />
             </div>
           </Link>
