@@ -7,7 +7,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 bg-ink text-cream/80">
+    <footer className="mt-24 bg-forest-600 text-cream/80">
       <div className="h-1 bg-gold-gradient" aria-hidden="true" />
 
       <div className="section py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -24,7 +24,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-poppins font-bold text-sm uppercase tracking-widest text-gold-300 mb-5">
+          <h3 className="font-poppins font-black text-[11px] uppercase tracking-[0.4em] text-gold-300 mb-6">
             Quick Links
           </h3>
           <ul className="space-y-3 text-sm">
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-poppins font-bold text-sm uppercase tracking-widest text-gold-300 mb-5">
+          <h3 className="font-poppins font-black text-[11px] uppercase tracking-[0.4em] text-gold-300 mb-6">
             Categories
           </h3>
           <ul className="space-y-3 text-sm">
@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-poppins font-bold text-sm uppercase tracking-widest text-gold-300 mb-5">
+          <h3 className="font-poppins font-black text-[11px] uppercase tracking-[0.4em] text-gold-300 mb-6">
             Our Information
           </h3>
           <ul className="space-y-3 text-sm text-cream/70">

@@ -20,11 +20,24 @@ const config: Config = {
           800: "#654715",
           900: "#43300E",
         },
+        forest: {
+          50: "#EBEFEC",
+          100: "#D3DBD5",
+          200: "#A6B7AB",
+          300: "#6E8577",
+          400: "#3F5C48",
+          500: "#2D4C38",
+          600: "#1B3022",
+          700: "#16271C",
+          800: "#101D15",
+          900: "#0A130E",
+        },
         cream: "#FFFDF7",
         ink: "#1A1A1A",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
+        fraunces: ["var(--font-fraunces)", "serif"],
       },
       backgroundImage: {
         "gold-gradient":

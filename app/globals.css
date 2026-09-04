@@ -11,13 +11,6 @@
     @apply bg-cream text-ink font-poppins;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-poppins font-bold;
-  }
-
   :focus-visible {
     @apply outline outline-2 outline-offset-2 outline-gold-500;
   }
@@ -29,11 +22,11 @@
   }
 
   .section-heading {
-    @apply text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight text-ink;
+    @apply font-fraunces italic text-3xl sm:text-4xl lg:text-[2.75rem] font-medium tracking-tight text-forest-600;
   }
 
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold-600;
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.4em] text-gold-600;
   }
 
   .divider-moon {
