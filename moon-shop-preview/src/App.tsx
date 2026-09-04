@@ -6,6 +6,14 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetails from './pages/ProductDetails';
 import Checkout from './pages/Checkout';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import Shipping from './pages/Shipping';
+import Track from './pages/Track';
+import Sitemap from './pages/Sitemap';
+import Login from './pages/Login';
 import CartDrawer from './components/CartDrawer';
 import ScrollToTop from './components/ScrollToTop';
 import { CartItem, Product } from './types';
@@ -59,9 +67,14 @@ export default function App() {
             <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
             <Route path="/product/:id" element={<ProductDetails onAddToCart={handleAddToCart} />} />
             <Route path="/checkout" element={<Checkout cart={cart} />} />
-            {/* Placeholder routes for others */}
-            <Route path="/about" element={<div className="pt-32 text-center py-20 px-4"><h1 className="text-4xl font-bold tracking-tighter uppercase mb-4">Precision Sourcing</h1><p className="opacity-60 max-w-lg mx-auto">Moon Spices & Groceries has brought India's finest dry fruits, dry dates, and whole spices from trusted farms to your home since 1996.</p></div>} />
-            <Route path="/contact" element={<div className="pt-32 text-center py-20 px-4">Contact our Concierge</div>} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/track" element={<Track />} />
+            <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
 

@@ -51,7 +51,7 @@ export default function Footer() {
                 { name: 'Current Harvest', path: '/shop' },
                 { name: 'Our Provenance', path: '/about' },
                 { name: 'Bespoke Logistics', path: '/track' },
-                { name: 'Gift Sets', path: '/shop?category=Gifts' }
+                { name: 'Site Directory', path: '/sitemap' }
               ].map((link) => (
                 <li key={link.name}>
                   <Link 
