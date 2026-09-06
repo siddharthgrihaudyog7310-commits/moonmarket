@@ -182,7 +182,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'ajwain',
     name: 'Ajwain (Carrom Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Ajwain (Carrom Seeds) has a sharp, thyme-like aroma and a warm, slightly bitter bite. A classic tempering spice in Indian cooking, and a traditional favourite for digestive teas.',
     price: 70,
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'sounf-maheen',
     name: 'Sounf Maheen (Small Fennel Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Sounf Maheen (fine fennel seeds) has a sweet, delicate aroma. Enjoyed after meals as a mouth freshener, or used to add gentle sweetness to curries and teas.',
     price: 90,
@@ -206,7 +206,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'kalonji',
     name: 'Kalonji (Nigella Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Kalonji (Nigella Seeds) has a distinctive, slightly bitter, oniony flavour. Widely used in pickles, naan, and vegetable dishes for its bold, earthy character.',
     price: 110,
@@ -218,7 +218,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'sarso-peeli',
     name: 'Sarso Peeli (Yellow Mustard Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Sarso Peeli (Yellow Mustard Seeds) brings a sharp, tangy bite. A staple tempering spice across Indian kitchens, essential for pickles, dals, and curries.',
     price: 60,
@@ -230,7 +230,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'jeera',
     name: 'Jeera (Cumin Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Jeera (Cumin Seeds) has a warm, earthy aroma that forms the base of countless Indian dishes. Essential for tempering dals, curries, and rice.',
     price: 130,
@@ -243,7 +243,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'posta-dana',
     name: 'Posta Dana (Poppy Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Posta Dana (Poppy Seeds) has a mild, nutty flavour. Used to thicken and enrich gravies, or roasted for garnishing sweets and snacks.',
     price: 150,
@@ -255,7 +255,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'methi',
     name: 'Methi (Fenugreek Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Methi (Fenugreek Seeds) has a distinctive, slightly bitter aroma. A classic tempering spice, and a key ingredient in pickles and spice blends.',
     price: 65,
@@ -267,7 +267,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'sarso-kali',
     name: 'Sarso Kali (Black Mustard Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Sarso Kali (Black Mustard Seeds) has a pungent, nutty bite once tempered in hot oil. A South Indian and Bengali kitchen essential.',
     price: 75,
@@ -279,7 +279,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'rai',
     name: 'Rai (Mustard Seeds)',
-    category: 'Spices',
+    category: 'Whole Spices',
     description:
       'Our Rai (Mustard Seeds) is a everyday tempering spice with a sharp, pungent flavour that mellows into a nutty warmth when cooked in hot oil.',
     price: 55,
@@ -326,7 +326,7 @@ export const PRODUCTS: Product[] = [
 
 export const CATEGORIES = [
   { name: 'Dry Fruits', image: '/products/almonds.jpg' },
-  { name: 'Spices', image: '/products/jeera.png' },
+  { name: 'Whole Spices', image: '/products/jeera.png' },
   { name: 'Dry Dates', image: '/products/dry-dates.jpg' },
   { name: 'Speciality Flours', image: '/products/kuttu-atta.jpg' },
   { name: 'Seeds', image: '/products/pumpkin-seeds.jpg' },

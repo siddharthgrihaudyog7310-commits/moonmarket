@@ -18,7 +18,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </span>
       )}
       
-      <Link to={`/product/${product.id}`} className={`block relative overflow-hidden aspect-[4/5] p-10 ${product.category === 'Spices' ? 'bg-white' : 'bg-[#FBFBFA]'}`}>
+      <Link to={`/product/${product.id}`} className={`block relative overflow-hidden aspect-[4/5] p-10 ${product.category === 'Whole Spices' ? 'bg-white' : 'bg-[#FBFBFA]'}`}>
         <img
           src={product.image}
           alt={product.name}

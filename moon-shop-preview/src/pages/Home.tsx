@@ -297,7 +297,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-            {PRODUCTS.filter(p => p.category === 'Spices').slice(0, 6).map((product, idx) => (
+            {PRODUCTS.filter(p => p.category === 'Whole Spices').slice(0, 6).map((product, idx) => (
               <motion.div 
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -339,7 +339,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
 
           <div className="mt-24 text-center">
             <Link 
-              to="/shop?category=Spices" 
+              to="/shop?category=Whole Spices"
               className="group relative inline-block bg-brand-green text-white px-16 py-7 rounded-none font-black uppercase text-[10px] tracking-[0.5em] overflow-hidden shadow-2xl"
             >
               <span className="relative z-10">Explore All Masale</span>
