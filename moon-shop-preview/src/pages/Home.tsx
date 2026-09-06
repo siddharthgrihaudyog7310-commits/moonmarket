@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion, Variants } from 'motion/react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,21 @@ import { Product } from '../types';
 import Hero3D from '../components/Hero3D';
 import ErrorBoundary from '../components/ErrorBoundary';
 
+// The WebGL sphere isn't worth the battery/perf cost (or the edge cases) on
+// phones — mobile gets a plain gradient hero instead of the 3D scene.
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < breakpoint);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 export default function Home({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
+  const isMobile = useIsMobile();
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,9 +48,16 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <ErrorBoundary>
-            <Hero3D />
-          </ErrorBoundary>
+          {isMobile ? (
+            <div
+              className="absolute inset-0"
+              style={{ background: 'radial-gradient(circle at 50% 38%, #2D4C38 0%, #1B3022 45%, #0a140d 75%)' }}
+            />
+          ) : (
+            <ErrorBoundary>
+              <Hero3D />
+            </ErrorBoundary>
+          )}
           <div className="absolute inset-0 bg-black/10 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-cream/100 pointer-events-none" />
         </div>
