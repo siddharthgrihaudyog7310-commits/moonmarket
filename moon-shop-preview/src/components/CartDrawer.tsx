@@ -68,8 +68,8 @@ export default function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, o
                     key={`${item.id}-${item.selectedWeight}`} 
                     className="flex space-x-4 bg-white/5 p-4 rounded-xl border border-white/5 group"
                   >
-                    <div className="w-20 h-20 bg-white/10 rounded-lg overflow-hidden shrink-0">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <div className="w-20 h-20 bg-white/10 rounded-lg overflow-hidden shrink-0 p-2">
+                      <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-grow">
                       <h3 className="text-sm font-bold line-clamp-1 mb-1">{item.name}</h3>

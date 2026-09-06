@@ -222,7 +222,7 @@ export default function Checkout({ cart }: CheckoutProps) {
                   <div key={item.id} className="flex justify-between items-start">
                     <div className="flex space-x-4">
                       <div className="w-16 h-16 bg-brand-cream border border-brand-green/5 p-2 overflow-hidden shrink-0">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                       </div>
                       <div>
                         <p className="text-xs font-bold leading-tight line-clamp-1">{item.name}</p>

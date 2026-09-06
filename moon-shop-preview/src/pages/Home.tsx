@@ -148,11 +148,11 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
                 className="group cursor-pointer"
               >
                 <Link to={`/shop?category=${cat.name}`} className="block w-32 md:w-40 lg:w-44">
-                  <div className="relative aspect-square overflow-hidden mb-5 bg-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-full border-2 border-white group-hover:border-brand-gold transition-all duration-700">
-                    <img 
-                      src={cat.image} 
+                  <div className="relative aspect-square overflow-hidden mb-5 bg-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-full border-2 border-white group-hover:border-brand-gold transition-all duration-700 p-6">
+                    <img
+                      src={cat.image}
                       alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                      className="w-full h-full object-contain group-hover:scale-110 transition-all duration-1000"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-brand-green/10 group-hover:bg-transparent transition-colors duration-500" />
@@ -303,12 +303,12 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="group relative aspect-[4/5] bg-white overflow-hidden mb-8 border border-brand-green/5 shadow-xl">
+                <div className="group relative aspect-[4/5] bg-[#FBFBFA] overflow-hidden mb-8 border border-brand-green/5 shadow-xl p-10">
                   <Link to={`/product/${product.id}`} className="block h-full">
                     <div className="absolute inset-0 bg-brand-green translate-y-full group-hover:translate-y-0 transition-transform duration-700 z-10 opacity-10 pointer-events-none" />
-                    <img 
-                      src={product.image} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                    <img
+                      src={product.image}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000"
                       alt={product.name}
                       referrerPolicy="no-referrer"
                     />
