@@ -88,9 +88,14 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
                 <span className="relative z-10">Shop the Catalog</span>
                 <div className="absolute inset-0 bg-brand-gold translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
               </Link>
-              <button className="text-white hover:text-brand-gold transition-colors font-bold uppercase text-[10px] tracking-[0.4em] px-4 py-5 border-b border-white/20 h-fit hover:border-brand-gold">
+              <a
+                href="https://www.instagram.com/moon_spices_groceries"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-brand-gold transition-colors font-bold uppercase text-[10px] tracking-[0.4em] px-4 py-5 border-b border-white/20 h-fit hover:border-brand-gold"
+              >
                 Our Story
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
