@@ -23,17 +23,18 @@ export default function App() {
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const handleAddToCart = (product: Product, weight?: string) => {
+  const handleAddToCart = (product: Product, weight?: string, quantity: number = 1) => {
     setCart(prevCart => {
-      const existing = prevCart.find(item => item.id === product.id && item.selectedWeight === (weight || product.weightOptions[0]));
+      const targetWeight = weight || product.weightOptions[0];
+      const existing = prevCart.find(item => item.id === product.id && item.selectedWeight === targetWeight);
       if (existing) {
-        return prevCart.map(item => 
-          (item.id === product.id && item.selectedWeight === (weight || product.weightOptions[0]))
-            ? { ...item, quantity: item.quantity + 1 } 
+        return prevCart.map(item =>
+          (item.id === product.id && item.selectedWeight === targetWeight)
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1, selectedWeight: weight || product.weightOptions[0] }];
+      return [...prevCart, { ...product, quantity, selectedWeight: targetWeight }];
     });
     setIsCartOpen(true);
   };

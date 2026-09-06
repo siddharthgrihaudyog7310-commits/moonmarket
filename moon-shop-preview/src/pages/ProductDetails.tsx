@@ -1,13 +1,23 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { ArrowLeft, Star, ShoppingBag, ShieldCheck, Truck, RefreshCcw } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowLeft, Star, ShoppingBag, ShieldCheck, Truck, RefreshCcw, Minus, Plus, ZoomIn, X } from 'lucide-react';
 import { PRODUCTS } from '../data';
-import { useState } from 'react';
+import { Product } from '../types';
+import { useEffect, useState } from 'react';
+import Accordion from '../components/Accordion';
 
-export default function ProductDetails({ onAddToCart }: { onAddToCart: (product: any, weight: string) => void }) {
+export default function ProductDetails({ onAddToCart }: { onAddToCart: (product: Product, weight: string, quantity: number) => void }) {
   const { id } = useParams<{ id: string }>();
   const product = PRODUCTS.find((p) => p.id === id);
   const [selectedWeight, setSelectedWeight] = useState(product?.weightOptions[0] || '250g');
+  const [quantity, setQuantity] = useState(1);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
+
+  useEffect(() => {
+    setSelectedWeight(product?.weightOptions[0] || '250g');
+    setQuantity(1);
+  }, [product]);
 
   if (!product) {
     return (
@@ -21,39 +31,118 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
     );
   }
 
+  const handleAdd = () => {
+    onAddToCart(product, selectedWeight, quantity);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1800);
+  };
+
+  const detailItems = [
+    ...(product.additionalInfo
+      ? [{
+          title: "What's Inside",
+          content: (
+            <ul className="space-y-3">
+              {product.additionalInfo.map((info, i) => (
+                <li key={i} className="flex items-start space-x-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold mt-1.5 shrink-0" />
+                  <span>{info}</span>
+                </li>
+              ))}
+            </ul>
+          ),
+        }]
+      : []),
+    ...(product.nutrition
+      ? [{
+          title: 'Nutritional Profile',
+          content: (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {Object.entries(product.nutrition).map(([key, val]) => (
+                <div key={key} className="bg-brand-cream/60 p-4 border border-brand-green/5">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-brand-green/30 mb-1">{key}</p>
+                  <p className="text-sm font-bold text-brand-green">{val as string}</p>
+                </div>
+              ))}
+            </div>
+          ),
+        }]
+      : []),
+    ...(product.specifications
+      ? [{
+          title: 'Specifications',
+          content: (
+            <div className="divide-y divide-brand-green/5">
+              {Object.entries(product.specifications).map(([key, val]) => (
+                <div key={key} className="flex justify-between py-2">
+                  <span className="font-bold text-brand-green/50 uppercase tracking-widest text-[10px]">{key}</span>
+                  <span className="font-semibold text-brand-green">{val}</span>
+                </div>
+              ))}
+            </div>
+          ),
+        }]
+      : []),
+    {
+      title: 'Delivery & Ordering',
+      content: (
+        <div className="space-y-3">
+          <p>
+            We deliver across India. Once you place an order, we confirm delivery charges and timelines with you
+            directly on WhatsApp.
+          </p>
+          {product.minimumOrderQuantity && <p>Minimum order quantity for this item: {product.minimumOrderQuantity}.</p>}
+          <p>
+            Have a question about this product before you order? {' '}
+            <a href="https://wa.me/917054578781" target="_blank" rel="noopener noreferrer" className="text-brand-gold underline">
+              Ask us on WhatsApp
+            </a>
+            .
+          </p>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="pt-32 pb-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
-        <Link 
-          to="/shop" 
+        <Link
+          to="/shop"
           className="inline-flex items-center text-brand-green/40 hover:text-brand-gold transition-colors text-[10px] font-black uppercase tracking-[0.4em] mb-12"
         >
           <ArrowLeft size={14} className="mr-3" /> Back to Catalog
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Image Gallery Mockup */}
-          <motion.div 
+          {/* Image */}
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-6"
+            className="space-y-6 lg:sticky lg:top-32"
           >
-            <div className="aspect-square bg-brand-cream/30 border border-brand-green/5 overflow-hidden flex items-center justify-center group relative">
+            <button
+              onClick={() => setIsZoomed(true)}
+              className="aspect-square w-full bg-brand-cream/30 border border-brand-green/5 overflow-hidden flex items-center justify-center group relative cursor-zoom-in"
+            >
               {product.isBestseller && (
                 <span className="absolute top-8 left-8 z-10 bg-brand-gold text-white px-4 py-2 text-[9px] font-black uppercase tracking-widest">
                   Bestseller
                 </span>
               )}
-              <img 
-                src={product.image} 
-                alt={product.name} 
+              <span className="absolute bottom-6 right-6 z-10 bg-white/90 backdrop-blur text-brand-green p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                <ZoomIn size={16} />
+              </span>
+              <img
+                src={product.image}
+                alt={product.name}
                 className="w-full h-full object-cover grayscale-[0.2] transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0"
               />
-            </div>
+            </button>
           </motion.div>
 
           {/* Product Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
@@ -63,16 +152,16 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
               <div className="flex items-center space-x-4">
                 <div className="flex text-brand-gold">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} fill={i < Math.floor(product.rating) ? "currentColor" : "none"} strokeWidth={3} />
+                    <Star key={i} size={14} fill={i < Math.floor(product.rating) ? 'currentColor' : 'none'} strokeWidth={3} />
                   ))}
                 </div>
                 {product.reviewsCount != null && (
                   <span className="text-[10px] font-bold uppercase tracking-widest text-brand-green/40">{product.reviewsCount} Appraisals</span>
                 )}
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-serif italic text-brand-green leading-tight">{product.name}</h1>
-              
+
               <div className="flex items-baseline space-x-6">
                 <span className="text-4xl font-serif text-brand-gold italic">₹{product.price}</span>
                 {product.originalPrice && (
@@ -87,42 +176,92 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
             </div>
 
             {/* Selection */}
-            <div className="space-y-10">
-              <div className="space-y-4">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-green/40 block">Select Harvest Size</span>
-                <div className="flex flex-wrap gap-3">
-                  {product.weightOptions.map((weight) => (
-                    <button
-                      key={weight}
-                      onClick={() => setSelectedWeight(weight)}
-                      className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
-                        selectedWeight === weight 
-                          ? 'bg-brand-green text-white border-brand-green translate-y-[-2px] shadow-lg' 
-                          : 'bg-white text-brand-green border-brand-green/10 hover:border-brand-gold hover:text-brand-gold'
-                      }`}
-                    >
-                      {weight}
-                    </button>
-                  ))}
+            <div className="space-y-8">
+              {product.weightOptions.length > 1 ? (
+                <div className="space-y-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-green/40 block">Select Harvest Size</span>
+                  <div className="flex flex-wrap gap-3">
+                    {product.weightOptions.map((weight) => (
+                      <button
+                        key={weight}
+                        onClick={() => setSelectedWeight(weight)}
+                        className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
+                          selectedWeight === weight
+                            ? 'bg-brand-green text-white border-brand-green translate-y-[-2px] shadow-lg'
+                            : 'bg-white text-brand-green border-brand-green/10 hover:border-brand-gold hover:text-brand-gold'
+                        }`}
+                      >
+                        {weight}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+              ) : (
+                <div className="flex items-center space-x-3 text-[10px] font-black uppercase tracking-[0.4em] text-brand-green/40">
+                  <span>Pack Size</span>
+                  <span className="text-brand-green">{selectedWeight}</span>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <div className="flex items-center border border-brand-green/10 w-fit">
+                  <button
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    disabled={quantity <= 1}
+                    aria-label="Decrease quantity"
+                    className="p-4 text-brand-green hover:bg-brand-cream/60 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <Minus size={14} />
+                  </button>
+                  <span className="w-14 text-center font-bold text-brand-green tabular-nums">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity((q) => q + 1)}
+                    aria-label="Increase quantity"
+                    className="p-4 text-brand-green hover:bg-brand-cream/60 transition-colors"
+                  >
+                    <Plus size={14} />
+                  </button>
+                </div>
+
+                <button
+                  onClick={handleAdd}
+                  className="group relative flex-1 bg-brand-green text-white px-10 py-6 font-black uppercase text-[10px] tracking-[0.5em] overflow-hidden shadow-2xl flex items-center justify-center space-x-4"
+                >
+                  <div className="absolute inset-0 bg-brand-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                  <AnimatePresence mode="wait" initial={false}>
+                    {justAdded ? (
+                      <motion.span
+                        key="added"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        className="relative z-10"
+                      >
+                        Added to Harvest ✓
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="add"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        className="relative z-10 flex items-center space-x-4"
+                      >
+                        <ShoppingBag size={18} />
+                        <span>Add to Harvest</span>
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
               </div>
 
               {product.minimumOrderQuantity && (
                 <div className="p-6 bg-brand-gold/5 border border-brand-gold/10 inline-block">
                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold">
-                    ⚡ Minimum Order Quantity: {product.minimumOrderQuantity}
+                    Minimum Order Quantity: {product.minimumOrderQuantity}
                   </p>
                 </div>
               )}
-
-              <button 
-                onClick={() => onAddToCart(product, selectedWeight)}
-                className="group relative w-full lg:w-auto bg-brand-green text-white px-16 py-7 font-black uppercase text-[10px] tracking-[0.5em] overflow-hidden shadow-2xl flex items-center justify-center space-x-4"
-              >
-                <div className="absolute inset-0 bg-brand-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                <ShoppingBag size={18} className="relative z-10" />
-                <span className="relative z-10">Add to Harvest</span>
-              </button>
             </div>
 
             {/* Quick Benefits */}
@@ -130,7 +269,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
               {[
                 { icon: ShieldCheck, title: 'Obsessive Quality', desc: 'Hand-inspected harvest' },
                 { icon: Truck, title: 'Direct Transit', desc: 'Farm to your table' },
-                { icon: RefreshCcw, title: 'Purity Promise', desc: 'No additives, ever' }
+                { icon: RefreshCcw, title: 'Purity Promise', desc: 'No additives, ever' },
               ].map((item, i) => (
                 <div key={i} className="space-y-2">
                   <item.icon size={20} className="text-brand-gold" strokeWidth={1.5} />
@@ -139,108 +278,22 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
                 </div>
               ))}
             </div>
+
+            {/* Details Accordion */}
+            <div className="pt-4">
+              <Accordion items={detailItems} defaultOpen={0} />
+            </div>
           </motion.div>
         </div>
 
-        {/* Specifications & Details Section */}
-        <section className="mt-32 pt-24 border-t border-brand-green/5">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-            <div className="lg:col-span-4 space-y-12">
-              {product.nutrition && (
-                <div className="space-y-8">
-                  <h3 className="text-2xl font-serif italic text-brand-green border-b border-brand-green/5 pb-4 mb-8">Nutritional Profile</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(product.nutrition).map(([key, val]) => (
-                      <div key={key} className="bg-brand-cream/40 p-6 border border-brand-green/5 group hover:border-brand-gold/30 transition-colors">
-                        <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-green/30 mb-2">{key}</p>
-                        <p className="text-base font-sans font-bold text-brand-green tracking-tight">{val as string}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {product.additionalInfo && (
-                <div className="space-y-8">
-                  <h3 className="text-2xl font-serif italic text-brand-green border-b border-brand-green/5 pb-4 mb-8">Product Essence</h3>
-                  <ul className="space-y-6">
-                    {product.additionalInfo.map((info, i) => (
-                      <li key={i} className="flex items-start space-x-4 text-brand-green/70 text-[13px] font-sans leading-relaxed group">
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-gold mt-1.5 shrink-0 transition-transform group-hover:scale-125" />
-                        <span className="font-medium">{info}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-
-            {product.specifications && (
-              <div className="lg:col-span-8 space-y-12">
-                <div className="space-y-8">
-                  <div className="flex items-center justify-between border-b border-brand-green/5 pb-4 mb-8">
-                    <h3 className="text-2xl font-serif italic text-brand-green">Technical Specifications</h3>
-                    <div className="flex space-x-8 text-[9px] font-black uppercase tracking-[0.4em] text-brand-green/30">
-                      <div className="flex items-center"><div className="w-2 h-2 rounded-full bg-brand-gold mr-2" /> Verified Harvest</div>
-                      <div className="flex items-center"><div className="w-2 h-2 rounded-full bg-brand-gold mr-2" /> Lab Tested</div>
-                    </div>
-                  </div>
-                  
-                  <div className="overflow-hidden border border-brand-green/10 bg-white">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-brand-green/[0.03] border-b border-brand-green/10">
-                          <th className="px-10 py-6 text-[9px] font-black uppercase tracking-[0.4em] text-brand-green/40 w-1/3">Standard Parameter</th>
-                          <th className="px-10 py-6 text-[9px] font-black uppercase tracking-[0.4em] text-brand-green/40">Moon Observation</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-brand-green/5">
-                        {Object.entries(product.specifications).map(([key, val]) => (
-                          <tr key={key} className="group hover:bg-brand-gold/[0.02] transition-colors">
-                            <td className="px-10 py-6 text-[10px] font-bold text-brand-green/60 uppercase tracking-[0.25em]">{key}</td>
-                            <td className="px-10 py-6 text-[13px] font-sans font-semibold text-brand-green tracking-tight">{val}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                {(product.productionCapacity || product.deliveryTime) && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
-                    <div className="flex items-center p-8 bg-brand-green text-white space-x-6 group">
-                      <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold flex-shrink-0 transition-transform group-hover:scale-110">
-                        <Truck size={24} />
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40 mb-1">Logistics Estimate</p>
-                        <p className="text-xl font-sans font-bold tracking-tight">Dispatched in {product.deliveryTime}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center p-8 bg-brand-gold text-white space-x-6 group">
-                      <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white flex-shrink-0 transition-transform group-hover:scale-110">
-                        <ShoppingBag size={24} />
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40 mb-1">Production Reserve</p>
-                        <p className="text-xl font-sans font-bold tracking-tight">{product.productionCapacity} Stocked</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </section>
-
         {/* Suggestion Section */}
-        <section className="mt-48">
+        <section className="mt-32">
           <div className="text-center mb-16 space-y-4">
             <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.6em] block">Complementary Selection</span>
             <h2 className="text-5xl font-serif italic text-brand-green">Curated For You</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PRODUCTS.filter(p => p.id !== product.id && p.category === product.category).slice(0, 4).map((p) => (
+            {PRODUCTS.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4).map((p) => (
               <Link key={p.id} to={`/product/${p.id}`} className="group">
                 <div className="aspect-square bg-brand-cream/30 border border-brand-green/5 overflow-hidden mb-6 relative">
                   <img src={p.image} className="w-full h-full object-cover grayscale-[0.2] transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0" alt={p.name} />
@@ -252,6 +305,35 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
           </div>
         </section>
       </div>
+
+      {/* Image Lightbox */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsZoomed(false)}
+            className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-6 cursor-zoom-out"
+          >
+            <button
+              onClick={() => setIsZoomed(false)}
+              aria-label="Close"
+              className="absolute top-6 right-6 text-white/70 hover:text-white p-3"
+            >
+              <X size={28} />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={product.image}
+              alt={product.name}
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
