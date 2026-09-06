@@ -241,18 +241,6 @@ export const PRODUCTS: Product[] = [
     additionalInfo: ['Warm, earthy aroma', 'Kitchen essential', 'Cleaned & sorted', '100% natural'],
   },
   {
-    id: 'sendha-namak',
-    name: 'Sendha Namak (Rock Salt)',
-    category: 'Spices',
-    description:
-      'Our Sendha Namak (Rock Salt) is a mild, mineral-rich salt traditionally used during vrat/fasting cooking, as well as an everyday alternative to table salt.',
-    price: 50,
-    weightOptions: ['100g'],
-    image: '/products/sendha-namak.png',
-    rating: 4.8,
-    additionalInfo: ['Mild, mineral-rich taste', 'Traditional vrat/fasting salt', 'Cleaned & sorted', '100% natural'],
-  },
-  {
     id: 'posta-dana',
     name: 'Posta Dana (Poppy Seeds)',
     category: 'Spices',
@@ -299,18 +287,6 @@ export const PRODUCTS: Product[] = [
     image: '/products/rai.png',
     rating: 4.8,
     additionalInfo: ['Sharp, pungent flavour', 'Everyday tempering spice', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'baking-soda',
-    name: 'Baking Soda',
-    category: 'Spices',
-    description:
-      'Our food-grade Baking Soda is a versatile kitchen staple used as a leavening agent for baking, and for tenderizing or quick-cleaning in everyday cooking.',
-    price: 40,
-    weightOptions: ['100g'],
-    image: '/products/baking-soda.png',
-    rating: 4.8,
-    additionalInfo: ['Food-grade quality', 'Versatile kitchen staple', 'Sealed for freshness'],
   },
   {
     id: 'kuttu-atta',

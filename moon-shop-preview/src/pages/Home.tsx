@@ -303,7 +303,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="group relative aspect-[4/5] bg-[#FBFBFA] overflow-hidden mb-8 border border-brand-green/5 shadow-xl p-10">
+                <div className="group relative aspect-[4/5] bg-white overflow-hidden mb-8 border border-brand-green/5 shadow-xl p-10">
                   <Link to={`/product/${product.id}`} className="block h-full">
                     <div className="absolute inset-0 bg-brand-green translate-y-full group-hover:translate-y-0 transition-transform duration-700 z-10 opacity-10 pointer-events-none" />
                     <img

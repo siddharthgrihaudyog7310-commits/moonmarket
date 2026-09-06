@@ -123,7 +123,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
           >
             <button
               onClick={() => setIsZoomed(true)}
-              className="aspect-square w-full bg-[#FBFBFA] border border-brand-green/5 overflow-hidden flex items-center justify-center group relative cursor-zoom-in p-12"
+              className={`aspect-square w-full border border-brand-green/5 overflow-hidden flex items-center justify-center group relative cursor-zoom-in p-12 ${product.category === 'Spices' ? 'bg-white' : 'bg-[#FBFBFA]'}`}
             >
               {product.isBestseller && (
                 <span className="absolute top-8 left-8 z-10 bg-brand-gold text-white px-4 py-2 text-[9px] font-black uppercase tracking-widest">
@@ -295,7 +295,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {PRODUCTS.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4).map((p) => (
               <Link key={p.id} to={`/product/${p.id}`} className="group">
-                <div className="aspect-square bg-[#FBFBFA] border border-brand-green/5 overflow-hidden mb-6 relative p-8">
+                <div className={`aspect-square border border-brand-green/5 overflow-hidden mb-6 relative p-8 ${product.category === 'Spices' ? 'bg-white' : 'bg-[#FBFBFA]'}`}>
                   <img src={p.image} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" alt={p.name} />
                 </div>
                 <h4 className="text-lg font-sans font-semibold text-brand-green group-hover:text-brand-gold transition-colors leading-tight mb-1">{p.name}</h4>
