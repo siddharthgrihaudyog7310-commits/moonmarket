@@ -52,7 +52,11 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
             <img
               src="/logo-full.png"
               alt="Moon Spices & Groceries"
-              className="w-[240px] sm:w-[320px] md:w-[400px] lg:w-[460px] mx-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] mb-10"
+              className="w-[240px] sm:w-[320px] md:w-[400px] lg:w-[460px] mx-auto mb-10"
+              style={{
+                filter:
+                  'drop-shadow(0 0 3px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(0,0,0,0.75)) drop-shadow(0 10px 20px rgba(0,0,0,0.6))',
+              }}
             />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
               <Link 
