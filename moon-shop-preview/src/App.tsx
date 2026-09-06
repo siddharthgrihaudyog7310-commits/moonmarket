@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { priceFor } from './data';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -33,7 +34,8 @@ export default function App() {
             : item
         );
       }
-      return [...prevCart, { ...product, quantity, selectedWeight: targetWeight }];
+      // Pin the price for the chosen pack size, not the product's default.
+      return [...prevCart, { ...product, price: priceFor(product, targetWeight), quantity, selectedWeight: targetWeight }];
     });
     setIsCartOpen(true);
   };

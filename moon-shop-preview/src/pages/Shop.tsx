@@ -24,7 +24,7 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
 
-  const sizes = ['100g', '250g', '500g'];
+  const sizes = ['50g', '100g', '250g', '500g'];
 
   const toggleSize = (size: string) => {
     setSelectedSizes(prev =>

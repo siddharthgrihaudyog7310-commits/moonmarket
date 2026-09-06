@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Star, ShoppingBag, ShieldCheck, Truck, RefreshCcw, Minus, Plus, ZoomIn, X } from 'lucide-react';
-import { PRODUCTS } from '../data';
+import { PRODUCTS, priceFor } from '../data';
 import { Product } from '../types';
 import { useEffect, useState } from 'react';
 import Accordion from '../components/Accordion';
@@ -163,7 +163,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
               <h1 className="text-5xl md:text-7xl font-serif italic text-brand-green leading-tight">{product.name}</h1>
 
               <div className="flex items-baseline space-x-6">
-                <span className="text-4xl font-serif text-brand-gold italic">₹{product.price}</span>
+                <span className="text-4xl font-serif text-brand-gold italic">₹{priceFor(product, selectedWeight)}</span>
                 {product.originalPrice && (
                   <span className="text-xl text-brand-green/20 line-through">₹{product.originalPrice}</span>
                 )}
@@ -191,7 +191,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
                             : 'bg-white text-brand-green border-brand-green/10 hover:border-brand-gold hover:text-brand-gold'
                         }`}
                       >
-                        {weight}
+                        {weight} · ₹{priceFor(product, weight)}
                       </button>
                     ))}
                   </div>

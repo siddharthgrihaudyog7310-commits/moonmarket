@@ -186,7 +186,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Ajwain (Carrom Seeds) has a sharp, thyme-like aroma and a warm, slightly bitter bite. A classic tempering spice in Indian cooking, and a traditional favourite for digestive teas.',
     price: 70,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 70, '50g': 35 },
     image: '/products/ajwain.png',
     rating: 4.8,
     additionalInfo: ['Sharp, aromatic flavour', 'Popular in tempering & parathas', 'Cleaned & sorted', '100% natural'],
@@ -198,7 +199,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Sounf Maheen (fine fennel seeds) has a sweet, delicate aroma. Enjoyed after meals as a mouth freshener, or used to add gentle sweetness to curries and teas.',
     price: 90,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 90, '50g': 45 },
     image: '/products/sounf-maheen.png',
     rating: 4.8,
     additionalInfo: ['Sweet, delicate aroma', 'Popular after-meal freshener', 'Cleaned & sorted', '100% natural'],
@@ -210,7 +212,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Kalonji (Nigella Seeds) has a distinctive, slightly bitter, oniony flavour. Widely used in pickles, naan, and vegetable dishes for its bold, earthy character.',
     price: 110,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 110, '50g': 55 },
     image: '/products/kalonji.png',
     rating: 4.8,
     additionalInfo: ['Bold, earthy flavour', 'Popular in pickles & naan', 'Cleaned & sorted', '100% natural'],
@@ -222,7 +225,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Sarso Peeli (Yellow Mustard Seeds) brings a sharp, tangy bite. A staple tempering spice across Indian kitchens, essential for pickles, dals, and curries.',
     price: 60,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 60, '50g': 30 },
     image: '/products/sarso-peeli.png',
     rating: 4.8,
     additionalInfo: ['Sharp, tangy flavour', 'Essential tempering spice', 'Cleaned & sorted', '100% natural'],
@@ -234,7 +238,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Jeera (Cumin Seeds) has a warm, earthy aroma that forms the base of countless Indian dishes. Essential for tempering dals, curries, and rice.',
     price: 130,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 130, '50g': 65 },
     image: '/products/jeera.png',
     rating: 4.8,
     isBestseller: true,
@@ -247,7 +252,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Posta Dana (Poppy Seeds) has a mild, nutty flavour. Used to thicken and enrich gravies, or roasted for garnishing sweets and snacks.',
     price: 150,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 150, '50g': 75 },
     image: '/products/posta-dana.png',
     rating: 4.8,
     additionalInfo: ['Mild, nutty flavour', 'Used to enrich gravies', 'Cleaned & sorted', '100% natural'],
@@ -259,7 +265,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Methi (Fenugreek Seeds) has a distinctive, slightly bitter aroma. A classic tempering spice, and a key ingredient in pickles and spice blends.',
     price: 65,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 65, '50g': 35 },
     image: '/products/methi.png',
     rating: 4.8,
     additionalInfo: ['Distinctive, bold aroma', 'Popular in pickles & tadka', 'Cleaned & sorted', '100% natural'],
@@ -271,7 +278,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Sarso Kali (Black Mustard Seeds) has a pungent, nutty bite once tempered in hot oil. A South Indian and Bengali kitchen essential.',
     price: 75,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 75, '50g': 40 },
     image: '/products/sarso-kali.png',
     rating: 4.8,
     additionalInfo: ['Pungent, nutty flavour', 'South Indian & Bengali staple', 'Cleaned & sorted', '100% natural'],
@@ -283,7 +291,8 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Rai (Mustard Seeds) is a everyday tempering spice with a sharp, pungent flavour that mellows into a nutty warmth when cooked in hot oil.',
     price: 55,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 55, '50g': 30 },
     image: '/products/rai.png',
     rating: 4.8,
     additionalInfo: ['Sharp, pungent flavour', 'Everyday tempering spice', 'Cleaned & sorted', '100% natural'],
@@ -323,6 +332,16 @@ export const PRODUCTS: Product[] = [
     ],
   },
 ];
+
+/**
+ * The price actually charged for a given pack size. Used by the storefront
+ * and by the serverless order routes, so a customer is never quoted one
+ * price and charged another.
+ */
+export function priceFor(product: Product, weight?: string): number {
+  if (!weight) return product.price;
+  return product.pricesByWeight?.[weight] ?? product.price;
+}
 
 export const CATEGORIES = [
   { name: 'Dry Fruits', image: '/products/almonds.jpg' },

@@ -5,9 +5,17 @@ export interface Product {
   name: string;
   category: Category;
   description: string;
+  /** Price for the default (first) entry in weightOptions. */
   price: number;
   originalPrice?: number;
   weightOptions: string[];
+  /**
+   * Per-weight pricing for products sold in more than one pack size. Any
+   * weight missing here falls back to `price`. Required whenever
+   * weightOptions has more than one entry — otherwise every pack size would
+   * be charged at the default weight's price.
+   */
+  pricesByWeight?: Record<string, number>;
   image: string;
   rating: number;
   /** Omit until real review data exists — never fabricate a review count. */

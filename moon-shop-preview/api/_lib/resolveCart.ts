@@ -1,4 +1,4 @@
-import { PRODUCTS } from '../../src/data';
+import { PRODUCTS, priceFor } from '../../src/data';
 
 export interface CartItemInput {
   id: string;
@@ -23,13 +23,20 @@ export function resolveCartItems(items: CartItemInput[]): { resolvedItems: Resol
     const product = PRODUCTS.find((p) => p.id === item.id);
     if (!product) throw new Error(`Unknown product: ${item.id}`);
     const quantity = Math.max(1, Math.floor(item.quantity) || 1);
-    subtotal += product.price * quantity;
+    // Only accept a pack size this product is actually sold in, so a bogus
+    // weight can't slip through and be priced off the default.
+    const weight =
+      item.selectedWeight && product.weightOptions.includes(item.selectedWeight)
+        ? item.selectedWeight
+        : product.weightOptions[0];
+    const price = priceFor(product, weight);
+    subtotal += price * quantity;
     return {
       id: product.id,
       name: product.name,
-      price: product.price,
+      price,
       quantity,
-      selectedWeight: item.selectedWeight || product.weightOptions[0],
+      selectedWeight: weight,
     };
   });
   return { resolvedItems, subtotal };
