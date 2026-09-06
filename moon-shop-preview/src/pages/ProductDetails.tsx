@@ -170,7 +170,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
                 <span className="text-xs font-bold text-brand-green/40 uppercase tracking-widest">Per {selectedWeight}</span>
               </div>
 
-              <p className="text-brand-green/60 text-lg font-light leading-relaxed max-w-lg">
+              <p className="text-brand-green/70 text-lg font-normal leading-relaxed max-w-lg">
                 {product.description}
               </p>
             </div>

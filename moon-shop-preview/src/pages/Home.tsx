@@ -214,7 +214,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
                 <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.8em] block">The Moon Presence</span>
                 <h2 className="text-5xl md:text-7xl font-serif italic text-white leading-tight">Elevating Every Culinary Moment</h2>
               </div>
-              <p className="text-white/70 text-lg leading-relaxed font-light max-w-lg">
+              <p className="text-white/80 text-lg leading-relaxed font-normal max-w-lg">
                 Witness the obsession behind the selection. Our hand-selection process ensures that only the most pristine, nutrient-dense dry fruits make it into our signature collections. Every piece is a testament to our commitment to excellence.
               </p>
               <Link 
@@ -244,7 +244,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
               <h2 className="text-4xl md:text-6xl font-serif italic text-brand-green mt-4 leading-tight">Seasonal Jewels</h2>
             </div>
             <div className="lg:pl-20 border-l border-brand-green/5">
-              <p className="text-brand-green/60 font-light text-base md:text-lg leading-relaxed">
+              <p className="text-brand-green/70 font-normal text-base md:text-lg leading-relaxed">
                 Our collectors travel across the sub-continent to secure the first harvest of each season. This carousel represents the absolute peak of current variety.
               </p>
             </div>
@@ -289,7 +289,7 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
               <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.6em] block">The Spice Harvest</span>
               <h2 className="text-4xl md:text-6xl font-serif italic text-brand-green leading-tight">Authentic <br className="hidden md:block" /> Aromatic Masale</h2>
             </div>
-            <p className="text-brand-green/60 text-lg font-light max-w-sm">
+            <p className="text-brand-green/70 text-lg font-normal max-w-sm">
               Discover our obsidian-grade spices, stone-ground to preserve heritage aromas and medicinal potency.
             </p>
           </div>
