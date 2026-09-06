@@ -6,11 +6,34 @@ import {
   ArrowLeft,
   CheckCircle2,
   MessageCircle,
+  CreditCard,
+  Loader2,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
 
 const WHATSAPP_NUMBER = '917054578781';
+const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
+function loadRazorpayScript(): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (window.Razorpay) {
+      resolve(true);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
 
 interface CheckoutProps {
   cart: CartItem[];
@@ -20,6 +43,9 @@ export default function Checkout({ cart }: CheckoutProps) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | null>(null);
+  const [isPaying, setIsPaying] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
   const [shippingInfo, setShippingInfo] = useState({
     fullName: '',
     email: '',
@@ -49,15 +75,94 @@ export default function Checkout({ cart }: CheckoutProps) {
     return encodeURIComponent(lines.join('\n'));
   };
 
+  const orderPayload = () => ({
+    items: cart.map((item) => ({ id: item.id, selectedWeight: item.selectedWeight, quantity: item.quantity })),
+    customer: { name: shippingInfo.fullName, email: shippingInfo.email },
+    shipping: { address: shippingInfo.address, city: shippingInfo.city, postalCode: shippingInfo.postalCode },
+  });
+
   const handleSendOrder = () => {
+    // Best-effort order log — must never block or fail the WhatsApp handoff itself.
+    fetch('/api/log-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderPayload()),
+    }).catch(() => {});
+
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMessage()}`, '_blank', 'noopener,noreferrer');
+    setPaymentStatus('whatsapp');
     setIsSuccess(true);
   };
 
+  const handlePayOnline = async () => {
+    setPaymentError(null);
+    setIsPaying(true);
+    try {
+      const [scriptLoaded, createRes] = await Promise.all([
+        loadRazorpayScript(),
+        fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderPayload()),
+        }),
+      ]);
+
+      if (!scriptLoaded) throw new Error('Could not load the payment gateway. Check your connection and try again.');
+      if (!createRes.ok) throw new Error('Could not start the payment. Please try again.');
+
+      const order = await createRes.json();
+
+      const razorpay = new window.Razorpay({
+        key: order.keyId,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.razorpayOrderId,
+        name: 'Moon Spices & Groceries',
+        description: 'Order Payment',
+        prefill: {
+          name: shippingInfo.fullName,
+          email: shippingInfo.email,
+          contact: '',
+        },
+        theme: { color: '#1B3022' },
+        handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+          try {
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(response),
+            });
+            if (!verifyRes.ok) throw new Error('Payment could not be verified.');
+            setPaymentStatus('paid');
+            setIsSuccess(true);
+          } catch {
+            setPaymentError('Payment went through but we could not confirm it automatically. Please message us on WhatsApp with your payment ID so we can verify manually.');
+          } finally {
+            setIsPaying(false);
+          }
+        },
+        modal: {
+          ondismiss: () => setIsPaying(false),
+        },
+      });
+
+      razorpay.on('payment.failed', () => {
+        setPaymentError('Payment failed or was cancelled. You can try again, or order via WhatsApp instead.');
+        setIsPaying(false);
+      });
+
+      razorpay.open();
+    } catch (err) {
+      setPaymentError(err instanceof Error ? err.message : 'Something went wrong starting the payment.');
+      setIsPaying(false);
+    }
+  };
+
   if (isSuccess) {
+    const isPaid = paymentStatus === 'paid';
     return (
       <div className="min-h-screen bg-brand-cream flex items-center justify-center p-6 pt-32">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-md w-full bg-white p-12 text-center shadow-2xl border border-brand-green/5"
@@ -65,12 +170,16 @@ export default function Checkout({ cart }: CheckoutProps) {
           <div className="flex justify-center mb-8">
             <CheckCircle2 size={80} className="text-brand-gold" strokeWidth={1} />
           </div>
-          <h1 className="text-4xl font-serif font-medium italic text-brand-green mb-6">Order Sent</h1>
-          <p className="text-brand-green/60 mb-10 leading-relaxed font-normal">
-            Your order has been sent to us on WhatsApp. We'll confirm availability, pricing, and delivery with you directly in the chat.
+          <h1 className="text-4xl font-serif font-medium italic text-brand-green mb-6">
+            {isPaid ? 'Payment Successful' : 'Order Sent'}
+          </h1>
+          <p className="text-brand-green/70 mb-10 leading-relaxed font-normal">
+            {isPaid
+              ? "Your payment has been received and your order is confirmed. We'll reach out on WhatsApp with delivery updates."
+              : "Your order has been sent to us on WhatsApp. We'll confirm availability, pricing, and delivery with you directly in the chat."}
           </p>
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-block bg-brand-green text-white px-12 py-5 font-bold uppercase text-[10px] tracking-[0.3em] hover:bg-brand-gold transition-all"
           >
             Return to Home
@@ -164,17 +273,41 @@ export default function Checkout({ cart }: CheckoutProps) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="space-y-12"
+                className="space-y-8"
               >
+                {RAZORPAY_KEY_ID && (
+                  <div className="bg-white p-10 border border-brand-green/5 space-y-6 shadow-xl">
+                    <div className="flex items-center space-x-3">
+                      <CreditCard className="text-brand-gold" size={20} />
+                      <span className="text-[11px] font-black uppercase tracking-[0.2em]">Pay Online</span>
+                    </div>
+                    <p className="text-sm text-brand-green/70 leading-relaxed">
+                      Pay securely by card, UPI, or netbanking via Razorpay. Your order is confirmed the moment
+                      payment succeeds.
+                    </p>
+                    <button
+                      onClick={handlePayOnline}
+                      disabled={isPaying}
+                      className="w-full bg-brand-green text-white px-12 py-6 font-black uppercase text-[10px] tracking-[0.5em] hover:bg-brand-gold transition-all shadow-xl flex items-center justify-center space-x-3 disabled:opacity-60"
+                    >
+                      {isPaying ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
+                      <span>{isPaying ? 'Processing…' : `Pay ₹${total} Online`}</span>
+                    </button>
+                    {paymentError && (
+                      <p className="text-xs font-bold text-red-600/80 leading-relaxed">{paymentError}</p>
+                    )}
+                  </div>
+                )}
+
                 <div className="bg-white p-10 border border-brand-green/5 space-y-6 shadow-xl">
                   <div className="flex items-center space-x-3">
                     <MessageCircle className="text-[#25D366]" size={20} />
                     <span className="text-[11px] font-black uppercase tracking-[0.2em]">Order via WhatsApp</span>
                   </div>
-                  <p className="text-sm text-brand-green/60 leading-relaxed">
-                    Online payment isn't set up yet. Tap below to send this order &mdash; items, quantities, and your
-                    shipping details &mdash; directly to us on WhatsApp, and we'll confirm pricing, availability, and
-                    delivery with you there.
+                  <p className="text-sm text-brand-green/70 leading-relaxed">
+                    {RAZORPAY_KEY_ID
+                      ? "Prefer to sort out details before paying? Send this order — items, quantities, and your shipping details — directly to us on WhatsApp instead."
+                      : "Online payment isn't set up yet. Tap below to send this order — items, quantities, and your shipping details — directly to us on WhatsApp, and we'll confirm pricing, availability, and delivery with you there."}
                   </p>
                 </div>
 
