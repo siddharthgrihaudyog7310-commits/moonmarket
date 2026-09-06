@@ -46,13 +46,13 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="inline-block text-brand-gold font-bold tracking-[0.4em] uppercase text-[9px] md:text-[10px] mb-8 bg-white/10 backdrop-blur-xl px-8 py-3 border border-white/20 whitespace-nowrap">
+            <span className="inline-block text-brand-gold font-bold tracking-[0.4em] uppercase text-[9px] md:text-[10px] mb-10 bg-white/10 backdrop-blur-xl px-8 py-3 border border-white/20 whitespace-nowrap">
               Premium Dry Fruit Collection
             </span>
             <img
               src="/logo-full.png"
               alt="Moon Spices & Groceries"
-              className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[560px] mx-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] mb-12"
+              className="w-[240px] sm:w-[320px] md:w-[400px] lg:w-[460px] mx-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] mb-10"
             />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
               <Link 
