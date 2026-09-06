@@ -49,9 +49,11 @@ export default function Home({ onAddToCart }: { onAddToCart: (product: Product) 
             <span className="inline-block text-brand-gold font-bold tracking-[0.4em] uppercase text-[9px] md:text-[10px] mb-8 bg-white/10 backdrop-blur-xl px-8 py-3 border border-white/20 whitespace-nowrap">
               Premium Dry Fruit Collection
             </span>
-            <h1 className="text-7xl md:text-9xl lg:text-[12rem] font-serif font-medium italic text-white leading-none tracking-tighter drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] mb-12">
-              Moon
-            </h1>
+            <img
+              src="/logo-full.png"
+              alt="Moon Spices & Groceries"
+              className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[560px] mx-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] mb-12"
+            />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
               <Link 
                 to="/shop" 
