@@ -37,13 +37,19 @@ function loadRazorpayScript(): Promise<boolean> {
 
 interface CheckoutProps {
   cart: CartItem[];
+  onClearCart: () => void;
 }
 
-export default function Checkout({ cart }: CheckoutProps) {
+function formatOrderRef(id: string) {
+  return id.replace(/-/g, '').slice(0, 8).toUpperCase();
+}
+
+export default function Checkout({ cart, onClearCart }: CheckoutProps) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | null>(null);
+  const [orderRef, setOrderRef] = useState<string | null>(null);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [shippingInfo, setShippingInfo] = useState({
@@ -53,6 +59,7 @@ export default function Checkout({ cart }: CheckoutProps) {
     city: '',
     postalCode: '',
   });
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const subtotal = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
   const shipping = subtotal > 1500 ? 0 : 150;
@@ -81,17 +88,34 @@ export default function Checkout({ cart }: CheckoutProps) {
     shipping: { address: shippingInfo.address, city: shippingInfo.city, postalCode: shippingInfo.postalCode },
   });
 
+  const validateShipping = () => {
+    const errors: Record<string, string> = {};
+    if (!shippingInfo.fullName.trim()) errors.fullName = 'Required';
+    if (!shippingInfo.address.trim()) errors.address = 'Required';
+    if (!shippingInfo.city.trim()) errors.city = 'Required';
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleReviewOrder = () => {
+    if (validateShipping()) setStep(2);
+  };
+
   const handleSendOrder = () => {
     // Best-effort order log — must never block or fail the WhatsApp handoff itself.
     fetch('/api/log-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderPayload()),
-    }).catch(() => {});
+    })
+      .then((res) => res.json())
+      .then((data) => data?.orderId && setOrderRef(formatOrderRef(data.orderId)))
+      .catch(() => {});
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMessage()}`, '_blank', 'noopener,noreferrer');
     setPaymentStatus('whatsapp');
     setIsSuccess(true);
+    onClearCart();
   };
 
   const handlePayOnline = async () => {
@@ -133,8 +157,10 @@ export default function Checkout({ cart }: CheckoutProps) {
               body: JSON.stringify(response),
             });
             if (!verifyRes.ok) throw new Error('Payment could not be verified.');
+            if (order.dbOrderId) setOrderRef(formatOrderRef(order.dbOrderId));
             setPaymentStatus('paid');
             setIsSuccess(true);
+            onClearCart();
           } catch {
             setPaymentError('Payment went through but we could not confirm it automatically. Please message us on WhatsApp with your payment ID so we can verify manually.');
           } finally {
@@ -173,11 +199,16 @@ export default function Checkout({ cart }: CheckoutProps) {
           <h1 className="text-4xl font-serif font-medium italic text-brand-green mb-6">
             {isPaid ? 'Payment Successful' : 'Order Sent'}
           </h1>
-          <p className="text-brand-green/70 mb-10 leading-relaxed font-normal">
+          <p className="text-brand-green/70 mb-6 leading-relaxed font-normal">
             {isPaid
               ? "Your payment has been received and your order is confirmed. We'll reach out on WhatsApp with delivery updates."
               : "Your order has been sent to us on WhatsApp. We'll confirm availability, pricing, and delivery with you directly in the chat."}
           </p>
+          {orderRef && (
+            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-brand-gold mb-10">
+              Order Reference: #{orderRef}
+            </p>
+          )}
           <Link
             to="/"
             className="inline-block bg-brand-green text-white px-12 py-5 font-bold uppercase text-[10px] tracking-[0.3em] hover:bg-brand-gold transition-all"
@@ -242,20 +273,23 @@ export default function Checkout({ cart }: CheckoutProps) {
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Full Name</label>
-                    <input type="text" value={shippingInfo.fullName} onChange={(e) => setShippingInfo((s) => ({ ...s, fullName: e.target.value }))} className="w-full bg-white border border-brand-green/10 px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors" placeholder="e.g. Sarthak Negi" />
+                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Full Name *</label>
+                    <input type="text" value={shippingInfo.fullName} onChange={(e) => setShippingInfo((s) => ({ ...s, fullName: e.target.value }))} className={`w-full bg-white border px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors ${fieldErrors.fullName ? 'border-red-400' : 'border-brand-green/10'}`} placeholder="e.g. Sarthak Negi" />
+                    {fieldErrors.fullName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest">Please enter your name</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Email Address</label>
                     <input type="email" value={shippingInfo.email} onChange={(e) => setShippingInfo((s) => ({ ...s, email: e.target.value }))} className="w-full bg-white border border-brand-green/10 px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors" placeholder="sarthak@example.com" />
                   </div>
                   <div className="md:col-span-2 space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Shipping Address</label>
-                    <textarea value={shippingInfo.address} onChange={(e) => setShippingInfo((s) => ({ ...s, address: e.target.value }))} className="w-full bg-white border border-brand-green/10 px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors h-32 resize-none" placeholder="Enter your full street address..." />
+                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Shipping Address *</label>
+                    <textarea value={shippingInfo.address} onChange={(e) => setShippingInfo((s) => ({ ...s, address: e.target.value }))} className={`w-full bg-white border px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors h-32 resize-none ${fieldErrors.address ? 'border-red-400' : 'border-brand-green/10'}`} placeholder="Enter your full street address..." />
+                    {fieldErrors.address && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest">Please enter a delivery address</p>}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">City</label>
-                    <input type="text" value={shippingInfo.city} onChange={(e) => setShippingInfo((s) => ({ ...s, city: e.target.value }))} className="w-full bg-white border border-brand-green/10 px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors" />
+                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">City *</label>
+                    <input type="text" value={shippingInfo.city} onChange={(e) => setShippingInfo((s) => ({ ...s, city: e.target.value }))} className={`w-full bg-white border px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors ${fieldErrors.city ? 'border-red-400' : 'border-brand-green/10'}`} />
+                    {fieldErrors.city && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest">Please enter your city</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">Postal Code</label>
@@ -263,7 +297,7 @@ export default function Checkout({ cart }: CheckoutProps) {
                   </div>
                 </div>
                 <button
-                  onClick={() => setStep(2)}
+                  onClick={handleReviewOrder}
                   className="w-full md:w-auto bg-brand-green text-white px-16 py-6 font-bold uppercase text-[10px] tracking-[0.3em] hover:bg-brand-gold transition-all shadow-xl"
                 >
                   Review Order

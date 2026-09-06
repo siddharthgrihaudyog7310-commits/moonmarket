@@ -1,9 +1,30 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { Instagram, MessageCircle, ArrowUpRight, Check, Loader2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [subscribeState, setSubscribeState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubscribeState('loading');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      setSubscribeState('success');
+      setEmail('');
+    } catch {
+      setSubscribeState('error');
+    }
+  };
 
   return (
     <footer className="relative bg-brand-green pt-32 pb-20 text-brand-cream overflow-hidden">
@@ -101,16 +122,35 @@ export default function Footer() {
                 Join our collective for first access to rare harvests and limited editions.
               </p>
               
-              <div className="relative group">
-                <input 
-                  type="email" 
-                  placeholder="EMAIL ADDRESS" 
-                  className="w-full bg-transparent border-b border-brand-cream/10 py-4 text-[10px] font-bold tracking-[0.3em] uppercase focus:outline-none focus:border-brand-gold transition-colors placeholder:text-brand-cream/10"
-                />
-                <button className="absolute right-0 top-1/2 -translate-y-1/2 text-brand-gold hover:text-brand-cream transition-colors">
-                  <ArrowUpRight size={16} />
-                </button>
-              </div>
+              {subscribeState === 'success' ? (
+                <p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gold py-4">
+                  <Check size={14} /> You're on the list
+                </p>
+              ) : (
+                <form onSubmit={handleSubscribe} className="relative group">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (subscribeState === 'error') setSubscribeState('idle');
+                    }}
+                    placeholder="EMAIL ADDRESS"
+                    required
+                    className="w-full bg-transparent border-b border-brand-cream/10 py-4 pr-8 text-[10px] font-bold tracking-[0.3em] uppercase focus:outline-none focus:border-brand-gold transition-colors placeholder:text-brand-cream/10"
+                  />
+                  <button
+                    type="submit"
+                    disabled={subscribeState === 'loading'}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 text-brand-gold hover:text-brand-cream transition-colors disabled:opacity-50"
+                  >
+                    {subscribeState === 'loading' ? <Loader2 size={16} className="animate-spin" /> : <ArrowUpRight size={16} />}
+                  </button>
+                  {subscribeState === 'error' && (
+                    <p className="text-[9px] font-bold text-red-400 uppercase tracking-widest mt-2">Something went wrong — try again.</p>
+                  )}
+                </form>
+              )}
 
               <div className="flex space-x-6">
                 {[

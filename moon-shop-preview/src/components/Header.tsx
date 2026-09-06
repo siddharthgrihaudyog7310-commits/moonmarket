@@ -1,26 +1,36 @@
 import { useState } from 'react';
-import { ShoppingCart, Heart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lucide-react';
+import { ShoppingCart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { CATEGORIES, PRODUCTS } from '../data';
 
-export default function Header({ cartCount, wishlistCount, onOpenCart }: { cartCount: number, wishlistCount: number, onOpenCart: () => void }) {
+export default function Header({ cartCount, onOpenCart }: { cartCount: number, onOpenCart: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const location = useLocation();
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
-  const categories = {
-    'Dry Fruits': ['Premium Almonds', 'Whole Cashews', 'Golden Raisins'],
-    'Spices': ['Turmeric Powder', 'Red Chilli Powder', 'Coriander Powder', 'Amchur Powder'],
-    'Dry Dates': ['Moon Dry Fruits Dry Dates'],
-    'Speciality Flours': ['Kuttu Atta', 'Singhara Atta'],
-    'Seeds': ['Chia Seeds', 'Pumpkin Seeds', 'Flax Seeds', 'Black Sesame Seeds'],
-  };
+  // Built from the real catalog so this never drifts out of sync with what's
+  // actually for sale (previously a hardcoded list that went stale the
+  // moment the catalog changed).
+  const categories = Object.fromEntries(
+    CATEGORIES.map((cat) => [cat.name, PRODUCTS.filter((p) => p.category === cat.name).map((p) => p.name)])
+  );
 
   const navLinks = [
     { name: 'Shop Categories', path: '/shop', hasMega: true },
     { name: 'New Launches', path: '/shop' },
     { name: 'Combos', path: '/shop' },
   ];
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = searchQuery.trim();
+    if (!query) return;
+    navigate(`/shop?search=${encodeURIComponent(query)}`);
+    setSearchQuery('');
+    setIsMenuOpen(false);
+  };
 
   return (
     <header 
@@ -62,14 +72,21 @@ export default function Header({ cartCount, wishlistCount, onOpenCart }: { cartC
 
           {/* Right Section */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <div className="hidden md:flex items-center bg-brand-green/5 px-4 py-2 rounded-lg border border-brand-green/10 w-48 lg:w-64 focus-within:border-brand-gold transition-all">
-              <Search size={14} className="text-brand-green/40 mr-2" />
-              <input 
-                type="text" 
-                placeholder="SEARCH COLLECTION" 
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden md:flex items-center bg-brand-green/5 px-4 py-2 rounded-lg border border-brand-green/10 w-48 lg:w-64 focus-within:border-brand-gold transition-all"
+            >
+              <button type="submit" aria-label="Search">
+                <Search size={14} className="text-brand-green/40 mr-2" />
+              </button>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="SEARCH COLLECTION"
                 className="bg-transparent border-none text-[10px] font-bold tracking-widest w-full focus:outline-none placeholder:text-brand-green/20 text-brand-green uppercase"
               />
-            </div>
+            </form>
 
             <div className="flex items-center space-x-1 sm:space-x-2">
               <Link to="/login" className="p-2 hover:text-brand-gold transition-colors">
@@ -155,6 +172,18 @@ export default function Header({ cartCount, wishlistCount, onOpenCart }: { cartC
             exit={{ opacity: 0, x: -100 }}
             className="lg:hidden fixed inset-0 top-20 bg-brand-green z-40 p-6 flex flex-col space-y-6 text-white"
           >
+            <form onSubmit={handleSearchSubmit} className="flex items-center bg-white/10 px-4 py-3 rounded-lg border border-white/10">
+              <button type="submit" aria-label="Search">
+                <Search size={16} className="text-white/50 mr-3" />
+              </button>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="SEARCH COLLECTION"
+                className="bg-transparent border-none text-xs font-bold tracking-widest w-full focus:outline-none placeholder:text-white/30 text-white uppercase"
+              />
+            </form>
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 

@@ -10,8 +10,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
-  const isSoldOut = product.id === '100';
-
   return (
     <div className="group bg-white rounded-none overflow-hidden transition-all duration-1000 flex flex-col h-full relative border border-transparent hover:border-brand-gold/10">
       {product.isBestseller && (
@@ -56,7 +54,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           
           <button
             onClick={() => onAddToCart(product)}
-            disabled={isSoldOut}
             className="group/btn relative w-11 h-11 flex items-center justify-center transition-all duration-700 overflow-hidden"
             id={`add-to-cart-${product.id}`}
           >

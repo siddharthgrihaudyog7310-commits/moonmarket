@@ -28,22 +28,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { resolvedItems, subtotal } = resolveCartItems(items);
 
-    const { error } = await supabaseAdmin.from('orders').insert({
-      status: 'pending_whatsapp',
-      payment_method: 'whatsapp',
-      customer_name: customer?.name,
-      customer_email: customer?.email,
-      customer_phone: customer?.phone,
-      shipping_address: shipping?.address,
-      shipping_city: shipping?.city,
-      shipping_postal_code: shipping?.postalCode,
-      items: resolvedItems,
-      subtotal,
-    });
+    const { data, error } = await supabaseAdmin
+      .from('orders')
+      .insert({
+        status: 'pending_whatsapp',
+        payment_method: 'whatsapp',
+        customer_name: customer?.name,
+        customer_email: customer?.email,
+        customer_phone: customer?.phone,
+        shipping_address: shipping?.address,
+        shipping_city: shipping?.city,
+        shipping_postal_code: shipping?.postalCode,
+        items: resolvedItems,
+        subtotal,
+      })
+      .select('id')
+      .single();
 
     if (error) throw error;
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, orderId: data.id });
   } catch (err) {
     console.error('log-order failed', err);
     res.status(200).json({ success: false });

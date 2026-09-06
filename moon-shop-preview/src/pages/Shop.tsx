@@ -6,28 +6,53 @@ import ProductCard from '../components/ProductCard';
 import { Product } from '../types';
 import { useSearchParams } from 'react-router-dom';
 
+type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'name-asc';
+
+const SORT_LABELS: Record<SortOption, string> = {
+  featured: 'Featured',
+  'price-asc': 'Price: Low to High',
+  'price-desc': 'Price: High to Low',
+  'name-asc': 'Name: A to Z',
+};
+
 export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'All';
+  const searchQuery = searchParams.get('search') || '';
   const [priceRange, setPriceRange] = useState([0, 600]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  
+  const [sortBy, setSortBy] = useState<SortOption>('featured');
+  const [isSortOpen, setIsSortOpen] = useState(false);
+
   const sizes = ['100g', '250g', '500g'];
 
   const toggleSize = (size: string) => {
-    setSelectedSizes(prev => 
+    setSelectedSizes(prev =>
       prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]
     );
   };
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter(product => {
+    const query = searchQuery.trim().toLowerCase();
+    const filtered = PRODUCTS.filter(product => {
       const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
       const matchesPrice = product.price <= priceRange[1];
       const matchesSize = selectedSizes.length === 0 || product.weightOptions.some(s => selectedSizes.includes(s));
-      return matchesCategory && matchesPrice && matchesSize;
+      const matchesSearch = !query || product.name.toLowerCase().includes(query) || product.category.toLowerCase().includes(query);
+      return matchesCategory && matchesPrice && matchesSize && matchesSearch;
     });
-  }, [activeCategory, priceRange, selectedSizes]);
+
+    switch (sortBy) {
+      case 'price-asc':
+        return [...filtered].sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return [...filtered].sort((a, b) => b.price - a.price);
+      case 'name-asc':
+        return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+      default:
+        return filtered;
+    }
+  }, [activeCategory, priceRange, selectedSizes, sortBy, searchQuery]);
 
   return (
     <div className="bg-brand-cream min-h-screen pt-32 pb-24">
@@ -51,11 +76,32 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
               <span className="text-brand-gold font-bold">●</span>
               <span>Harvest Count: {filteredProducts.length}</span>
             </div>
-            <div className="relative group">
-              <button className="flex items-center space-x-4 transition-colors text-brand-green hover:text-brand-gold py-1 border-b border-brand-green/10">
-                <span>Refine Selection</span>
-                <ChevronDown size={12} strokeWidth={3} />
+            <div className="relative" onMouseLeave={() => setIsSortOpen(false)}>
+              <button
+                onClick={() => setIsSortOpen((v) => !v)}
+                className="flex items-center space-x-4 transition-colors text-brand-green hover:text-brand-gold py-1 border-b border-brand-green/10"
+              >
+                <span>Sort: {SORT_LABELS[sortBy]}</span>
+                <ChevronDown size={12} strokeWidth={3} className={`transition-transform ${isSortOpen ? 'rotate-180' : ''}`} />
               </button>
+              {isSortOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-brand-green/10 shadow-xl z-30 py-2">
+                  {(Object.keys(SORT_LABELS) as SortOption[]).map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => {
+                        setSortBy(option);
+                        setIsSortOpen(false);
+                      }}
+                      className={`w-full text-left px-5 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                        sortBy === option ? 'text-brand-gold bg-brand-gold/5' : 'text-brand-green/60 hover:bg-brand-cream/60'
+                      }`}
+                    >
+                      {SORT_LABELS[option]}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -153,6 +199,23 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
 
           {/* Product Grid */}
           <div className="flex-grow">
+            {searchQuery && (
+              <div className="flex items-center gap-3 mb-10 text-[11px] font-bold uppercase tracking-widest text-brand-green/60">
+                <span>
+                  Showing results for <span className="text-brand-green">"{searchQuery}"</span>
+                </span>
+                <button
+                  onClick={() => {
+                    const next = new URLSearchParams(searchParams);
+                    next.delete('search');
+                    setSearchParams(next);
+                  }}
+                  className="text-brand-gold hover:underline"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24">
                 {filteredProducts.map(product => (

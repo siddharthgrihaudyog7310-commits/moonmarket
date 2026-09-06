@@ -20,7 +20,6 @@ import { CartItem, Product } from './types';
 
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [wishlist, setWishlist] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleAddToCart = (product: Product, weight?: string, quantity: number = 1) => {
@@ -52,13 +51,14 @@ export default function App() {
     setCart(prev => prev.filter(item => !(item.id === id && item.selectedWeight === weight)));
   };
 
+  const handleClearCart = () => setCart([]);
+
   return (
     <Router>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-brand-dark overflow-x-hidden">
-        <Header 
-          cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)} 
-          wishlistCount={wishlist.length} 
+        <Header
+          cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
           onOpenCart={() => setIsCartOpen(true)}
         />
         
@@ -67,7 +67,7 @@ export default function App() {
             <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
             <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
             <Route path="/product/:id" element={<ProductDetails onAddToCart={handleAddToCart} />} />
-            <Route path="/checkout" element={<Checkout cart={cart} />} />
+            <Route path="/checkout" element={<Checkout cart={cart} onClearCart={handleClearCart} />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/terms" element={<Terms />} />

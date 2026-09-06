@@ -25,3 +25,11 @@ create index if not exists orders_created_at_idx on orders (created_at desc);
 -- role key (used exclusively by the serverless functions in /api, never
 -- shipped to the browser) can read or write this table.
 alter table orders enable row level security;
+
+create table if not exists newsletter_signups (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  email text not null unique
+);
+
+alter table newsletter_signups enable row level security;
