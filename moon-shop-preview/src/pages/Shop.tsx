@@ -32,6 +32,11 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
     );
   };
 
+  // A category with nothing in it yet isn't the same as filters matching
+  // nothing — the empty state wording differs.
+  const categoryIsEmpty =
+    activeCategory !== 'All' && !PRODUCTS.some((product) => product.category === activeCategory);
+
   const filteredProducts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
     const filtered = PRODUCTS.filter(product => {
@@ -235,17 +240,32 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
               </div>
             ) : (
               <div className="bg-white border border-brand-green/5 p-20 text-center">
-                <p className="text-brand-green/40 font-serif italic text-2xl">No items match your refined selection.</p>
-                <button 
-                  onClick={() => {
-                    setPriceRange([0, 600]);
-                    setSelectedSizes([]);
-                    setSearchParams({});
-                  }}
-                  className="mt-8 text-brand-gold text-[10px] font-black uppercase tracking-widest border-b border-brand-gold/20 pb-1"
-                >
-                  Clear All Filters
-                </button>
+                {categoryIsEmpty ? (
+                  <>
+                    <p className="text-brand-green/40 font-serif italic text-2xl">This collection is coming soon.</p>
+                    <p className="mt-4 text-brand-green/40 text-xs font-medium">
+                      We're preparing this range — message us on{' '}
+                      <a href="https://wa.me/917054578781" target="_blank" rel="noopener noreferrer" className="text-brand-gold underline">
+                        WhatsApp
+                      </a>{' '}
+                      for availability.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-brand-green/40 font-serif italic text-2xl">No items match your refined selection.</p>
+                    <button
+                      onClick={() => {
+                        setPriceRange([0, 600]);
+                        setSelectedSizes([]);
+                        setSearchParams({});
+                      }}
+                      className="mt-8 text-brand-gold text-[10px] font-black uppercase tracking-widest border-b border-brand-gold/20 pb-1"
+                    >
+                      Clear All Filters
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
