@@ -15,7 +15,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   'name-asc': 'Name: A to Z',
 };
 
-export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
+export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, weight?: string) => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'All';
   const searchQuery = searchParams.get('search') || '';
@@ -223,20 +223,28 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
             )}
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24">
-                {filteredProducts.map(product => (
-                  <motion.div 
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    key={product.id}
-                  >
-                    <ProductCard 
-                      product={product} 
-                      onAddToCart={onAddToCart} 
-                    />
-                  </motion.div>
-                ))}
+                {filteredProducts.map(product => {
+                  // When the Net Weight filter narrows to one matching size, show that
+                  // size's real photo/price on the card instead of the product's default.
+                  const displayWeight = selectedSizes.length > 0
+                    ? product.weightOptions.find(w => selectedSizes.includes(w))
+                    : undefined;
+                  return (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      key={product.id}
+                    >
+                      <ProductCard
+                        product={product}
+                        onAddToCart={onAddToCart}
+                        displayWeight={displayWeight}
+                      />
+                    </motion.div>
+                  );
+                })}
               </div>
             ) : (
               <div className="bg-white border border-brand-green/5 p-20 text-center">
