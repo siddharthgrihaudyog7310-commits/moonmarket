@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Star, ShoppingBag, ShieldCheck, Truck, RefreshCcw, Minus, Plus, ZoomIn, X } from 'lucide-react';
-import { PRODUCTS, priceFor } from '../data';
+import { PRODUCTS, priceFor, imageFor } from '../data';
 import { Product } from '../types';
 import { useEffect, useState } from 'react';
 import Accordion from '../components/Accordion';
@@ -134,7 +134,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
                 <ZoomIn size={16} />
               </span>
               <img
-                src={product.image}
+                src={imageFor(product, selectedWeight)}
                 alt={product.name}
                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
               />
@@ -326,7 +326,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
             <motion.img
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              src={product.image}
+              src={imageFor(product, selectedWeight)}
               alt={product.name}
               className="max-w-full max-h-full object-contain"
               onClick={(e) => e.stopPropagation()}

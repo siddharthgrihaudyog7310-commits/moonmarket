@@ -176,61 +176,9 @@ export const PRODUCTS: Product[] = [
       '100% natural, no additives',
     ],
   },
-  // NOTE: prices below are PLACEHOLDERS (owner has not finalized real pricing
-  // for this lineup yet) — swap in real prices before relying on these for
-  // actual sales.
-  {
-    id: 'ajwain',
-    name: 'Ajwain (Carrom Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Ajwain (Carrom Seeds) has a sharp, thyme-like aroma and a warm, slightly bitter bite. A classic tempering spice in Indian cooking, and a traditional favourite for digestive teas.',
-    price: 70,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 70, '50g': 35 },
-    image: '/products/ajwain.png',
-    rating: 4.8,
-    additionalInfo: ['Sharp, aromatic flavour', 'Popular in tempering & parathas', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'sounf-maheen',
-    name: 'Sounf Maheen (Small Fennel Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Sounf Maheen (fine fennel seeds) has a sweet, delicate aroma. Enjoyed after meals as a mouth freshener, or used to add gentle sweetness to curries and teas.',
-    price: 90,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 90, '50g': 45 },
-    image: '/products/sounf-maheen.png',
-    rating: 4.8,
-    additionalInfo: ['Sweet, delicate aroma', 'Popular after-meal freshener', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'kalonji',
-    name: 'Kalonji (Nigella Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Kalonji (Nigella Seeds) has a distinctive, slightly bitter, oniony flavour. Widely used in pickles, naan, and vegetable dishes for its bold, earthy character.',
-    price: 110,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 110, '50g': 55 },
-    image: '/products/kalonji.png',
-    rating: 4.8,
-    additionalInfo: ['Bold, earthy flavour', 'Popular in pickles & naan', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'sarso-peeli',
-    name: 'Sarso Peeli (Yellow Mustard Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Sarso Peeli (Yellow Mustard Seeds) brings a sharp, tangy bite. A staple tempering spice across Indian kitchens, essential for pickles, dals, and curries.',
-    price: 60,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 60, '50g': 30 },
-    image: '/products/sarso-peeli.png',
-    rating: 4.8,
-    additionalInfo: ['Sharp, tangy flavour', 'Essential tempering spice', 'Cleaned & sorted', '100% natural'],
-  },
+  // NOTE: prices below are PLACEHOLDERS (owner has not finalized real
+  // pricing for this lineup yet) — swap in real prices before relying on
+  // these for actual sales.
   {
     id: 'jeera',
     name: 'Jeera (Cumin Seeds)',
@@ -240,36 +188,11 @@ export const PRODUCTS: Product[] = [
     price: 130,
     weightOptions: ['100g', '50g'],
     pricesByWeight: { '100g': 130, '50g': 65 },
-    image: '/products/jeera.png',
+    image: '/products/jeera-100g.png',
+    imagesByWeight: { '100g': '/products/jeera-100g.png', '50g': '/products/jeera-50g.png' },
     rating: 4.8,
     isBestseller: true,
     additionalInfo: ['Warm, earthy aroma', 'Kitchen essential', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'posta-dana',
-    name: 'Posta Dana (Poppy Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Posta Dana (Poppy Seeds) has a mild, nutty flavour. Used to thicken and enrich gravies, or roasted for garnishing sweets and snacks.',
-    price: 150,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 150, '50g': 75 },
-    image: '/products/posta-dana.png',
-    rating: 4.8,
-    additionalInfo: ['Mild, nutty flavour', 'Used to enrich gravies', 'Cleaned & sorted', '100% natural'],
-  },
-  {
-    id: 'methi',
-    name: 'Methi (Fenugreek Seeds)',
-    category: 'Whole Spices',
-    description:
-      'Our Methi (Fenugreek Seeds) has a distinctive, slightly bitter aroma. A classic tempering spice, and a key ingredient in pickles and spice blends.',
-    price: 65,
-    weightOptions: ['100g', '50g'],
-    pricesByWeight: { '100g': 65, '50g': 35 },
-    image: '/products/methi.png',
-    rating: 4.8,
-    additionalInfo: ['Distinctive, bold aroma', 'Popular in pickles & tadka', 'Cleaned & sorted', '100% natural'],
   },
   {
     id: 'sarso-kali',
@@ -280,7 +203,8 @@ export const PRODUCTS: Product[] = [
     price: 75,
     weightOptions: ['100g', '50g'],
     pricesByWeight: { '100g': 75, '50g': 40 },
-    image: '/products/sarso-kali.png',
+    image: '/products/sarso-kali-100g.png',
+    imagesByWeight: { '100g': '/products/sarso-kali-100g.png', '50g': '/products/sarso-kali-50g.png' },
     rating: 4.8,
     additionalInfo: ['Pungent, nutty flavour', 'South Indian & Bengali staple', 'Cleaned & sorted', '100% natural'],
   },
@@ -289,13 +213,82 @@ export const PRODUCTS: Product[] = [
     name: 'Rai (Mustard Seeds)',
     category: 'Whole Spices',
     description:
-      'Our Rai (Mustard Seeds) is a everyday tempering spice with a sharp, pungent flavour that mellows into a nutty warmth when cooked in hot oil.',
+      'Our Rai (Mustard Seeds) is an everyday tempering spice with a sharp, pungent flavour that mellows into a nutty warmth when cooked in hot oil.',
     price: 55,
     weightOptions: ['100g', '50g'],
     pricesByWeight: { '100g': 55, '50g': 30 },
-    image: '/products/rai.png',
+    image: '/products/rai-100g.png',
+    imagesByWeight: { '100g': '/products/rai-100g.png', '50g': '/products/rai-50g.png' },
     rating: 4.8,
     additionalInfo: ['Sharp, pungent flavour', 'Everyday tempering spice', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'sounf-maheen',
+    name: 'Sounf Maheen (Small Fennel Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Sounf Maheen (fine fennel seeds) has a sweet, delicate aroma. Enjoyed after meals as a mouth freshener, or used to add gentle sweetness to curries and teas.',
+    price: 90,
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 90, '50g': 45 },
+    image: '/products/sounf-maheen-100g.png',
+    imagesByWeight: { '100g': '/products/sounf-maheen-100g.png', '50g': '/products/sounf-maheen-50g.png' },
+    rating: 4.8,
+    additionalInfo: ['Sweet, delicate aroma', 'Popular after-meal freshener', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'sauf-moti',
+    name: 'Sauf Moti (Large Fennel Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Sauf Moti (large fennel seeds) has a bold, sweet aroma with a bigger, crunchier bite than fine fennel. Popular as a mouth freshener or brewed into a soothing tea.',
+    price: 85,
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 85, '50g': 45 },
+    image: '/products/sauf-moti-100g.png',
+    imagesByWeight: { '100g': '/products/sauf-moti-100g.png', '50g': '/products/sauf-moti-50g.png' },
+    rating: 4.8,
+    additionalInfo: ['Bold, sweet aroma', 'Large, crunchy seeds', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'sarso-peeli',
+    name: 'Sarso Peeli (Yellow Mustard Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Sarso Peeli (Yellow Mustard Seeds) brings a sharp, tangy bite. A staple tempering spice across Indian kitchens, essential for pickles, dals, and curries.',
+    price: 60,
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 60, '50g': 30 },
+    image: '/products/sarso-peeli-100g.png',
+    imagesByWeight: { '100g': '/products/sarso-peeli-100g.png', '50g': '/products/sarso-peeli-50g.png' },
+    rating: 4.8,
+    additionalInfo: ['Sharp, tangy flavour', 'Essential tempering spice', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'posta-dana',
+    name: 'Posta Dana (Poppy Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Posta Dana (Poppy Seeds) has a mild, nutty flavour. Used to thicken and enrich gravies, or roasted for garnishing sweets and snacks.',
+    price: 150,
+    weightOptions: ['100g', '50g'],
+    pricesByWeight: { '100g': 150, '50g': 75 },
+    image: '/products/posta-dana-100g.png',
+    imagesByWeight: { '100g': '/products/posta-dana-100g.png', '50g': '/products/posta-dana-50g.png' },
+    rating: 4.8,
+    additionalInfo: ['Mild, nutty flavour', 'Used to enrich gravies', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'kali-mirch',
+    name: 'Kali Mirch (Black Pepper)',
+    category: 'Whole Spices',
+    description:
+      'Our Kali Mirch (whole black peppercorns) has a sharp, woody heat. A universal kitchen essential for seasoning, tempering, and finishing dishes.',
+    price: 90,
+    weightOptions: ['100g'],
+    image: '/products/kali-mirch.png',
+    rating: 4.8,
+    additionalInfo: ['Sharp, woody heat', 'Universal seasoning essential', 'Cleaned & sorted', '100% natural'],
   },
   {
     id: 'kuttu-atta',
@@ -343,9 +336,15 @@ export function priceFor(product: Product, weight?: string): number {
   return product.pricesByWeight?.[weight] ?? product.price;
 }
 
+/** The real pack photo for a given weight, when one exists. */
+export function imageFor(product: Product, weight?: string): string {
+  if (!weight) return product.image;
+  return product.imagesByWeight?.[weight] ?? product.image;
+}
+
 export const CATEGORIES = [
   { name: 'Dry Fruits', image: '/products/almonds.jpg' },
-  { name: 'Whole Spices', image: '/products/jeera.png' },
+  { name: 'Whole Spices', image: '/products/jeera-100g.png' },
   { name: 'Spices', image: '/products/haldi.jpg' },
   { name: 'Dry Dates', image: '/products/dry-dates.jpg' },
   { name: 'Speciality Flours', image: '/products/kuttu-atta.jpg' },

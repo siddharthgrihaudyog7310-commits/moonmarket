@@ -16,7 +16,13 @@ export interface Product {
    * be charged at the default weight's price.
    */
   pricesByWeight?: Record<string, number>;
+  /** Default (first weightOption's) product photo. */
   image: string;
+  /**
+   * Per-weight product photos, for products whose real pack photo actually
+   * differs by size. Any weight missing here falls back to `image`.
+   */
+  imagesByWeight?: Record<string, string>;
   rating: number;
   /** Omit until real review data exists — never fabricate a review count. */
   reviewsCount?: number;
