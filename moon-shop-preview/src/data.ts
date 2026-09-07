@@ -157,8 +157,10 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Black Sesame Seeds are cleaned and hand-sorted for a rich, nutty aroma. A staple in Indian and Asian cooking, perfect for garnishing, baking, or making chikki and laddoos.',
     price: 60,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '250g'],
+    pricesByWeight: { '100g': 60, '250g': 150 },
     image: '/products/til-kala.jpg',
+    imagesByWeight: { '100g': '/products/til-kala.jpg', '250g': '/products/til-kala-250g.jpg' },
     rating: 4.8,
     additionalInfo: [
       'Rich in calcium & iron',
@@ -213,8 +215,10 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Jeera (Cumin Seeds) has a warm, earthy aroma that forms the base of countless Indian dishes. Essential for tempering dals, curries, and rice.',
     price: 130,
-    weightOptions: ['100g'],
+    weightOptions: ['100g', '250g'],
+    pricesByWeight: { '250g': 150 },
     image: '/products/jeera-100g.png',
+    imagesByWeight: { '250g': '/products/jeera-250g.jpg' },
     rating: 4.8,
     isBestseller: true,
     additionalInfo: ['Warm, earthy aroma', 'Kitchen essential', 'Cleaned & sorted', '100% natural'],
@@ -302,6 +306,33 @@ export const PRODUCTS: Product[] = [
     image: '/products/kali-mirch.png',
     rating: 4.8,
     additionalInfo: ['Sharp, woody heat', 'Universal seasoning essential', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'coriander-whole',
+    name: 'Coriander Whole',
+    category: 'Whole Spices',
+    description:
+      'Our Coriander Whole has a mild, citrusy aroma and is a base spice for countless Indian curries and masalas. Dry roast and grind fresh for the best flavour.',
+    price: 100,
+    weightOptions: ['250g'],
+    image: '/products/coriander-whole-250g.jpg',
+    rating: 4.8,
+    additionalInfo: ['Mild, citrusy aroma', 'Base spice for curries & masalas', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    // NOTE: price is a PLACEHOLDER (owner has not confirmed the real
+    // 100g price for this product yet) — swap in the real price before
+    // relying on this for actual sales.
+    id: 'garam-masala-whole',
+    name: 'Garam Masala Whole',
+    category: 'Whole Spices',
+    description:
+      'Our Garam Masala Whole is a fragrant blend of whole spices — cinnamon, cloves, star anise, black pepper, cardamom, bay leaf and more — for tempering and slow-cooked dishes.',
+    price: 150,
+    weightOptions: ['100g'],
+    image: '/products/garam-masala-whole-100g.jpg',
+    rating: 4.8,
+    additionalInfo: ['Fragrant whole-spice blend', 'For tempering & slow cooking', 'Cleaned & sorted', '100% natural'],
   },
   {
     id: 'kuttu-atta',
