@@ -104,30 +104,15 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Chia Seeds are naturally rich in fibre and omega-3s, with a mild, nutty flavour. Soak them in water or milk, or add to smoothies and salads for a wholesome nutritional boost.',
     price: 120,
-    weightOptions: ['100g'],
-    image: '/products/chia-seeds.jpg',
+    weightOptions: ['100g', '250g'],
+    pricesByWeight: { '100g': 120, '250g': 300 },
+    image: '/products/chia-seeds-100g.jpg',
+    imagesByWeight: { '100g': '/products/chia-seeds-100g.jpg', '250g': '/products/chia-seeds-250g.jpg' },
     rating: 4.8,
     additionalInfo: [
       'Rich in omega-3 fatty acids',
       'High in dietary fibre',
       'Good source of plant protein',
-      '100% natural, no additives',
-    ],
-  },
-  {
-    id: 'sunflower-seeds',
-    name: 'Sunflower Seeds',
-    category: 'Seeds',
-    description:
-      'Our Sunflower Seeds are cleaned and hand-sorted for a light, crunchy bite. A nutritious addition to salads, trail mixes, or enjoyed on their own as a healthy snack.',
-    price: 150,
-    weightOptions: ['100g'],
-    image: '/products/sunflower-seeds.jpg',
-    rating: 4.8,
-    additionalInfo: [
-      'Rich in Vitamin E',
-      'Good source of healthy fats',
-      'Hand-cleaned & sorted',
       '100% natural, no additives',
     ],
   },
@@ -189,8 +174,10 @@ export const PRODUCTS: Product[] = [
     description:
       'Our Pumpkin Seeds are cleaned and hand-sorted for a satisfying crunch and nutty flavour. Enjoy them as a snack, or add to salads, granola, and baked goods for extra nutrition.',
     price: 140,
-    weightOptions: ['100g'],
-    image: '/products/pumpkin-seeds.jpg',
+    weightOptions: ['100g', '250g'],
+    pricesByWeight: { '100g': 140, '250g': 350 },
+    image: '/products/pumpkin-seeds-100g.jpg',
+    imagesByWeight: { '100g': '/products/pumpkin-seeds-100g.jpg', '250g': '/products/pumpkin-seeds-250g.jpg' },
     rating: 4.8,
     additionalInfo: [
       'Rich in magnesium & zinc',
@@ -375,5 +362,5 @@ export const CATEGORIES = [
   { name: 'Spices', image: '/products/haldi.jpg' },
   { name: 'Dry Dates', image: '/products/dry-dates.jpg' },
   { name: 'Speciality Flours', image: '/products/kuttu-atta.jpg' },
-  { name: 'Seeds', image: '/products/pumpkin-seeds.jpg' },
+  { name: 'Seeds', image: '/products/pumpkin-seeds-100g.jpg' },
 ];
