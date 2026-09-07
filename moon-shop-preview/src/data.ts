@@ -115,6 +115,23 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
+    id: 'sunflower-seeds',
+    name: 'Sunflower Seeds',
+    category: 'Seeds',
+    description:
+      'Our Sunflower Seeds are cleaned and hand-sorted for a light, crunchy bite. A nutritious addition to salads, trail mixes, or enjoyed on their own as a healthy snack.',
+    price: 150,
+    weightOptions: ['100g'],
+    image: '/products/sunflower-seeds.jpg',
+    rating: 4.8,
+    additionalInfo: [
+      'Rich in Vitamin E',
+      'Good source of healthy fats',
+      'Hand-cleaned & sorted',
+      '100% natural, no additives',
+    ],
+  },
+  {
     id: 'musk-melon-seeds',
     name: 'Musk Melon Seeds',
     category: 'Seeds',
