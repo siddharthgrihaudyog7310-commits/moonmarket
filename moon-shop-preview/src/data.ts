@@ -283,7 +283,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Our Kuttu Atta (buckwheat flour) is milled from premium buckwheat for a fine, soft texture — perfect for vrat/fasting recipes like puris and parathas, or as a gluten-free flour for everyday cooking.",
     price: 180,
-    weightOptions: ['500g'],
+    weightOptions: ['250g'],
     image: '/products/kuttu-atta.jpg',
     rating: 4.8,
     additionalInfo: [
@@ -300,7 +300,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Our Singhara Atta (water chestnut flour) is ground fresh for a light, delicate texture — a traditional favourite for vrat/fasting meals, giving puris and pakoras their signature crisp bite.",
     price: 200,
-    weightOptions: ['500g'],
+    weightOptions: ['250g'],
     image: '/products/singhara-atta.jpg',
     rating: 4.8,
     additionalInfo: [
