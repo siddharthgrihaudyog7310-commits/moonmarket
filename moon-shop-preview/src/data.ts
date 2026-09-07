@@ -10,7 +10,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Our Premium Almonds are sourced from the finest orchards and hand-sorted for size and quality. Naturally rich in protein, fibre, and healthy fats, they make a wholesome everyday snack or a thoughtful gift for the ones you love.",
     price: 550,
-    weightOptions: ['250g'],
+    weightOptions: ['500g'],
     image: '/products/almonds.jpg',
     rating: 4.8,
     isBestseller: true,
@@ -28,7 +28,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Our Whole Cashews (W240 grade) are prized for their smooth, creamy texture and delicate sweetness. Carefully cleaned and graded, each kernel is packed to lock in freshness — perfect for snacking, gifting, or your festive kitchen.",
     price: 550,
-    weightOptions: ['250g'],
+    weightOptions: ['500g'],
     image: '/products/cashews.jpg',
     rating: 4.8,
     isBestseller: true,
