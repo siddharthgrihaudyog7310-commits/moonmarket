@@ -4,6 +4,25 @@ import { Product } from './types';
 // Only products with a confirmed real price are listed here (cart requires a fixed price).
 export const PRODUCTS: Product[] = [
   {
+    id: 'combo-almonds-cashews',
+    name: 'Almonds & Cashews Combo',
+    category: 'Combos',
+    description:
+      "Can't choose between our Premium Almonds and Whole Cashews? Get both in one pack — 250g of each, at a special combo price.",
+    price: 880,
+    originalPrice: 1100,
+    weightOptions: ['250g Each'],
+    image: '/products/combo-almonds-cashews.jpg',
+    rating: 4.8,
+    isBestseller: true,
+    additionalInfo: [
+      '250g Premium Almonds + 250g Whole Cashews',
+      'Best value — save over buying separately',
+      'No added sugar or preservatives',
+      '100% natural, sun-dried',
+    ],
+  },
+  {
     id: 'almonds',
     name: 'Premium Almonds',
     category: 'Dry Fruits',
@@ -333,6 +352,7 @@ export function imageFor(product: Product, weight?: string): string {
 }
 
 export const CATEGORIES = [
+  { name: 'Combos', image: '/products/combo-almonds-cashews.jpg' },
   { name: 'Dry Fruits', image: '/products/almonds-250g.jpg' },
   { name: 'Whole Spices', image: '/products/jeera-100g.png' },
   { name: 'Spices', image: '/products/haldi.jpg' },

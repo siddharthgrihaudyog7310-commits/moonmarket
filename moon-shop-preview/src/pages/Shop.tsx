@@ -15,11 +15,15 @@ const SORT_LABELS: Record<SortOption, string> = {
   'name-asc': 'Name: A to Z',
 };
 
+// Derived from the catalog so the slider never silently hides a product
+// priced above a stale hardcoded ceiling.
+const MAX_PRICE = Math.max(...PRODUCTS.map((p) => p.price));
+
 export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'All';
   const searchQuery = searchParams.get('search') || '';
-  const [priceRange, setPriceRange] = useState([0, 600]);
+  const [priceRange, setPriceRange] = useState([0, MAX_PRICE]);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
 
@@ -145,14 +149,14 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
               </div>
               <div className="space-y-8">
                 <div className="relative pt-4">
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="600" 
+                  <input
+                    type="range"
+                    min="0"
+                    max={MAX_PRICE}
                     value={priceRange[1]}
                     onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
                     style={{
-                      background: `linear-gradient(to right, #B58452 ${(priceRange[1] / 600) * 100}%, rgba(27, 48, 34, 0.05) ${(priceRange[1] / 600) * 100}%)`
+                      background: `linear-gradient(to right, #B58452 ${(priceRange[1] / MAX_PRICE) * 100}%, rgba(27, 48, 34, 0.05) ${(priceRange[1] / MAX_PRICE) * 100}%)`
                     }}
                     className="w-full h-[1px] appearance-none cursor-pointer accent-brand-gold [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand-gold [&::-webkit-slider-thumb]:shadow-[0_0_0_6px_rgba(181,132,82,0.1)] [&::-webkit-slider-thumb]:hover:shadow-[0_0_0_10px_rgba(181,132,82,0.15)] transition-all"
                   />
@@ -225,7 +229,7 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) 
                     <p className="text-brand-green/40 font-serif italic text-2xl">No items match your refined selection.</p>
                     <button
                       onClick={() => {
-                        setPriceRange([0, 600]);
+                        setPriceRange([0, MAX_PRICE]);
                         setSearchParams({});
                       }}
                       className="mt-8 text-brand-gold text-[10px] font-black uppercase tracking-widest border-b border-brand-gold/20 pb-1"

@@ -20,7 +20,7 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
   const navLinks = [
     { name: 'Shop Categories', path: '/shop', hasMega: true },
     { name: 'New Launches', path: '/shop' },
-    { name: 'Combos', path: '/shop' },
+    { name: 'Combos', path: '/shop?category=Combos' },
   ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
