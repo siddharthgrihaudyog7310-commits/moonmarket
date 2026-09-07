@@ -2,17 +2,14 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Star, ShoppingCart } from 'lucide-react';
 import { Product } from '../types';
-import { priceFor, imageFor } from '../data';
 import React from 'react';
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (product: Product, weight?: string) => void;
-  /** When the shop's weight filter narrows a product to one matching size, show that size's real photo/price instead of the default. */
-  displayWeight?: string;
+  onAddToCart: (product: Product) => void;
 }
 
-export default function ProductCard({ product, onAddToCart, displayWeight }: ProductCardProps) {
+export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <div className="group bg-white rounded-none overflow-hidden transition-all duration-1000 flex flex-col h-full relative border border-transparent hover:border-brand-gold/10">
       {product.isBestseller && (
@@ -23,7 +20,7 @@ export default function ProductCard({ product, onAddToCart, displayWeight }: Pro
       
       <Link to={`/product/${product.id}`} className={`block relative overflow-hidden aspect-[4/5] p-10 ${product.category === 'Whole Spices' ? 'bg-white' : 'bg-[#FBFBFA]'}`}>
         <img
-          src={imageFor(product, displayWeight)}
+          src={product.image}
           alt={product.name}
           className="w-full h-full object-contain mix-blend-multiply transition-all duration-1000 group-hover:scale-105 group-hover:rotate-1"
           referrerPolicy="no-referrer"
@@ -48,7 +45,7 @@ export default function ProductCard({ product, onAddToCart, displayWeight }: Pro
           <div className="flex flex-col">
             <span className="text-[7px] text-brand-green/20 uppercase font-black tracking-[0.25em] mb-2">Artisanal Reserve</span>
             <div className="flex items-baseline space-x-2">
-              <span className="text-xl font-sans font-bold text-brand-green tracking-tighter">₹{priceFor(product, displayWeight)}</span>
+              <span className="text-xl font-sans font-bold text-brand-green tracking-tighter">₹{product.price}</span>
               {product.originalPrice && (
                 <span className="text-[10px] text-brand-green/20 line-through font-medium">₹{product.originalPrice}</span>
               )}
@@ -56,7 +53,7 @@ export default function ProductCard({ product, onAddToCart, displayWeight }: Pro
           </div>
           
           <button
-            onClick={() => onAddToCart(product, displayWeight)}
+            onClick={() => onAddToCart(product)}
             className="group/btn relative w-11 h-11 flex items-center justify-center transition-all duration-700 overflow-hidden"
             id={`add-to-cart-${product.id}`}
           >

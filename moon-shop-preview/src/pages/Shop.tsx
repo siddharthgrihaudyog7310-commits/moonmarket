@@ -15,22 +15,13 @@ const SORT_LABELS: Record<SortOption, string> = {
   'name-asc': 'Name: A to Z',
 };
 
-export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, weight?: string) => void }) {
+export default function Shop({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'All';
   const searchQuery = searchParams.get('search') || '';
   const [priceRange, setPriceRange] = useState([0, 600]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
-
-  const sizes = ['100g', '250g', '500g'];
-
-  const toggleSize = (size: string) => {
-    setSelectedSizes(prev =>
-      prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]
-    );
-  };
 
   // A category with nothing in it yet isn't the same as filters matching
   // nothing — the empty state wording differs.
@@ -42,9 +33,8 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, 
     const filtered = PRODUCTS.filter(product => {
       const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
       const matchesPrice = product.price <= priceRange[1];
-      const matchesSize = selectedSizes.length === 0 || product.weightOptions.some(s => selectedSizes.includes(s));
       const matchesSearch = !query || product.name.toLowerCase().includes(query) || product.category.toLowerCase().includes(query);
-      return matchesCategory && matchesPrice && matchesSize && matchesSearch;
+      return matchesCategory && matchesPrice && matchesSearch;
     });
 
     switch (sortBy) {
@@ -57,7 +47,7 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, 
       default:
         return filtered;
     }
-  }, [activeCategory, priceRange, selectedSizes, sortBy, searchQuery]);
+  }, [activeCategory, priceRange, sortBy, searchQuery]);
 
   return (
     <div className="bg-brand-cream min-h-screen pt-32 pb-24">
@@ -179,27 +169,6 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, 
                 </div>
               </div>
             </div>
-
-            {/* Size Filter */}
-            <div>
-              <div className="mb-6 pb-5 border-b border-brand-green/5">
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-gold block mb-1">Metrics</span>
-                <h3 className="text-3xl font-serif italic text-brand-green tracking-tight">Net Weight</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {sizes.map(size => (
-                  <button 
-                    key={size}
-                    onClick={() => toggleSize(size)}
-                    className={`h-11 flex items-center justify-center text-[10px] font-bold uppercase tracking-widest border transition-all duration-700 ${
-                      selectedSizes.includes(size) ? 'bg-brand-green border-brand-green text-white shadow-xl shadow-brand-green/20' : 'bg-white border-brand-green/5 text-brand-green/40 hover:border-brand-gold/30 hover:text-brand-gold'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
           </aside>
 
           {/* Product Grid */}
@@ -223,28 +192,20 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, 
             )}
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24">
-                {filteredProducts.map(product => {
-                  // When the Net Weight filter narrows to one matching size, show that
-                  // size's real photo/price on the card instead of the product's default.
-                  const displayWeight = selectedSizes.length > 0
-                    ? product.weightOptions.find(w => selectedSizes.includes(w))
-                    : undefined;
-                  return (
-                    <motion.div
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      key={product.id}
-                    >
-                      <ProductCard
-                        product={product}
-                        onAddToCart={onAddToCart}
-                        displayWeight={displayWeight}
-                      />
-                    </motion.div>
-                  );
-                })}
+                {filteredProducts.map(product => (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    key={product.id}
+                  >
+                    <ProductCard
+                      product={product}
+                      onAddToCart={onAddToCart}
+                    />
+                  </motion.div>
+                ))}
               </div>
             ) : (
               <div className="bg-white border border-brand-green/5 p-20 text-center">
@@ -265,7 +226,6 @@ export default function Shop({ onAddToCart }: { onAddToCart: (product: Product, 
                     <button
                       onClick={() => {
                         setPriceRange([0, 600]);
-                        setSelectedSizes([]);
                         setSearchParams({});
                       }}
                       className="mt-8 text-brand-gold text-[10px] font-black uppercase tracking-widest border-b border-brand-gold/20 pb-1"
