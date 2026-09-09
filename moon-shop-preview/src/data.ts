@@ -289,11 +289,23 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Posta Dana (Poppy Seeds) has a mild, nutty flavour. Used to thicken and enrich gravies, or roasted for garnishing sweets and snacks.',
-    price: 150,
+    price: 300,
     weightOptions: ['100g'],
     image: '/products/posta-dana-100g.png',
     rating: 4.8,
     additionalInfo: ['Mild, nutty flavour', 'Used to enrich gravies', 'Cleaned & sorted', '100% natural'],
+  },
+  {
+    id: 'ajwain',
+    name: 'Ajwain (Carrom Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Ajwain (Carrom Seeds) has a sharp, thyme-like aroma and a warm, slightly bitter bite. A classic tempering spice in Indian cooking, and a traditional favourite for digestive teas.',
+    price: 60,
+    weightOptions: ['100g'],
+    image: '/products/ajwain-100g.jpg',
+    rating: 4.8,
+    additionalInfo: ['Sharp, aromatic flavour', 'Popular in tempering & parathas', 'Cleaned & sorted', '100% natural'],
   },
   {
     id: 'kali-mirch',
