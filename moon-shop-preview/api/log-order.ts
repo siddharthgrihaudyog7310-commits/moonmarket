@@ -6,6 +6,8 @@ interface LogOrderBody {
   items: CartItemInput[];
   customer: { name?: string; email?: string; phone?: string };
   shipping: { address?: string; city?: string; postalCode?: string };
+  paymentMethod?: 'whatsapp' | 'upi_manual';
+  upiRef?: string;
 }
 
 // Logs a WhatsApp-handoff order for record-keeping. This must never block or
@@ -19,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { items, customer, shipping } = req.body as LogOrderBody;
+    const { items, customer, shipping, paymentMethod, upiRef } = req.body as LogOrderBody;
 
     if (!Array.isArray(items) || items.length === 0) {
       res.status(200).json({ success: false });
@@ -27,12 +29,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const { resolvedItems, subtotal } = resolveCartItems(items);
+    const method = paymentMethod === 'upi_manual' ? 'upi_manual' : 'whatsapp';
 
     const { data, error } = await supabaseAdmin
       .from('orders')
       .insert({
-        status: 'pending_whatsapp',
-        payment_method: 'whatsapp',
+        status: method === 'upi_manual' ? 'pending_upi_verification' : 'pending_whatsapp',
+        payment_method: method,
+        upi_reference: method === 'upi_manual' ? upiRef : undefined,
         customer_name: customer?.name,
         customer_email: customer?.email,
         customer_phone: customer?.phone,

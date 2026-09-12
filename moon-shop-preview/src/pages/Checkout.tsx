@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'motion/react';
+import QRCode from 'qrcode';
 import {
   Truck,
   ChevronRight,
@@ -8,12 +9,17 @@ import {
   MessageCircle,
   CreditCard,
   Loader2,
+  QrCode,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
 
 const WHATSAPP_NUMBER = '917054578781';
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
+const UPI_ID = 'MAB.037216043620012@axisbank';
+const UPI_PAYEE_NAME = 'Moon Spices & Groceries';
 
 declare global {
   interface Window {
@@ -44,14 +50,28 @@ function formatOrderRef(id: string) {
   return id.replace(/-/g, '').slice(0, 8).toUpperCase();
 }
 
+function buildUpiUri(amount: number) {
+  const params = new URLSearchParams({
+    pa: UPI_ID,
+    pn: UPI_PAYEE_NAME,
+    am: amount.toString(),
+    cu: 'INR',
+    tn: 'Moon Spices order',
+  });
+  return `upi://pay?${params.toString()}`;
+}
+
 export default function Checkout({ cart, onClearCart }: CheckoutProps) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | 'upi' | null>(null);
   const [orderRef, setOrderRef] = useState<string | null>(null);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [upiQrDataUrl, setUpiQrDataUrl] = useState<string | null>(null);
+  const [upiRef, setUpiRef] = useState('');
+  const [upiIdCopied, setUpiIdCopied] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({
     fullName: '',
     email: '',
@@ -65,15 +85,25 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
   const shipping = subtotal > 1500 ? 0 : 150;
   const total = subtotal + shipping;
 
-  const buildWhatsAppMessage = () => {
+  useEffect(() => {
+    if (total <= 0) return;
+    QRCode.toDataURL(buildUpiUri(total), { margin: 1, width: 240 })
+      .then(setUpiQrDataUrl)
+      .catch(() => setUpiQrDataUrl(null));
+  }, [total]);
+
+  const buildWhatsAppMessage = (paidViaUpi = false) => {
     const lines = [
-      `Hi Moon Spices & Groceries! I'd like to place this order:`,
+      paidViaUpi
+        ? `Hi Moon Spices & Groceries! I've paid for this order via UPI:`
+        : `Hi Moon Spices & Groceries! I'd like to place this order:`,
       '',
       ...cart.map((item) => `• ${item.name} (${item.selectedWeight}) x${item.quantity} — ₹${item.price * item.quantity}`),
       '',
       `Subtotal: ₹${subtotal}`,
       `Shipping: ${shipping === 0 ? 'Complimentary' : `₹${shipping}`}`,
       `Total: ₹${total}`,
+      ...(paidViaUpi ? ['', `UPI Reference: ${upiRef.trim() || 'not provided'}`] : []),
       '',
       `Name: ${shippingInfo.fullName || '-'}`,
       `Address: ${shippingInfo.address || '-'}, ${shippingInfo.city || '-'} ${shippingInfo.postalCode || ''}`.trim(),
@@ -116,6 +146,30 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
     setPaymentStatus('whatsapp');
     setIsSuccess(true);
     onClearCart();
+  };
+
+  const handleConfirmUpiPaid = () => {
+    // Best-effort order log — must never block or fail the WhatsApp handoff itself.
+    fetch('/api/log-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...orderPayload(), paymentMethod: 'upi_manual', upiRef: upiRef.trim() }),
+    })
+      .then((res) => res.json())
+      .then((data) => data?.orderId && setOrderRef(formatOrderRef(data.orderId)))
+      .catch(() => {});
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMessage(true)}`, '_blank', 'noopener,noreferrer');
+    setPaymentStatus('upi');
+    setIsSuccess(true);
+    onClearCart();
+  };
+
+  const handleCopyUpiId = () => {
+    navigator.clipboard.writeText(UPI_ID).then(() => {
+      setUpiIdCopied(true);
+      setTimeout(() => setUpiIdCopied(false), 2000);
+    });
   };
 
   const handlePayOnline = async () => {
@@ -186,6 +240,7 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
 
   if (isSuccess) {
     const isPaid = paymentStatus === 'paid';
+    const isUpi = paymentStatus === 'upi';
     return (
       <div className="min-h-screen bg-brand-cream flex items-center justify-center p-6 pt-32">
         <motion.div
@@ -197,11 +252,13 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
             <CheckCircle2 size={80} className="text-brand-gold" strokeWidth={1} />
           </div>
           <h1 className="text-4xl font-serif font-medium italic text-brand-green mb-6">
-            {isPaid ? 'Payment Successful' : 'Order Sent'}
+            {isPaid ? 'Payment Successful' : isUpi ? 'Payment Details Sent' : 'Order Sent'}
           </h1>
           <p className="text-brand-green/70 mb-6 leading-relaxed font-normal">
             {isPaid
               ? "Your payment has been received and your order is confirmed. We'll reach out on WhatsApp with delivery updates."
+              : isUpi
+              ? "We've sent your order and UPI payment details to our WhatsApp. We'll verify the payment and confirm your order shortly."
               : "Your order has been sent to us on WhatsApp. We'll confirm availability, pricing, and delivery with you directly in the chat."}
           </p>
           {orderRef && (
@@ -332,6 +389,60 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
                     )}
                   </div>
                 )}
+
+                <div className="bg-white p-10 border border-brand-green/5 space-y-6 shadow-xl">
+                  <div className="flex items-center space-x-3">
+                    <QrCode className="text-brand-gold" size={20} />
+                    <span className="text-[11px] font-black uppercase tracking-[0.2em]">Pay via UPI</span>
+                  </div>
+                  <p className="text-sm text-brand-green/70 leading-relaxed">
+                    Scan the QR code or pay directly to our UPI ID using any UPI app (Google Pay, PhonePe, Paytm).
+                    Then confirm below and we'll verify and confirm your order on WhatsApp.
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center gap-8">
+                    {upiQrDataUrl && (
+                      <img src={upiQrDataUrl} alt="UPI QR code" className="w-40 h-40 border border-brand-green/10 p-2 shrink-0" />
+                    )}
+                    <div className="w-full space-y-4">
+                      <div className="flex items-center justify-between bg-brand-cream/60 border border-brand-green/10 px-5 py-4">
+                        <span className="text-xs font-bold text-brand-green tracking-tight break-all">{UPI_ID}</span>
+                        <button
+                          onClick={handleCopyUpiId}
+                          aria-label="Copy UPI ID"
+                          className="shrink-0 ml-3 text-brand-green/50 hover:text-brand-gold transition-colors"
+                        >
+                          {upiIdCopied ? <Check size={16} className="text-green-600" /> : <Copy size={16} />}
+                        </button>
+                      </div>
+                      <a
+                        href={buildUpiUri(total)}
+                        className="w-full bg-brand-green text-white px-8 py-4 font-black uppercase text-[10px] tracking-[0.3em] hover:bg-brand-gold transition-all shadow-lg flex items-center justify-center space-x-3"
+                      >
+                        <QrCode size={16} />
+                        <span>Pay ₹{total} via UPI App</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">
+                      UPI Transaction / Reference ID (optional, helps us verify faster)
+                    </label>
+                    <input
+                      type="text"
+                      value={upiRef}
+                      onChange={(e) => setUpiRef(e.target.value)}
+                      className="w-full bg-white border border-brand-green/10 px-6 py-4 text-sm font-bold tracking-tight outline-none focus:border-brand-gold transition-colors"
+                      placeholder="e.g. 123456789012"
+                    />
+                  </div>
+                  <button
+                    onClick={handleConfirmUpiPaid}
+                    className="w-full bg-brand-gold text-brand-green px-12 py-6 font-black uppercase text-[10px] tracking-[0.5em] hover:bg-brand-green hover:text-white transition-all shadow-xl flex items-center justify-center space-x-3"
+                  >
+                    <Check size={16} />
+                    <span>I've Paid via UPI</span>
+                  </button>
+                </div>
 
                 <div className="bg-white p-10 border border-brand-green/5 space-y-6 shadow-xl">
                   <div className="flex items-center space-x-3">
