@@ -205,10 +205,9 @@ export const PRODUCTS: Product[] = [
       '100% natural, no additives',
     ],
   },
-  // NOTE: prices below are PLACEHOLDERS (owner has not finalized real
-  // pricing for this lineup yet) — swap in real prices before relying on
-  // these for actual sales.
   {
+    // NOTE: the 100g price is a PLACEHOLDER (owner has only confirmed the
+    // real 250g price so far) — swap in the real 100g price when known.
     id: 'jeera',
     name: 'Jeera (Cumin Seeds)',
     category: 'Whole Spices',
@@ -229,7 +228,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Sarso Kali (Black Mustard Seeds) has a pungent, nutty bite once tempered in hot oil. A South Indian and Bengali kitchen essential.',
-    price: 75,
+    price: 20,
     weightOptions: ['100g'],
     image: '/products/sarso-kali-100g.png',
     rating: 4.8,
@@ -241,7 +240,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Rai (Mustard Seeds) is an everyday tempering spice with a sharp, pungent flavour that mellows into a nutty warmth when cooked in hot oil.',
-    price: 55,
+    price: 40,
     weightOptions: ['100g'],
     image: '/products/rai-100g.png',
     rating: 4.8,
@@ -253,7 +252,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Sounf Maheen (fine fennel seeds) has a sweet, delicate aroma. Enjoyed after meals as a mouth freshener, or used to add gentle sweetness to curries and teas.',
-    price: 90,
+    price: 80,
     weightOptions: ['100g'],
     image: '/products/sounf-maheen-100g.png',
     rating: 4.8,
@@ -265,7 +264,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Sauf Moti (large fennel seeds) has a bold, sweet aroma with a bigger, crunchier bite than fine fennel. Popular as a mouth freshener or brewed into a soothing tea.',
-    price: 85,
+    price: 60,
     weightOptions: ['100g'],
     image: '/products/sauf-moti-100g.png',
     rating: 4.8,
@@ -277,7 +276,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Sarso Peeli (Yellow Mustard Seeds) brings a sharp, tangy bite. A staple tempering spice across Indian kitchens, essential for pickles, dals, and curries.',
-    price: 60,
+    price: 30,
     weightOptions: ['100g'],
     image: '/products/sarso-peeli-100g.png',
     rating: 4.8,
@@ -313,7 +312,7 @@ export const PRODUCTS: Product[] = [
     category: 'Whole Spices',
     description:
       'Our Kali Mirch (whole black peppercorns) has a sharp, woody heat. A universal kitchen essential for seasoning, tempering, and finishing dishes.',
-    price: 90,
+    price: 160,
     weightOptions: ['100g'],
     image: '/products/kali-mirch.png',
     rating: 4.8,
