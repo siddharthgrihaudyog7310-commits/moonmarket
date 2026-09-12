@@ -13,7 +13,6 @@ export const PRODUCTS: Product[] = [
     originalPrice: 1100,
     weightOptions: ['250g Each'],
     image: '/products/combo-almonds-cashews.jpg',
-    rating: 4.8,
     isBestseller: true,
     additionalInfo: [
       '250g Premium Almonds + 250g Whole Cashews',
@@ -33,7 +32,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '250g': 550, '500g': 1100 },
     image: '/products/almonds-250g.jpg',
     imagesByWeight: { '250g': '/products/almonds-250g.jpg', '500g': '/products/almonds-500g.jpg' },
-    rating: 4.8,
     isBestseller: true,
     additionalInfo: [
       'Rich source of Vitamin E',
@@ -53,7 +51,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '250g': 550, '500g': 1100 },
     image: '/products/cashews-250g.jpg',
     imagesByWeight: { '250g': '/products/cashews-250g.jpg', '500g': '/products/cashews-500g.jpg' },
-    rating: 4.8,
     isBestseller: true,
     additionalInfo: [
       'Good source of healthy fats',
@@ -71,7 +68,6 @@ export const PRODUCTS: Product[] = [
     price: 350,
     weightOptions: ['250g'],
     image: '/products/raisins.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Naturally sweet — no added sugar',
       'Good source of iron & potassium',
@@ -88,7 +84,6 @@ export const PRODUCTS: Product[] = [
     price: 280,
     weightOptions: ['250g'],
     image: '/products/dry-dates.jpg',
-    rating: 4.8,
     isBestseller: true,
     additionalInfo: [
       'Naturally sweet — no added sugar',
@@ -108,7 +103,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '100g': 120, '250g': 300 },
     image: '/products/chia-seeds-100g.jpg',
     imagesByWeight: { '100g': '/products/chia-seeds-100g.jpg', '250g': '/products/chia-seeds-250g.jpg' },
-    rating: 4.8,
     additionalInfo: [
       'Rich in omega-3 fatty acids',
       'High in dietary fibre',
@@ -125,7 +119,6 @@ export const PRODUCTS: Product[] = [
     price: 150,
     weightOptions: ['100g'],
     image: '/products/musk-melon-seeds.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Good source of healthy fats',
       'Rich in magnesium',
@@ -142,7 +135,6 @@ export const PRODUCTS: Product[] = [
     price: 130,
     weightOptions: ['100g'],
     image: '/products/melon-seeds.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Good source of healthy fats & protein',
       'Rich in magnesium & zinc',
@@ -161,7 +153,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '100g': 60, '250g': 150 },
     image: '/products/til-kala.jpg',
     imagesByWeight: { '100g': '/products/til-kala.jpg', '250g': '/products/til-kala-250g.jpg' },
-    rating: 4.8,
     additionalInfo: [
       'Rich in calcium & iron',
       'Good source of healthy fats',
@@ -180,7 +171,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '100g': 140, '250g': 350 },
     image: '/products/pumpkin-seeds-100g.jpg',
     imagesByWeight: { '100g': '/products/pumpkin-seeds-100g.jpg', '250g': '/products/pumpkin-seeds-250g.jpg' },
-    rating: 4.8,
     additionalInfo: [
       'Rich in magnesium & zinc',
       'Good source of plant protein',
@@ -197,7 +187,6 @@ export const PRODUCTS: Product[] = [
     price: 70,
     weightOptions: ['100g'],
     image: '/products/flax-seeds.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Rich in omega-3 fatty acids',
       'High in dietary fibre',
@@ -218,7 +207,6 @@ export const PRODUCTS: Product[] = [
     pricesByWeight: { '250g': 150 },
     image: '/products/jeera-100g.png',
     imagesByWeight: { '250g': '/products/jeera-250g.jpg' },
-    rating: 4.8,
     isBestseller: true,
     additionalInfo: ['Warm, earthy aroma', 'Kitchen essential', 'Cleaned & sorted', '100% natural'],
   },
@@ -231,7 +219,6 @@ export const PRODUCTS: Product[] = [
     price: 20,
     weightOptions: ['100g'],
     image: '/products/sarso-kali-100g.png',
-    rating: 4.8,
     additionalInfo: ['Pungent, nutty flavour', 'South Indian & Bengali staple', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -243,7 +230,6 @@ export const PRODUCTS: Product[] = [
     price: 40,
     weightOptions: ['100g'],
     image: '/products/rai-100g.png',
-    rating: 4.8,
     additionalInfo: ['Sharp, pungent flavour', 'Everyday tempering spice', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -255,7 +241,6 @@ export const PRODUCTS: Product[] = [
     price: 80,
     weightOptions: ['100g'],
     image: '/products/sounf-maheen-100g.png',
-    rating: 4.8,
     additionalInfo: ['Sweet, delicate aroma', 'Popular after-meal freshener', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -267,7 +252,6 @@ export const PRODUCTS: Product[] = [
     price: 60,
     weightOptions: ['100g'],
     image: '/products/sauf-moti-100g.png',
-    rating: 4.8,
     additionalInfo: ['Bold, sweet aroma', 'Large, crunchy seeds', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -279,7 +263,6 @@ export const PRODUCTS: Product[] = [
     price: 30,
     weightOptions: ['100g'],
     image: '/products/sarso-peeli-100g.png',
-    rating: 4.8,
     additionalInfo: ['Sharp, tangy flavour', 'Essential tempering spice', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -291,7 +274,6 @@ export const PRODUCTS: Product[] = [
     price: 300,
     weightOptions: ['100g'],
     image: '/products/posta-dana-100g.png',
-    rating: 4.8,
     additionalInfo: ['Mild, nutty flavour', 'Used to enrich gravies', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -303,7 +285,6 @@ export const PRODUCTS: Product[] = [
     price: 60,
     weightOptions: ['100g'],
     image: '/products/ajwain-100g.jpg',
-    rating: 4.8,
     additionalInfo: ['Sharp, aromatic flavour', 'Popular in tempering & parathas', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -315,7 +296,6 @@ export const PRODUCTS: Product[] = [
     price: 160,
     weightOptions: ['100g'],
     image: '/products/kali-mirch.png',
-    rating: 4.8,
     additionalInfo: ['Sharp, woody heat', 'Universal seasoning essential', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -327,7 +307,6 @@ export const PRODUCTS: Product[] = [
     price: 100,
     weightOptions: ['250g'],
     image: '/products/coriander-whole-250g.jpg',
-    rating: 4.8,
     additionalInfo: ['Mild, citrusy aroma', 'Base spice for curries & masalas', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -342,7 +321,6 @@ export const PRODUCTS: Product[] = [
     price: 150,
     weightOptions: ['100g'],
     image: '/products/garam-masala-whole-100g.jpg',
-    rating: 4.8,
     additionalInfo: ['Fragrant whole-spice blend', 'For tempering & slow cooking', 'Cleaned & sorted', '100% natural'],
   },
   {
@@ -354,7 +332,6 @@ export const PRODUCTS: Product[] = [
     price: 180,
     weightOptions: ['250g'],
     image: '/products/kuttu-atta.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Naturally gluten-free',
       'Good source of protein & fibre',
@@ -371,7 +348,6 @@ export const PRODUCTS: Product[] = [
     price: 200,
     weightOptions: ['250g'],
     image: '/products/singhara-atta.jpg',
-    rating: 4.8,
     additionalInfo: [
       'Naturally gluten-free',
       'Good source of potassium',

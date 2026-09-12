@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Star, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { Product } from '../types';
 import React from 'react';
 
@@ -29,16 +29,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       </Link>
 
       <div className="py-8 px-2 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-6">
-          <Link to={`/product/${product.id}`} className="flex-grow">
+        <div className="mb-6">
+          <Link to={`/product/${product.id}`}>
             <h3 className="text-[13px] font-bold tracking-tight text-brand-green group-hover:text-brand-gold transition-colors line-clamp-2 h-10 leading-tight">
               {product.name}
             </h3>
           </Link>
-          <div className="flex items-center text-brand-gold ml-4 bg-brand-gold/5 px-2 py-0.5 rounded-full">
-            <Star size={7} className="fill-brand-gold mr-1" />
-            <span className="text-[8px] font-black">{product.rating}</span>
-          </div>
         </div>
 
         <div className="flex items-end justify-between mt-auto pt-6 border-t border-brand-green/5">

@@ -23,9 +23,6 @@ export interface Product {
    * differs by size. Any weight missing here falls back to `image`.
    */
   imagesByWeight?: Record<string, string>;
-  rating: number;
-  /** Omit until real review data exists — never fabricate a review count. */
-  reviewsCount?: number;
   isBestseller?: boolean;
   /** Omit unless real nutrition-facts data exists — never fabricate nutrition numbers. */
   nutrition?: {

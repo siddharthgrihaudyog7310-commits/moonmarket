@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, Star, ShoppingBag, ShieldCheck, Truck, RefreshCcw, Minus, Plus, ZoomIn, X } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, RefreshCcw, Minus, Plus, ZoomIn, X } from 'lucide-react';
 import { PRODUCTS, priceFor, imageFor } from '../data';
 import { Product } from '../types';
 import { useEffect, useState } from 'react';
@@ -149,17 +149,6 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
             className="space-y-12"
           >
             <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="flex text-brand-gold">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} fill={i < Math.floor(product.rating) ? 'currentColor' : 'none'} strokeWidth={3} />
-                  ))}
-                </div>
-                {product.reviewsCount != null && (
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand-green/40">{product.reviewsCount} Appraisals</span>
-                )}
-              </div>
-
               <h1 className="text-5xl md:text-7xl font-serif italic text-brand-green leading-tight">{product.name}</h1>
 
               <div className="flex items-baseline space-x-6">
