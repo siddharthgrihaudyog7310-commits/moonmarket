@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { razorpay } from './_lib/razorpay';
 import { supabaseAdmin } from './_lib/supabaseAdmin';
 import { resolveCartItems, CartItemInput } from './_lib/resolveCart';
+import { getUserId } from './_lib/getUserId';
 
 interface CreateOrderBody {
   items: CartItemInput[];
@@ -24,6 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const { resolvedItems, subtotal } = resolveCartItems(items);
+    const userId = await getUserId(req);
 
     const razorpayOrder = await razorpay.orders.create({
       amount: Math.round(subtotal * 100), // Razorpay expects the amount in paise.
@@ -37,6 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         status: 'pending_payment',
         payment_method: 'razorpay',
         razorpay_order_id: razorpayOrder.id,
+        user_id: userId,
         customer_name: customer?.name,
         customer_email: customer?.email,
         customer_phone: customer?.phone,

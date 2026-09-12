@@ -3,12 +3,14 @@ import { ShoppingCart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lu
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CATEGORIES, PRODUCTS } from '../data';
+import { useAuth } from '../context/AuthContext';
 
 export default function Header({ cartCount, onOpenCart }: { cartCount: number, onOpenCart: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   // Built from the real catalog so this never drifts out of sync with what's
   // actually for sale (previously a hardcoded list that went stale the
@@ -89,7 +91,7 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
             </form>
 
             <div className="flex items-center space-x-1 sm:space-x-2">
-              <Link to="/login" className="p-2 hover:text-brand-gold transition-colors">
+              <Link to={user ? '/account' : '/login'} className="p-2 hover:text-brand-gold transition-colors" aria-label={user ? 'My Account' : 'Log In'}>
                 <User size={18} strokeWidth={2} />
               </Link>
               <button 

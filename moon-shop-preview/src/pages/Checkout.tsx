@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
+import { useAuth } from '../context/AuthContext';
+import { supabase } from '../lib/supabaseClient';
 
 const WHATSAPP_NUMBER = '917054578781';
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
@@ -63,6 +65,7 @@ function buildUpiUri(amount: number) {
 
 export default function Checkout({ cart, onClearCart }: CheckoutProps) {
   const navigate = useNavigate();
+  const { user, session } = useAuth();
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | 'upi' | null>(null);
@@ -92,6 +95,26 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
       .catch(() => setUpiQrDataUrl(null));
   }, [total]);
 
+  // Prefill from the customer's saved account details, without overwriting anything they've already typed.
+  useEffect(() => {
+    if (!user || !supabase) return;
+    supabase
+      .from('profiles')
+      .select('full_name, address, city, postal_code')
+      .eq('id', user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (!data) return;
+        setShippingInfo((s) => ({
+          fullName: s.fullName || data.full_name || '',
+          email: s.email || user.email || '',
+          address: s.address || data.address || '',
+          city: s.city || data.city || '',
+          postalCode: s.postalCode || data.postal_code || '',
+        }));
+      });
+  }, [user]);
+
   const buildWhatsAppMessage = (paidViaUpi = false) => {
     const lines = [
       paidViaUpi
@@ -111,6 +134,11 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
     ];
     return encodeURIComponent(lines.join('\n'));
   };
+
+  const authHeaders = (): Record<string, string> => ({
+    'Content-Type': 'application/json',
+    ...(session ? { Authorization: `Bearer ${session.access_token}` } : {}),
+  });
 
   const orderPayload = () => ({
     items: cart.map((item) => ({ id: item.id, selectedWeight: item.selectedWeight, quantity: item.quantity })),
@@ -135,7 +163,7 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
     // Best-effort order log — must never block or fail the WhatsApp handoff itself.
     fetch('/api/log-order', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify(orderPayload()),
     })
       .then((res) => res.json())
@@ -152,7 +180,7 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
     // Best-effort order log — must never block or fail the WhatsApp handoff itself.
     fetch('/api/log-order', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify({ ...orderPayload(), paymentMethod: 'upi_manual', upiRef: upiRef.trim() }),
     })
       .then((res) => res.json())
@@ -180,7 +208,7 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
         loadRazorpayScript(),
         fetch('/api/create-order', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders(),
           body: JSON.stringify(orderPayload()),
         }),
       ]);

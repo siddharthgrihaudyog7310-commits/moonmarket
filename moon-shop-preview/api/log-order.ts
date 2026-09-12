@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabaseAdmin } from './_lib/supabaseAdmin';
 import { resolveCartItems, CartItemInput } from './_lib/resolveCart';
+import { getUserId } from './_lib/getUserId';
 
 interface LogOrderBody {
   items: CartItemInput[];
@@ -30,6 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { resolvedItems, subtotal } = resolveCartItems(items);
     const method = paymentMethod === 'upi_manual' ? 'upi_manual' : 'whatsapp';
+    const userId = await getUserId(req);
 
     const { data, error } = await supabaseAdmin
       .from('orders')
@@ -37,6 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         status: method === 'upi_manual' ? 'pending_upi_verification' : 'pending_whatsapp',
         payment_method: method,
         upi_reference: method === 'upi_manual' ? upiRef : undefined,
+        user_id: userId,
         customer_name: customer?.name,
         customer_email: customer?.email,
         customer_phone: customer?.phone,

@@ -15,8 +15,10 @@ import Shipping from './pages/Shipping';
 import Track from './pages/Track';
 import Sitemap from './pages/Sitemap';
 import Login from './pages/Login';
+import Account from './pages/Account';
 import CartDrawer from './components/CartDrawer';
 import ScrollToTop from './components/ScrollToTop';
+import { AuthProvider } from './context/AuthContext';
 import { CartItem, Product } from './types';
 
 export default function App() {
@@ -60,40 +62,43 @@ export default function App() {
 
   return (
     <Router>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-brand-dark overflow-x-hidden">
-        <Header
-          cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
-        
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
-            <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
-            <Route path="/product/:id" element={<ProductDetails onAddToCart={handleAddToCart} />} />
-            <Route path="/checkout" element={<Checkout cart={cart} onClearCart={handleClearCart} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/shipping" element={<Shipping />} />
-            <Route path="/track" element={<Track />} />
-            <Route path="/sitemap" element={<Sitemap />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
+      <AuthProvider>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col bg-brand-dark overflow-x-hidden">
+          <Header
+            cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
+            onOpenCart={() => setIsCartOpen(true)}
+          />
 
-        <CartDrawer 
-          isOpen={isCartOpen}
-          onClose={() => setIsCartOpen(false)}
-          items={cart}
-          onUpdateQuantity={handleUpdateQuantity}
-          onRemove={handleRemoveFromCart}
-        />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
+              <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
+              <Route path="/product/:id" element={<ProductDetails onAddToCart={handleAddToCart} />} />
+              <Route path="/checkout" element={<Checkout cart={cart} onClearCart={handleClearCart} />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/track" element={<Track />} />
+              <Route path="/sitemap" element={<Sitemap />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/account" element={<Account />} />
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
+          <CartDrawer
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            items={cart}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemove={handleRemoveFromCart}
+          />
+
+          <Footer />
+        </div>
+      </AuthProvider>
     </Router>
   );
 }
