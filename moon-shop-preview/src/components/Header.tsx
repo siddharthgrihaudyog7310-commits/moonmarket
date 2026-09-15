@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ShoppingCart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,15 +11,6 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  // Safety net: the mega menu only opens/closes on hover, which has no
-  // equivalent "leave" event on touch devices — without this it can get
-  // stuck open, covering the page with no way to dismiss it.
-  useEffect(() => {
-    if (!isMegaMenuOpen) return;
-    const timer = setTimeout(() => setIsMegaMenuOpen(false), 5000);
-    return () => clearTimeout(timer);
-  }, [isMegaMenuOpen]);
 
   // Built from the real catalog so this never drifts out of sync with what's
   // actually for sale (previously a hardcoded list that went stale the
@@ -63,22 +54,30 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
 
           {/* Nav Links */}
           <nav className="hidden lg:flex space-x-12 items-center h-full">
-            {navLinks.map((link) => (
-              <div 
-                key={link.name}
-                className="h-full flex items-center"
-                onMouseEnter={() => link.hasMega && setIsMegaMenuOpen(true)}
-              >
-                <Link 
-                  to={link.path}
-                  className="text-[10px] uppercase font-bold tracking-[0.25em] text-brand-green/50 hover:text-brand-green transition-all relative group py-8"
-                >
-                  {link.name}
-                  {link.hasMega && <ChevronDown size={11} className="inline-block ml-1 opacity-30 group-hover:opacity-100 transition-opacity" />}
-                  <span className="absolute bottom-[28px] left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-500 group-hover:w-full"></span>
-                </Link>
-              </div>
-            ))}
+            {navLinks.map((link) =>
+              link.hasMega ? (
+                <div key={link.name} className="h-full flex items-center">
+                  <button
+                    onClick={() => setIsMegaMenuOpen((open) => !open)}
+                    className="text-[10px] uppercase font-bold tracking-[0.25em] text-brand-green/50 hover:text-brand-green transition-all relative group py-8"
+                  >
+                    {link.name}
+                    <ChevronDown size={11} className={`inline-block ml-1 opacity-30 group-hover:opacity-100 transition-transform ${isMegaMenuOpen ? 'rotate-180' : ''}`} />
+                    <span className="absolute bottom-[28px] left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-500 group-hover:w-full"></span>
+                  </button>
+                </div>
+              ) : (
+                <div key={link.name} className="h-full flex items-center">
+                  <Link
+                    to={link.path}
+                    className="text-[10px] uppercase font-bold tracking-[0.25em] text-brand-green/50 hover:text-brand-green transition-all relative group py-8"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-[28px] left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-500 group-hover:w-full"></span>
+                  </Link>
+                </div>
+              )
+            )}
           </nav>
 
           {/* Right Section */}
