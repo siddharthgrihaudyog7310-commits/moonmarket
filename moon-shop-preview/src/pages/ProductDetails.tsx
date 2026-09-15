@@ -148,7 +148,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
             transition={{ delay: 0.1 }}
             className="space-y-12"
           >
-            <div className="space-y-6">
+            <div className="space-y-8">
               <h1 className="text-5xl md:text-7xl font-serif italic text-brand-green leading-tight">{product.name}</h1>
 
               <div className="flex items-baseline space-x-6">
@@ -159,7 +159,7 @@ export default function ProductDetails({ onAddToCart }: { onAddToCart: (product:
                 <span className="text-xs font-bold text-brand-green/40 uppercase tracking-widest">Per {selectedWeight}</span>
               </div>
 
-              <p className="text-brand-green/70 text-lg font-normal leading-relaxed max-w-lg">
+              <p className="text-brand-green/70 text-lg font-normal leading-loose max-w-lg">
                 {product.description}
               </p>
             </div>
