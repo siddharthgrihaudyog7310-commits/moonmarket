@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ShoppingCart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,15 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  // Safety net: the mega menu only opens/closes on hover, which has no
+  // equivalent "leave" event on touch devices — without this it can get
+  // stuck open, covering the page with no way to dismiss it.
+  useEffect(() => {
+    if (!isMegaMenuOpen) return;
+    const timer = setTimeout(() => setIsMegaMenuOpen(false), 5000);
+    return () => clearTimeout(timer);
+  }, [isMegaMenuOpen]);
 
   // Built from the real catalog so this never drifts out of sync with what's
   // actually for sale (previously a hardcoded list that went stale the
