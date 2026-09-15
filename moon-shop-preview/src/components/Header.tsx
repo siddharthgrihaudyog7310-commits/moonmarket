@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ShoppingCart, Search, Menu, X, User, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { CATEGORIES, PRODUCTS } from '../data';
 import { useAuth } from '../context/AuthContext';
 
@@ -10,7 +10,16 @@ export default function Header({ cartCount, onOpenCart }: { cartCount: number, o
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
+
+  // The header persists across route changes (it lives outside <Routes>),
+  // so navigating away — e.g. clicking the account icon — must explicitly
+  // close any open menu, or it stays open and overlaps the new page.
+  useEffect(() => {
+    setIsMegaMenuOpen(false);
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   // Built from the real catalog so this never drifts out of sync with what's
   // actually for sale (previously a hardcoded list that went stale the
