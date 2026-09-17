@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { motion, Variants } from 'motion/react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,19 +6,7 @@ import ProductCard from '../components/ProductCard';
 import { Product } from '../types';
 import Hero3D from '../components/Hero3D';
 import ErrorBoundary from '../components/ErrorBoundary';
-
-// The WebGL sphere isn't worth the battery/perf cost (or the edge cases) on
-// phones — mobile gets a plain gradient hero instead of the 3D scene.
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < breakpoint);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < breakpoint);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, [breakpoint]);
-  return isMobile;
-}
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export default function Home({ onAddToCart }: { onAddToCart: (product: Product) => void }) {
   const isMobile = useIsMobile();

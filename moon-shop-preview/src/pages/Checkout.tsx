@@ -17,6 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabaseClient';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const WHATSAPP_NUMBER = '917054578781';
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
@@ -66,6 +67,7 @@ function buildUpiUri(amount: number) {
 export default function Checkout({ cart, onClearCart }: CheckoutProps) {
   const navigate = useNavigate();
   const { user, session } = useAuth();
+  const isMobile = useIsMobile();
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<'whatsapp' | 'paid' | 'upi' | null>(null);
@@ -424,13 +426,11 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
                     <span className="text-[11px] font-black uppercase tracking-[0.2em]">Pay via UPI</span>
                   </div>
                   <p className="text-sm text-brand-green/70 leading-relaxed">
-                    Scan the QR code or pay directly to our UPI ID using any UPI app (Google Pay, PhonePe, Paytm).
-                    Then confirm below and we'll verify and confirm your order on WhatsApp.
+                    {isMobile
+                      ? "Pay directly to our UPI ID using any UPI app (Google Pay, PhonePe, Paytm). Then confirm below and we'll verify and confirm your order on WhatsApp."
+                      : "Scan this QR code with your phone's UPI app to pay securely from your mobile. Then confirm below and we'll verify and confirm your order on WhatsApp."}
                   </p>
-                  <div className="flex flex-col sm:flex-row items-center gap-8">
-                    {upiQrDataUrl && (
-                      <img src={upiQrDataUrl} alt="UPI QR code" className="w-40 h-40 border border-brand-green/10 p-2 shrink-0" />
-                    )}
+                  {isMobile ? (
                     <div className="w-full space-y-4">
                       <div className="flex items-center justify-between bg-brand-cream/60 border border-brand-green/10 px-5 py-4">
                         <span className="text-xs font-bold text-brand-green tracking-tight break-all">{UPI_ID}</span>
@@ -450,7 +450,24 @@ export default function Checkout({ cart, onClearCart }: CheckoutProps) {
                         <span>Pay ₹{total} via UPI App</span>
                       </a>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="flex flex-col items-center gap-6 py-2">
+                      {upiQrDataUrl && (
+                        <img src={upiQrDataUrl} alt="UPI QR code" className="w-56 h-56 border border-brand-green/10 p-3" />
+                      )}
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">Scan to Pay ₹{total}</p>
+                      <div className="flex items-center justify-between w-full max-w-sm bg-brand-cream/60 border border-brand-green/10 px-5 py-4">
+                        <span className="text-xs font-bold text-brand-green tracking-tight break-all">{UPI_ID}</span>
+                        <button
+                          onClick={handleCopyUpiId}
+                          aria-label="Copy UPI ID"
+                          className="shrink-0 ml-3 text-brand-green/50 hover:text-brand-gold transition-colors"
+                        >
+                          {upiIdCopied ? <Check size={16} className="text-green-600" /> : <Copy size={16} />}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   <div className="space-y-2 pt-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-green/50">
                       UPI Transaction / Reference ID (optional, helps us verify faster)
