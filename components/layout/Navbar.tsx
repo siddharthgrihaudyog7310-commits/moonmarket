@@ -40,7 +40,7 @@ export function Navbar() {
         </button>
 
         <Link href="/" aria-label="Party Pulse home" className="lg:mr-8">
-          <Logo />
+          <Logo priority />
         </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">
