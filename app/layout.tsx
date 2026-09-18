@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
-import { Poppins, Fraunces } from "next/font/google";
+import { Baloo_2, Nunito } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import TopBar from "@/components/TopBar";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { Providers } from "@/components/Providers";
 import { siteConfig } from "@/lib/site-config";
 
-const poppins = Poppins({
+const baloo = Baloo_2({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-baloo",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
@@ -29,44 +28,47 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: [
+    "balloons",
+    "party decorations",
+    "birthday accessories",
+    "balloon decoration kit",
+    "party supplies India",
+    "themed party kits",
+  ],
   openGraph: {
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    title: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/og-image.svg"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${fraunces.variable}`}>
-      <body className="flex min-h-screen flex-col font-poppins antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:m-4 focus:rounded-full focus:bg-gold-500 focus:px-4 focus:py-2 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <TopBar />
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppFloat />
+    <html lang="en" className={`${baloo.variable} ${nunito.variable}`}>
+      <body className="flex min-h-screen flex-col font-sans antialiased">
+        <Providers>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-pulse-purple focus:px-4 focus:py-2 focus:text-white"
+          >
+            Skip to content
+          </a>
+          <AnnouncementBar />
+          <Navbar />
+          <div id="main-content" className="flex-1">
+            {children}
+          </div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -1,13 +1,9 @@
-# Moon Spices & Groceries
+# Party Pulse
 
-A marketing website for **Moon Spices & Groceries**, a premium Indian dry
-fruits and spices brand. Built with Next.js (App Router), TypeScript, and
-Tailwind CSS.
-
-This is a **brand/marketing site, not an online store** — there's no
-cart or checkout. Every product's "Enquire Now" button opens a pre-filled
-WhatsApp chat (with a `mailto`/`tel` fallback via the Contact page) so
-customers can order or ask questions directly.
+A production-quality ecommerce storefront for **Party Pulse** — balloons, balloon
+decoration kits, birthday accessories, party decorations and complete party kits.
+Built with Next.js (App Router), TypeScript, Tailwind CSS, shadcn-style UI
+primitives, Framer Motion and Lucide icons.
 
 ## Getting Started
 
@@ -18,72 +14,93 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-Other useful commands:
-
 ```bash
 npm run build   # production build
 npm run start   # run the production build locally
-npm run lint    # run ESLint
+npm run lint     # run ESLint
 ```
 
 ## Project Structure
 
 ```
-app/                  Routes (App Router)
-  page.tsx             Home
-  shop/page.tsx         Shop listing (filter + sort via query params)
-  shop/[slug]/page.tsx  Product detail
-  about/page.tsx        About / brand story
-  contact/page.tsx      Contact form + business details
-  layout.tsx            Root layout, fonts, global metadata
-  sitemap.ts / robots.ts  Basic SEO files
+app/                    Routes (App Router)
+  page.tsx                Homepage
+  shop/                    Shop catalog (filters, sort, search)
+  category/[slug]/         Category landing pages
+  product/[slug]/          Product detail page
+  cart/                    Full cart page
+  checkout/                Checkout placeholder (no real payment)
+  about/, contact/         Marketing pages
+  layout.tsx               Root layout, fonts, providers, SEO defaults
+  sitemap.ts / robots.ts   SEO files
 
-components/           Reusable UI (Navbar, Footer, ProductCard, Hero, …)
-data/                 Static seed data (products.ts, testimonials.ts)
-lib/                  site-config.ts (business details), utils.ts
-types/                Shared TypeScript types
-public/products/      Product placeholder images
+components/
+  ui/                      shadcn-style primitives (Button, Badge, Sheet, Dialog, …)
+  layout/                  Navbar, AnnouncementBar, Footer, MobileMenu, SearchOverlay
+  home/                    Homepage sections (Hero, ShopByTheme, Bundles, …)
+  product/                 ProductCard, ProductGrid, Gallery, Tabs, QuickView
+  shop/                    FilterSidebar, MobileFilterDrawer, SortDropdown
+  cart/                    CartDrawer, CartLineItem
+
+data/                    Local mock data (products, categories, themes, bundles)
+lib/
+  commerce.ts              Data-access layer — swap this for Shopify (see below)
+  cart-context.tsx          Cart state, persisted to localStorage
+  wishlist-context.tsx      Wishlist state, persisted to localStorage
+  site-config.ts             Business details (phone, email, social, shipping threshold)
+  utils.ts                   cn(), formatPrice(), discountPercent()
+types/                   Shared TypeScript types (Product, CartItem, …)
+public/products|categories|themes/  Generated placeholder SVG artwork
 ```
-
-## Where to Plug In Real Content
-
-- **Business details** — edit `lib/site-config.ts` (phone, WhatsApp
-  number, email, address, founding year, social links). These values
-  power the footer, contact page, and every "Enquire Now" WhatsApp link.
-- **Product catalog** — edit `data/products.ts`. Each product has a
-  `slug`, `category`, `image`, description fields, and one or more
-  `packs` (weight + price). Add/remove products or pack sizes here.
-- **Product photos** — replace the placeholder SVGs in `public/products/`
-  with real photography. Keep the same filenames (referenced from
-  `data/products.ts`) or update the `image` path per product. Square
-  images (at least 800×800px) work best.
-- **Logo** — replace `public/logo.svg` (used in the Navbar/Footer via
-  `components/Logo.tsx`) and `app/icon.svg` (browser favicon) with your
-  real logo mark.
-- **Testimonials** — edit `data/testimonials.ts`.
-- **About page imagery/copy** — `app/about/page.tsx`.
-- **Open Graph / social preview image** — replace `public/og-image.svg`
-  with a proper 1200×630 PNG/JPG for best compatibility across social
-  platforms.
-- **Contact form & newsletter signup** — both are UI-only right now
-  (`components/ContactForm.tsx`, `components/Newsletter.tsx`). Wire them
-  up to a form/email service (e.g. Formspree, Resend) or a Next.js API
-  route before launch.
-- **Map** — the Contact page has a placeholder map block; embed a real
-  Google Maps iframe for your store location.
 
 ## Design System
 
-- **Colors**: golden (`gold-50`…`gold-900`, primary `gold-500`
-  `#C9962C`), cream background (`#FFFDF7`), near-black body text
-  (`#1A1A1A`). See `tailwind.config.ts`.
-- **Typography**: Poppins (400/500/600/700/800), loaded via
-  `next/font/google` in `app/layout.tsx`.
-- **Crescent moon motif**: used in the logo mark, favicon, and as a
-  section divider (`components/SectionDivider.tsx`) throughout the site.
+- **Colors** — `tailwind.config.ts` defines the `pulse` palette: purple `#7C3AED`,
+  pink `#FF4F81`, gold `#FFC857`, on a warm `#FFF9FC` background. Used subtly —
+  accents and CTAs, not full-bleed color blocks.
+- **Typography** — Baloo 2 (`font-display`, headings) + Nunito (`font-sans`, body),
+  loaded via `next/font/google`.
+- **Motifs** — rounded-blob shapes, soft shadows, balloon-inspired illustrations.
 
-## Deploying
+## State & Data
 
-The site is a standard Next.js app and deploys cleanly to
-[Vercel](https://vercel.com) — connect this repository and point your
-domain (e.g. `moonmarket.in`) at the resulting deployment.
+- **Cart** — `lib/cart-context.tsx`. Client-side React context backed by
+  `localStorage` (`party-pulse:cart`). Supports add/remove/increment/decrement,
+  and derives subtotal, discount and total.
+- **Wishlist** — `lib/wishlist-context.tsx`, same pattern, key `party-pulse:wishlist`.
+- **Products** — `data/products.ts` (24 mock products across 9 categories, 8 themes,
+  8 occasions), read through `lib/commerce.ts`.
+
+## Connecting to Shopify
+
+Every page reads catalog data through `lib/commerce.ts` instead of importing
+`data/*` directly, and the `Product`/`CartItem` types in `types/index.ts` already
+mirror Shopify Storefront API concepts (`id`/`slug` ~ `id`/`handle`, `price`/`mrp`
+~ `priceRange`/`compareAtPriceRange`). To go live with Shopify:
+
+1. **Storefront API client** — add `@shopify/storefront-api-client` (or a thin
+   `fetch` wrapper) and your store's domain + Storefront access token as env vars
+   (`SHOPIFY_STORE_DOMAIN`, `SHOPIFY_STOREFRONT_TOKEN`).
+2. **Re-implement `lib/commerce.ts`** — replace each function body with a GraphQL
+   query against the Storefront API (`listProducts` → `products` query,
+   `getProduct` → `product(handle:)`, etc.), mapping the response into the
+   existing `Product` shape so no component needs to change.
+3. **Cart** — swap `lib/cart-context.tsx`'s local state for Shopify's
+   [Cart API](https://shopify.dev/docs/api/storefront#cart) (`cartCreate`,
+   `cartLinesAdd`, `cartLinesUpdate`) and store the returned `cart.id` in
+   `localStorage` instead of the line items themselves. The context's public
+   interface (`addItem`, `increment`, `decrement`, `items`, `subtotal`, `total`)
+   can stay the same so components are unaffected.
+3. **Checkout** — replace the `/checkout` placeholder with a redirect to the
+   Shopify-hosted `cart.checkoutUrl`, or integrate Shopify's
+   [Hydrogen/Headless checkout](https://shopify.dev/docs/custom-storefronts)
+   flow if you want a fully custom checkout.
+4. **Images** — swap the generated placeholder SVGs in `public/` for Shopify CDN
+   image URLs returned by the Storefront API (`next/image` already supports
+   remote sources — add the Shopify CDN domain to `next.config.mjs`'s
+   `images.remotePatterns`).
+5. **Webhooks** (optional) — add an API route (`app/api/webhooks/...`) for
+   inventory/price sync if you want ISR revalidation on product changes.
+
+Because components only ever call `lib/commerce.ts` and the cart/wishlist
+contexts, none of the UI needs to change during this migration.

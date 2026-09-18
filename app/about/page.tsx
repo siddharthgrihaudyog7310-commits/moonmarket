@@ -1,96 +1,74 @@
-import type { Metadata } from "next";
-import SectionDivider from "@/components/SectionDivider";
-import { LinkButton } from "@/components/Button";
-import { siteConfig } from "@/lib/site-config";
+import { Metadata } from "next";
+import Image from "next/image";
+import { Heart, Package, ShieldCheck, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: `Learn about ${siteConfig.name}'s sourcing promise, quality standards, and story.`,
+  title: "About Us | Party Pulse",
+  description: "Learn the story behind Party Pulse — India's premium balloon and party decoration brand.",
 };
 
 const values = [
-  {
-    title: "Ethically Sourced",
-    description:
-      "We work directly with trusted growers to bring you dry fruits and spices at the peak of quality — season after season.",
-  },
-  {
-    title: "Rigorously Graded",
-    description:
-      "Every batch is hand-sorted and quality-checked before it's packed, so only the best reaches your table.",
-  },
-  {
-    title: "Freshness Sealed In",
-    description:
-      "Packed to lock in natural aroma and crunch, with no artificial preservatives or additives.",
-  },
+  { icon: ShieldCheck, title: "Premium Materials", text: "We test every batch of balloons for thickness, colour-fastness and float time." },
+  { icon: Package, title: "Thoughtful Curation", text: "Every kit is designed by our in-house stylists so it looks great straight out of the box." },
+  { icon: Truck, title: "Nationwide Delivery", text: "We ship to 20,000+ pincodes across India, usually within 2-4 business days." },
+  { icon: Heart, title: "Customer Obsessed", text: "Our support team is real people who genuinely want your party to be perfect." },
 ];
 
 export default function AboutPage() {
   return (
-    <div>
-      <section className="bg-gold-gradient-soft">
-        <div className="section py-16 sm:py-20 text-center">
-          <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-700 shadow-sm">
-            Our Story
-          </span>
-          <h1 className="mt-4 font-poppins font-extrabold text-4xl sm:text-5xl text-ink">
-            Rooted in Tradition, <br className="hidden sm:block" />
-            Crafted for Today
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-ink/70">
-            For over 30 years, {siteConfig.name} has been bringing India&rsquo;s
-            finest dry fruits, dry dates, and whole spices from trusted farms
-            straight to your home — with the same care our families have
-            practiced for generations.
-          </p>
+    <main>
+      <section className="relative overflow-hidden bg-hero-radial py-16">
+        <div className="container-px mx-auto grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
+              We believe every celebration deserves a little magic.
+            </h1>
+            <p className="mt-4 text-base text-foreground/65">
+              Party Pulse started in 2021 with a simple idea: party decorations in India should be as premium,
+              well-designed and reliable as the celebrations they&apos;re part of. What began as a small balloon
+              studio in Bengaluru has grown into a nationwide brand trusted by 50,000+ hosts, event planners and
+              parents.
+            </p>
+            <p className="mt-4 text-base text-foreground/65">
+              Today we design and curate everything from single balloons to complete themed party kits — each one
+              tested, styled and packed with care by our small but mighty team.
+            </p>
+          </div>
+          <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-blob shadow-pop">
+            <Image src="/products/p7.svg" alt="Party Pulse studio setup" fill sizes="400px" className="object-cover" />
+          </div>
         </div>
       </section>
 
-      <section className="section py-16 max-w-2xl mx-auto text-center">
-        <h2 className="section-heading">Our Quality &amp; Sourcing Promise</h2>
-        <p className="mt-4 text-ink/70 leading-relaxed">
-          We believe premium food starts with premium sourcing. That&rsquo;s
-          why we partner directly with growers across India&rsquo;s finest
-          dry fruit and spice belts, inspecting every harvest for size,
-          texture, and aroma before it earns the Moon Spices name.
-        </p>
-        <p className="mt-4 text-ink/70 leading-relaxed">
-          From orchard to pack, our process is designed to preserve
-          nature&rsquo;s goodness — no shortcuts, no fillers, just honest,
-          wholesome food.
-        </p>
-      </section>
-
-      <SectionDivider />
-
-      <section className="section py-16">
-        <div className="text-center mb-10">
-          <h2 className="section-heading">What We Stand For</h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {values.map((v) => (
-            <div key={v.title} className="card p-6 text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gold-50 text-2xl text-gold-600">
-                ☾
+      <section className="container-px mx-auto py-14">
+        <h2 className="text-center font-display text-2xl font-extrabold sm:text-3xl">What We Stand For</h2>
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          {values.map(({ icon: Icon, title, text }) => (
+            <div key={title} className="flex flex-col items-center text-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-party-gradient-soft text-pulse-purple">
+                <Icon className="h-6 w-6" />
               </div>
-              <h3 className="font-poppins font-bold text-lg text-ink">{v.title}</h3>
-              <p className="mt-2 text-sm text-ink/70">{v.description}</p>
+              <h3 className="mt-3 font-display text-sm font-bold sm:text-base">{title}</h3>
+              <p className="mt-1 text-xs text-foreground/55 sm:text-sm">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="section pb-20 text-center">
-        <h2 className="section-heading">Taste the Moon Spices Difference</h2>
-        <p className="mx-auto mt-3 max-w-xl text-ink/70">
-          Explore our range and discover why customers across India trust us
-          for their everyday and festive needs.
-        </p>
-        <div className="mt-6">
-          <LinkButton href="/shop">Shop Now</LinkButton>
+      <section className="bg-white py-14">
+        <div className="container-px mx-auto grid gap-8 text-center sm:grid-cols-3">
+          {[
+            ["50,000+", "Celebrations styled"],
+            ["500+", "Products & kits"],
+            ["4.8/5", "Average customer rating"],
+          ].map(([stat, label]) => (
+            <div key={label}>
+              <p className="font-display text-3xl font-extrabold text-pulse-purple">{stat}</p>
+              <p className="mt-1 text-sm text-foreground/60">{label}</p>
+            </div>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }

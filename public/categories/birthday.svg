@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF9FC" />
+      <stop offset="100%" stop-color="#FDEFF6" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" rx="0" fill="url(#bg7)" />
+  <rect x="372.9861060157418" y="191.94014873355627" width="9.22660483159125" height="9.22660483159125" fill="#FFC857" opacity="0.6" transform="rotate(56.14141101948917 372.9861060157418 191.94014873355627)" /><rect x="611.2719092518091" y="414.7220365703106" width="6.377098080888391" height="6.377098080888391" fill="#A78BFA" opacity="0.6" transform="rotate(192.50622918829322 611.2719092518091 414.7220365703106)" /><rect x="237.06419859081507" y="782.356883585453" width="6.7802687540650375" height="6.7802687540650375" fill="#FFC857" opacity="0.6" transform="rotate(51.71665898524225 237.06419859081507 782.356883585453)" /><rect x="123.71522411704063" y="232.76097048074007" width="9.183211452513934" height="9.183211452513934" fill="#FFC857" opacity="0.6" transform="rotate(328.65865487605333 123.71522411704063 232.76097048074007)" /><circle cx="442.96859838068485" cy="497.2998671233654" r="6.4004545386414975" fill="#FFC857" opacity="0.6" /><rect x="736.9638880714774" y="662.1027873829007" width="5.119827791303397" height="5.119827791303397" fill="#7C3AED" opacity="0.6" transform="rotate(153.1136608030647 736.9638880714774 662.1027873829007)" /><rect x="16.140891425311565" y="70.48498820513487" width="10.944126845523716" height="10.944126845523716" fill="#A78BFA" opacity="0.6" transform="rotate(168.7185461539775 16.140891425311565 70.48498820513487)" /><rect x="756.9769365713" y="562.6248687505722" width="10.306379740312696" height="10.306379740312696" fill="#7C3AED" opacity="0.6" transform="rotate(49.96483376249671 756.9769365713 562.6248687505722)" /><circle cx="106.63460809737444" cy="730.4278945550323" r="4.612134813331068" fill="#7C3AED" opacity="0.6" /><circle cx="269.41674314439297" cy="34.9050672724843" r="6.421268885722384" fill="#FFC857" opacity="0.6" /><circle cx="661.2620195373893" cy="524.1955054923892" r="7.599390056682751" fill="#7C3AED" opacity="0.6" /><circle cx="519.3328211084008" cy="712.8519272431731" r="7.8024919629096985" fill="#FFC857" opacity="0.6" /><rect x="771.0966346785426" y="774.0050595253706" width="9.188546142727137" height="9.188546142727137" fill="#FFC857" opacity="0.6" transform="rotate(185.78645682893693 771.0966346785426 774.0050595253706)" /><circle cx="262.44509406387806" cy="579.4172758236527" r="5.747475509531796" fill="#FFC857" opacity="0.6" /><circle cx="446.0426591336727" cy="658.5275892168283" r="5.149970668833703" fill="#A78BFA" opacity="0.6" /><rect x="441.3573669269681" y="249.907061830163" width="6.694681429490448" height="6.694681429490448" fill="#7C3AED" opacity="0.6" transform="rotate(339.62288671173155 441.3573669269681 249.907061830163)" /><circle cx="666.6951302438974" cy="504.4811246916652" r="3.0720060744788498" fill="#A78BFA" opacity="0.6" /><circle cx="573.4798019751906" cy="795.8885075524449" r="4.38998701935634" fill="#FFC857" opacity="0.6" /><circle cx="643.9339527860284" cy="499.51913077384233" r="7.150694500422105" fill="#7C3AED" opacity="0.6" /><rect x="405.5453311651945" y="453.5119313746691" width="6.087057969719172" height="6.087057969719172" fill="#A78BFA" opacity="0.6" transform="rotate(292.8751991316676 405.5453311651945 453.5119313746691)" /><circle cx="689.253849722445" cy="588.7354400008917" r="6.292276005959138" fill="#FFC857" opacity="0.6" /><circle cx="589.1641097143292" cy="764.3108962103724" r="5.446098964428529" fill="#7C3AED" opacity="0.6" />
+  
+  <g transform="rotate(-9.765904936939478 280 340)">
+    <ellipse cx="280" cy="340" rx="106.6" ry="130" fill="#7C3AED" />
+    <ellipse cx="243.6" cy="288" rx="28.6" ry="41.6" fill="white" opacity="0.35" />
+    <path d="M 280 470 L 274 484 L 286 484 Z" fill="#7C3AED" />
+    <path d="M 280 484 C 290 510, 270 530, 280 560" stroke="#7C3AED" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+  <g transform="rotate(-8.760834848508239 500 300)">
+    <ellipse cx="500" cy="300" rx="122.99999999999999" ry="150" fill="#A78BFA" />
+    <ellipse cx="458" cy="240" rx="33" ry="48" fill="white" opacity="0.35" />
+    <path d="M 500 450 L 494 464 L 506 464 Z" fill="#A78BFA" />
+    <path d="M 500 464 C 510 490, 490 510, 500 540" stroke="#A78BFA" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+  <g transform="rotate(9.5381526555866 400 460)">
+    <ellipse cx="400" cy="460" rx="90.19999999999999" ry="110" fill="#FFC857" />
+    <ellipse cx="369.2" cy="416" rx="24.2" ry="35.2" fill="white" opacity="0.35" />
+    <path d="M 400 570 L 394 584 L 406 584 Z" fill="#FFC857" />
+    <path d="M 400 584 C 410 610, 390 630, 400 660" stroke="#FFC857" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+  <g transform="rotate(3.9805741142481565 190 480)">
+    <ellipse cx="190" cy="480" rx="73.8" ry="90" fill="#7C3AED" />
+    <ellipse cx="164.8" cy="444" rx="19.8" ry="28.8" fill="white" opacity="0.35" />
+    <path d="M 190 570 L 184 584 L 196 584 Z" fill="#7C3AED" />
+    <path d="M 190 584 C 200 610, 180 630, 190 660" stroke="#7C3AED" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+  <g transform="rotate(0.42890537064522505 580 470)">
+    <ellipse cx="580" cy="470" rx="77.89999999999999" ry="95" fill="#A78BFA" />
+    <ellipse cx="553.4" cy="432" rx="20.9" ry="30.400000000000002" fill="white" opacity="0.35" />
+    <path d="M 580 565 L 574 579 L 586 579 Z" fill="#A78BFA" />
+    <path d="M 580 579 C 590 605, 570 625, 580 655" stroke="#A78BFA" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+  <g transform="rotate(-1.8895662389695644 340 220)">
+    <ellipse cx="340" cy="220" rx="65.6" ry="80" fill="#FFC857" />
+    <ellipse cx="317.6" cy="188" rx="17.6" ry="25.6" fill="white" opacity="0.35" />
+    <path d="M 340 300 L 334 314 L 346 314 Z" fill="#FFC857" />
+    <path d="M 340 314 C 350 340, 330 360, 340 390" stroke="#FFC857" stroke-width="2" fill="none" opacity="0.5" />
+  </g>
+</svg>

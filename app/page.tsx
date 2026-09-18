@@ -1,68 +1,30 @@
-import Hero from "@/components/Hero";
-import CategoryTile from "@/components/CategoryTile";
-import ProductCard from "@/components/ProductCard";
-import ShopByPurpose from "@/components/ShopByPurpose";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
-import FAQ from "@/components/FAQ";
-import Newsletter from "@/components/Newsletter";
-import { LinkButton } from "@/components/Button";
-import { products, categories } from "@/data/products";
+import { Hero } from "@/components/home/Hero";
+import { CelebrationCategories } from "@/components/home/CelebrationCategories";
+import { TrendingProducts } from "@/components/home/TrendingProducts";
+import { PromoBanner } from "@/components/home/PromoBanner";
+import { ShopByTheme } from "@/components/home/ShopByTheme";
+import { PartyBundles } from "@/components/home/PartyBundles";
+import { WhyPartyPulse } from "@/components/home/WhyPartyPulse";
+import { InstagramGallery } from "@/components/home/InstagramGallery";
+import { Newsletter } from "@/components/home/Newsletter";
+import { celebrationCategories, themes } from "@/data/categories";
+import { bundles } from "@/data/bundles";
+import { products } from "@/data/products";
 
 export default function HomePage() {
+  const trending = products.filter((p) => p.isBestseller || p.isNew).slice(0, 8);
+
   return (
-    <>
+    <main>
       <Hero />
-
-      <section className="bg-gold-gradient-soft py-16 sm:py-20">
-        <div className="section">
-          <div className="text-center mb-12">
-            <span className="section-eyebrow justify-center">Explore</span>
-            <h2 className="section-heading mt-2">Shop by Category</h2>
-            <p className="mt-3 text-ink/70">Explore our range, sourced for purity and freshness.</p>
-          </div>
-          <div className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 sm:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {categories.map((c) => (
-              <CategoryTile key={c.name} {...c} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20">
-        <div className="section">
-          <div className="text-center mb-12">
-            <span className="section-eyebrow justify-center">Customer Favourites</span>
-            <h2 className="section-heading mt-2">Featured Products</h2>
-            <p className="mt-3 text-ink/70">Hand-picked for you, always fresh and naturally sourced.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
-          </div>
-          <div className="mt-12 flex justify-center">
-            <LinkButton href="/shop" variant="outline">
-              View All Products
-            </LinkButton>
-          </div>
-        </div>
-      </section>
-
-      <ShopByPurpose />
-
-      <section className="bg-gold-gradient-soft py-16 sm:py-20">
-        <div className="section">
-          <div className="text-center mb-12">
-            <span className="section-eyebrow justify-center">Testimonials</span>
-            <h2 className="section-heading mt-2">What Our Customers Say</h2>
-          </div>
-          <TestimonialCarousel />
-        </div>
-      </section>
-
-      <FAQ />
-
+      <CelebrationCategories categories={celebrationCategories} />
+      <TrendingProducts products={trending} />
+      <PromoBanner />
+      <ShopByTheme themes={themes} />
+      <PartyBundles bundles={bundles} />
+      <WhyPartyPulse />
+      <InstagramGallery />
       <Newsletter />
-    </>
+    </main>
   );
 }

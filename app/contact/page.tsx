@@ -1,96 +1,68 @@
-import type { Metadata } from "next";
-import ContactForm from "@/components/ContactForm";
+import { Metadata } from "next";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
-  description: `Get in touch with ${siteConfig.name} for orders, bulk enquiries, and support.`,
+  title: "Contact Us | Party Pulse",
+  description: "Get in touch with Party Pulse for orders, bulk enquiries, support or partnerships.",
 };
 
 export default function ContactPage() {
   return (
-    <div className="section py-12">
-      <div className="text-center mb-10">
-        <h1 className="section-heading">Our Information</h1>
-        <p className="mt-2 text-ink/70">
-          Questions about a product, bulk orders, or gifting? We&rsquo;d love to hear from you.
+    <main className="container-px mx-auto py-12 lg:py-16">
+      <div className="text-center">
+        <h1 className="font-display text-3xl font-extrabold sm:text-4xl">Get In Touch</h1>
+        <p className="mx-auto mt-3 max-w-lg text-sm text-foreground/60 sm:text-base">
+          Have a question about an order, bulk pricing, or a custom party kit? We&apos;d love to help.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <ContactForm />
-
-        <div className="space-y-6">
-          <div className="card p-6">
-            <h2 className="font-poppins font-bold text-lg text-ink">Business Details</h2>
-            <dl className="mt-4 space-y-3 text-sm">
+      <div className="mt-12 grid gap-10 lg:grid-cols-5">
+        <div className="space-y-6 lg:col-span-2">
+          <div className="rounded-2xl bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse-purple-50 text-pulse-purple">
+                <Phone className="h-4 w-4" />
+              </span>
               <div>
-                <dt className="font-semibold text-ink/60">Address</dt>
-                <dd className="text-ink">{siteConfig.address}</dd>
+                <p className="text-xs text-foreground/50">Call us</p>
+                <a href={`tel:${siteConfig.phone}`} className="text-sm font-bold hover:text-pulse-purple">
+                  {siteConfig.phone}
+                </a>
               </div>
-              <div>
-                <dt className="font-semibold text-ink/60">Phone</dt>
-                <dd>
-                  <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="text-gold-600 hover:underline">
-                    {siteConfig.phone}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-ink/60">Email</dt>
-                <dd>
-                  <a href={`mailto:${siteConfig.email}`} className="text-gold-600 hover:underline">
-                    {siteConfig.email}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-ink/60">Hours</dt>
-                <dd className="text-ink">Mon – Sat, 9:00 AM – 7:00 PM IST</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-ink/60">WhatsApp</dt>
-                <dd>
-                  <a
-                    href={`https://wa.me/${siteConfig.whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold-600 hover:underline"
-                  >
-                    {siteConfig.phone}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-ink/60">Instagram</dt>
-                <dd>
-                  <a
-                    href={siteConfig.social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold-600 hover:underline"
-                  >
-                    @moon_spices_groceries
-                  </a>
-                </dd>
-              </div>
-            </dl>
+            </div>
           </div>
-
-          <div className="card overflow-hidden p-0">
-            <iframe
-              title={`${siteConfig.name} store location`}
-              src={`https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address)}&output=embed`}
-              width="100%"
-              height="256"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-64 w-full"
-            />
+          <div className="rounded-2xl bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse-pink-50 text-pulse-pink">
+                <Mail className="h-4 w-4" />
+              </span>
+              <div>
+                <p className="text-xs text-foreground/50">Email us</p>
+                <a href={`mailto:${siteConfig.email}`} className="text-sm font-bold hover:text-pulse-purple">
+                  {siteConfig.email}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-2xl bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse-gold-50 text-pulse-gold-700">
+                <MapPin className="h-4 w-4" />
+              </span>
+              <div>
+                <p className="text-xs text-foreground/50">Visit us</p>
+                <p className="text-sm font-bold">{siteConfig.address}</p>
+              </div>
+            </div>
           </div>
         </div>
+
+        <div className="rounded-3xl bg-white p-6 shadow-card lg:col-span-3">
+          <ContactForm />
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

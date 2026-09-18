@@ -2,44 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+:root {
+  --border: 320 20% 90%;
+  --input: 320 20% 88%;
+  --ring: 262 83% 58%;
+}
 
-  body {
-    @apply bg-cream text-ink font-poppins;
-  }
+* {
+  border-color: hsl(var(--border));
+}
 
-  :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-gold-500;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff9fc;
+  color: #24202a;
+}
+
+::selection {
+  background-color: #ffc857;
+  color: #24202a;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .container-px {
+    @apply px-4 sm:px-6 lg:px-8;
   }
 }
 
-@layer components {
-  .section {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
-  }
-
-  .section-heading {
-    @apply font-fraunces italic text-3xl sm:text-4xl lg:text-[2.75rem] font-medium tracking-tight text-forest-600;
-  }
-
-  .section-eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.4em] text-gold-600;
-  }
-
-  .divider-moon {
-    @apply relative flex items-center justify-center py-4;
-  }
-
-  .divider-moon::before,
-  .divider-moon::after {
-    content: "";
-    @apply h-px flex-1 bg-gold-300;
-  }
-
-  .card {
-    @apply rounded-xl2 bg-white shadow-card border border-gold-100/70;
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-display;
   }
 }

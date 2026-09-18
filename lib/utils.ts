@@ -1,3 +1,10 @@
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
 export function formatPrice(amount: number): string {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -6,17 +13,7 @@ export function formatPrice(amount: number): string {
   }).format(amount);
 }
 
-/** Computes a "₹X / 100g" style unit-price note from a pack like "250g" or "500g". */
-export function pricePerHundredGrams(weight: string, price?: number): string | null {
-  if (price == null) return null;
-
-  const match = weight.match(/^(\d+(?:\.\d+)?)\s*(g|kg)$/i);
-  if (!match) return null;
-
-  const value = parseFloat(match[1]);
-  const grams = match[2].toLowerCase() === "kg" ? value * 1000 : value;
-  if (!grams) return null;
-
-  const perHundred = (price / grams) * 100;
-  return `${formatPrice(perHundred)} / 100g`;
+export function discountPercent(price: number, mrp: number): number {
+  if (mrp <= price) return 0;
+  return Math.round(((mrp - price) / mrp) * 100);
 }
