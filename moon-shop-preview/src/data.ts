@@ -304,6 +304,17 @@ export const PRODUCTS: Product[] = [
     additionalInfo: ['Sharp, aromatic flavour', 'Popular in tempering & parathas', 'Cleaned & sorted', '100% natural'],
   },
   {
+    id: 'kalonji',
+    name: 'Kalonji (Nigella Seeds)',
+    category: 'Whole Spices',
+    description:
+      'Our Kalonji (Nigella Seeds) has a sharp, peppery bite with subtle onion-like notes. A classic tempering spice for naan, pickles, and vegetable curries.',
+    price: 60,
+    weightOptions: ['100g'],
+    image: '/products/kalonji-100g.jpg',
+    additionalInfo: ['Sharp, peppery flavour', 'Popular in pickles & naan', 'Cleaned & sorted', '100% natural'],
+  },
+  {
     id: 'kali-mirch',
     name: 'Kali Mirch (Black Pepper)',
     category: 'Whole Spices',
