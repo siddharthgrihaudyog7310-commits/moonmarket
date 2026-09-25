@@ -326,6 +326,17 @@ export const PRODUCTS: Product[] = [
     additionalInfo: ['Sharp, woody heat', 'Universal seasoning essential', 'Cleaned & sorted', '100% natural'],
   },
   {
+    id: 'chilli-whole',
+    name: 'Chilli Whole',
+    category: 'Whole Spices',
+    description:
+      'Our Chilli Whole (dried red chillies) brings a deep, smoky heat to tempering, curries, and pickles. Sun-dried and hand-sorted for consistent colour and spice.',
+    price: 60,
+    weightOptions: ['100g'],
+    image: '/products/chilli-whole-100g.jpg',
+    additionalInfo: ['Deep, smoky heat', 'Popular in tempering & pickles', 'Cleaned & sorted', '100% natural'],
+  },
+  {
     id: 'coriander-whole',
     name: 'Coriander Whole',
     category: 'Whole Spices',
