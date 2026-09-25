@@ -403,9 +403,8 @@ export function imageFor(product: Product, weight?: string): string {
 export const CATEGORIES = [
   { name: 'Combos', image: '/products/combo-almonds-cashews.jpg' },
   { name: 'Dry Fruits', image: '/products/almonds-250g.jpg' },
-  { name: 'Whole Spices', image: '/products/jeera-100g.png' },
-  { name: 'Spices', image: '/products/haldi.jpg' },
   { name: 'Dry Dates', image: '/products/dry-dates.jpg' },
-  { name: 'Speciality Flours', image: '/products/kuttu-atta.jpg' },
+  { name: 'Whole Spices', image: '/products/jeera-100g.png' },
   { name: 'Seeds', image: '/products/pumpkin-seeds-100g.jpg' },
+  { name: 'Speciality Flours', image: '/products/kuttu-atta.jpg' },
 ];

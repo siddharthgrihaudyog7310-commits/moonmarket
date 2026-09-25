@@ -1,4 +1,4 @@
-export type Category = 'Combos' | 'Dry Fruits' | 'Whole Spices' | 'Spices' | 'Dry Dates' | 'Speciality Flours' | 'Seeds';
+export type Category = 'Combos' | 'Dry Fruits' | 'Dry Dates' | 'Whole Spices' | 'Seeds' | 'Speciality Flours';
 
 export interface Product {
   id: string;
