@@ -76,6 +76,22 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
+    id: 'dry-figs',
+    name: 'Dry Figs',
+    category: 'Dry Fruits',
+    description:
+      "Our Dry Figs (Anjeer) are naturally sun-dried to bring out their rich, honeyed sweetness and soft, chewy texture. A wholesome everyday snack, perfect for gifting or adding to your daily diet.",
+    price: 350,
+    weightOptions: ['250g'],
+    image: '/products/dry-figs.jpg',
+    additionalInfo: [
+      'Naturally sweet — no added sugar',
+      'Good source of dietary fibre',
+      'Rich in calcium & potassium',
+      '100% natural, sun-dried',
+    ],
+  },
+  {
     id: 'moon-dry-dates',
     name: 'Moon Dry Fruits Dry Dates',
     category: 'Dry Dates',
@@ -345,7 +361,7 @@ export const PRODUCTS: Product[] = [
     category: 'Speciality Flours',
     description:
       "Our Singhara Atta (water chestnut flour) is ground fresh for a light, delicate texture — a traditional favourite for vrat/fasting meals, giving puris and pakoras their signature crisp bite.",
-    price: 200,
+    price: 100,
     weightOptions: ['250g'],
     image: '/products/singhara-atta.jpg',
     additionalInfo: [
