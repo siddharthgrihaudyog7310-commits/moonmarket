@@ -76,11 +76,11 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
-    id: 'dry-figs',
-    name: 'Dry Figs',
+    id: 'dried-figs',
+    name: 'Dried Figs',
     category: 'Dry Fruits',
     description:
-      "Our Dry Figs (Anjeer) are naturally sun-dried to bring out their rich, honeyed sweetness and soft, chewy texture. A wholesome everyday snack, perfect for gifting or adding to your daily diet.",
+      "Our Dried Figs (Anjeer) are naturally sun-dried to bring out their rich, honeyed sweetness and soft, chewy texture. A wholesome everyday snack, perfect for gifting or adding to your daily diet.",
     price: 350,
     weightOptions: ['250g'],
     image: '/products/dry-figs.jpg',
